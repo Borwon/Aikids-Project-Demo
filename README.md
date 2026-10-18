@@ -102,10 +102,15 @@ same validator, same screens.
 1. **Case List** — sortable/filterable table with SLA badge, flag count and a
    conflict badge. Nationality/language columns are hidden by default behind a
    "show nationality / language columns" toggle.
-2. **Case Copilot** — full raw field dump at the top (nothing hidden), then the
-   AI summary, flags, recommended action and draft message, each with
-   **Approve / Edit / Reject**. Nothing leaves the screen until a control is clicked.
-   A live `/api/draft` call shows the hard-rule validator status.
+2. **Case Copilot** — one case, three columns. Left: case identity plus the AI
+   **Case Summary** (its numbered key points) and a "full case details" panel that
+   opens the raw field dump — nothing is hidden. Centre: the customer conversation
+   as a thread, the yellow **AI Suggest Answer** card above the composer
+   (`Use this answer` drops the draft into the box, `Edit` and `⋯` are the other two
+   decisions). Right: **AI Insights** — key points to watch, recommended next action,
+   evidence tags, SLA status and case documents.
+   Every AI item has **Approve / Edit / Reject**; nothing leaves the screen until a
+   control is clicked. A live `/api/draft` call shows the hard-rule validator status.
 3. **Approval Log** — read-only, timestamped audit trail of every decision, with
    the AI's proposal next to the human's final text, plus the fairness badge.
 
@@ -114,7 +119,7 @@ same validator, same screens.
 ## Safety & fairness tests
 
 ```powershell
-python -m pytest -q tests      # 6 passed
+python -m pytest -q tests      # 24 passed
 ```
 
 | # | Test | File |

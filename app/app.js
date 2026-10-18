@@ -38,6 +38,20 @@ const ICONS = {
   inbox: '<path d="M4 13.4h3.8l1.4 2.8h5.6l1.4-2.8H20"/><path d="M4 13.4L6.4 5.4h11.2L20 13.4v5.6H4z"/>',
   send: '<path d="M4.4 12l15.2-7.4-7.4 15.2-1.9-6z"/>',
   lock: '<rect x="5" y="10.4" width="14" height="9.8" rx="2.4"/><path d="M8.4 10.4V7.8a3.6 3.6 0 0 1 7.2 0v2.6"/>',
+  home: '<path d="M4 10.7L12 4.3l8 6.4"/><path d="M6.3 9.5v9.9h11.4V9.5"/><path d="M10.1 19.4v-5.2h3.8v5.2"/>',
+  bell: '<path d="M6.5 9.9a5.5 5.5 0 0 1 11 0c0 3.9 1.5 5.5 1.5 5.5H5s1.5-1.6 1.5-5.5z"/><path d="M10.2 18.5a2 2 0 0 0 3.6 0"/>',
+  chevronDown: '<path d="M6.6 9.6l5.4 5.4 5.4-5.4"/>',
+  chevronRight: '<path d="M9.6 6.6l5.4 5.4-5.4 5.4"/>',
+  arrowRight: '<path d="M4.8 12h13.4"/><path d="M12.8 5.6L18.8 12l-6 6.4"/>',
+  phone: '<path d="M6.3 4.6h2.7l1.4 3.5-1.8 1.2a10.2 10.2 0 0 0 5.4 5.4l1.2-1.8 3.5 1.4v2.7a1.4 1.4 0 0 1-1.6 1.4C10.5 19.1 4.9 13.5 4.9 6.2a1.4 1.4 0 0 1 1.4-1.6z"/>',
+  video: '<rect x="3.4" y="6.6" width="12" height="10.8" rx="2.4"/><path d="M15.4 11l5.2-3v8l-5.2-3z"/>',
+  dots: '<circle cx="6" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18" cy="12" r="1.3"/>',
+  shield: '<path d="M12 3.8l6.6 2.4v5.2c0 3.8-2.6 6.6-6.6 7.8-4-1.2-6.6-4-6.6-7.8V6.2z"/><path d="M9 12l2.2 2.2 4-4.2"/>',
+  bag: '<rect x="4.4" y="8.2" width="15.2" height="10.4" rx="2.4"/><path d="M9.4 8.2V6.6a1.8 1.8 0 0 1 1.8-1.8h1.6a1.8 1.8 0 0 1 1.8 1.8v1.6"/>',
+  calendar: '<rect x="4.2" y="6.4" width="15.6" height="13" rx="2.4"/><path d="M8.2 4.4v3.6M15.8 4.4v3.6M4.2 11h15.6"/>',
+  paperclip: '<path d="M16.2 10.4l-5.8 5.8a2.9 2.9 0 0 1-4.1-4.1l6.4-6.4a1.9 1.9 0 0 1 2.7 2.7l-6.4 6.4a.9.9 0 0 1-1.3-1.3l5.9-5.9"/>',
+  emoji: '<circle cx="12" cy="12" r="8.4"/><path d="M9 14.4a4 4 0 0 0 6 0"/><path d="M9.4 9.8v.01M14.6 9.8v.01"/>',
+  image: '<rect x="4" y="5.6" width="16" height="12.8" rx="2.4"/><path d="M4.8 15.4l4-3.8 3.3 3.1 2.5-2.3 4.6 4.2"/><circle cx="9.4" cy="9.8" r="1.4"/>',
 };
 
 function icon(name, cls = "") {
@@ -61,6 +75,12 @@ function fmtShort(iso) {
   if (!iso) return "—";
   const d = new Date(iso);
   return isNaN(d) ? esc(iso) : d.toLocaleDateString(undefined, { month: "short", day: "2-digit" });
+}
+
+function fmtDay(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return isNaN(d) ? "" : d.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
 }
 
 function toast(msg) {
@@ -116,6 +136,14 @@ async function postApproval(entry) {
 }
 
 /* ---------- topbar ---------- */
+function setBellCount(n) {
+  const el = $("#bellCount");
+  if (!el) return;
+  if (!n) { el.hidden = true; return; }
+  el.hidden = false;
+  el.textContent = n > 99 ? "99+" : String(n);
+}
+
 function renderTopbar(active) {
   const links = [
     ["index.html", "Cases", "list", "queue"],
@@ -130,20 +158,29 @@ function renderTopbar(active) {
   const bar = document.createElement("header");
   bar.className = "topbar";
   bar.innerHTML = `
-    <div class="brand">
+    <a class="brand" href="index.html">
       <span class="mark" aria-hidden="true">${icon("plane")}</span>
       <span class="name">VisaConnect<small>Case Copilot</small></span>
-    </div>
+    </a>
     <nav class="nav" aria-label="Primary">${nav}</nav>
     <div class="spacer"></div>
-    <span class="hitl-note">${icon("spark")}AI drafts &amp; flags — a human approves</span>
+    <button class="bell" id="bell" type="button" title="Cases needing attention">
+      ${icon("bell")}<span class="bell-count" id="bellCount" hidden></span>
+    </button>
     <div class="whoami">
+      <span class="avatar" aria-hidden="true">${icon("user")}</span>
+      <span class="who-text"><strong id="whoName">${esc(getStaff())}</strong><small>Customer Support</small></span>
+      <span class="who-chev" aria-hidden="true">${icon("chevronDown")}</span>
       <label class="sr-only" for="staffSelect">Signed in as staff id</label>
-      <span>Signed in as</span>
       <select id="staffSelect" title="Mock login">${opts}</select>
     </div>`;
   document.body.prepend(bar);
-  $("#staffSelect").addEventListener("change", (e) => { setStaff(e.target.value); toast(`Signed in as ${e.target.value}`); });
+  $("#staffSelect").addEventListener("change", (e) => {
+    setStaff(e.target.value);
+    $("#whoName").textContent = e.target.value;
+    toast(`Signed in as ${e.target.value}`);
+  });
+  $("#bell").addEventListener("click", () => { location.href = "index.html?filter=flagged"; });
 }
 
 /* ---------- hooks for grouping flags ---------- */
@@ -159,6 +196,34 @@ const FLAG_SEVERITY = {
   NEGATIVE_SENTIMENT: "warn",
 };
 function flagKind(type) { return FLAG_SEVERITY[type] || "neutral"; }
+
+/* human-readable titles for the raw issue_type codes */
+const FLAG_LABEL = {
+  TRANSPORT_CONFLICT: "Conflicting airport transfer info",
+  STATUS_TIMESTAMP_CONFLICT: "Status and timestamp disagree",
+  SLA_BREACH: "SLA response target breached",
+  AMBIGUOUS_CASE: "Ambiguous case",
+  MISSING_REQUIRED_FIELD: "Missing required information",
+  UNASSIGNED_OWNER: "Unassigned service owner",
+  MISSING_DOCUMENT: "Missing documents",
+  UNRESPONDED_CONTACT: "Unanswered customer contact",
+  NEGATIVE_SENTIMENT: "Negative customer sentiment",
+};
+function flagLabel(type) { return FLAG_LABEL[type] || String(type || "").replace(/_/g, " ").toLowerCase(); }
+
+/* evidence tag shown on the insight rail: [text, tone] */
+const FLAG_TAG = {
+  TRANSPORT_CONFLICT: ["Conflicting info", "bad"],
+  STATUS_TIMESTAMP_CONFLICT: ["Status conflict", "bad"],
+  SLA_BREACH: ["SLA breach", "bad"],
+  MISSING_REQUIRED_FIELD: ["Missing info", "warn"],
+  MISSING_DOCUMENT: ["Missing info", "warn"],
+  UNASSIGNED_OWNER: ["Unassigned owner", "warn"],
+  AMBIGUOUS_CASE: ["Need to verify", "info"],
+  UNRESPONDED_CONTACT: ["Need to verify", "info"],
+  NEGATIVE_SENTIMENT: ["Negative sentiment", "warn"],
+};
+function flagTag(type) { return FLAG_TAG[type] || [flagLabel(type), "neutral"]; }
 
 /* case status -> badge tone (kept off yellow; yellow means "AI wrote this") */
 function statusKind(status) {

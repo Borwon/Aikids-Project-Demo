@@ -4,81 +4,155 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Case Copilot · VisaConnect</title>
-<meta name="description" content="Review one visa case: raw record, AI flags and draft, and the customer conversation.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230a1c33'/%3E%3Cpath d='M6 12l12-6-6 12-1.6-6z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="description" content="Work one visa case in one screen: the customer conversation, the AI-suggested reply, and the insights a human should check.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%231568f0'/%3E%3Cpath d='M6 12l12-6-6 12-1.6-6z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<main class="container" id="main">
-  <div class="page-head">
-    <div>
-      <h1 id="title">Case Copilot</h1>
-      <p id="subtitle">Loading…</p>
-    </div>
-    <div class="spacer"></div>
-    <a class="btn btn-ghost" href="index.html" id="backLink"></a>
-  </div>
+<main class="container wide" id="main">
+  <div id="banner"></div>
 
-  <div class="console">
-    <!-- ---------- column 1: queue ---------- -->
-    <aside class="card" aria-label="Case queue">
-      <div class="card-head">
-        <h2>Queue</h2>
-        <div class="spacer"></div>
-        <span class="hint" id="queueCount"></span>
-      </div>
-      <div style="padding:10px 10px 6px">
-        <div class="search">
-          <label class="sr-only" for="queueSearch">Filter the queue</label>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="6.8"/><path d="M16.2 16.2L20.5 20.5"/></svg>
-          <input type="search" id="queueSearch" placeholder="Filter queue…" autocomplete="off">
+  <div class="case-layout">
+    <!-- ---------- column 1: the case ---------- -->
+    <aside class="case-side">
+      <a class="back-link" href="index.html" id="backLink"></a>
+
+      <div class="id-card" aria-label="Case identity">
+        <div class="id-top">
+          <span class="id-tile" aria-hidden="true" id="idTile"></span>
+          <span class="id-num" id="cid">—</span>
+          <span id="idBadges"></span>
         </div>
+        <div class="id-rows" id="idRows"></div>
       </div>
-      <div class="queue-scroll">
-        <div class="queue-list" id="queueList"></div>
-      </div>
+
+      <!-- AI wrote the summary: blue panel, yellow rail -->
+      <section class="card ai-tint" aria-labelledby="sumTitle">
+        <div class="card-head">
+          <span class="head-tile ai" aria-hidden="true" id="sumIcon"></span>
+          <h2 id="sumTitle">Case Summary<span class="ai-tag">AI</span></h2>
+        </div>
+        <div class="card-body">
+          <p class="summary" id="sumText" style="margin:0;font-size:13.5px;color:var(--navy-800)"></p>
+          <ol class="points" id="sumPoints"></ol>
+          <div class="hitl-row" id="sumActions"></div>
+          <button class="link-btn" id="detailsToggle" type="button" aria-expanded="false"></button>
+          <div class="details-panel" id="detailsPanel" hidden></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="relTitle">
+        <div class="card-head"><h2 id="relTitle">Related Information</h2></div>
+        <div class="card-body flush"><div class="rel-list" id="relList"></div></div>
+      </section>
     </aside>
 
-    <!-- ---------- column 2: case + AI ---------- -->
-    <section class="stack">
-      <div id="banner"></div>
-
-      <div class="card">
-        <div class="card-head">
-          <h2>Case record</h2>
-          <div class="spacer"></div>
-          <span id="recordBadges"></span>
+    <!-- ---------- column 2: the conversation ---------- -->
+    <section class="chat-pane" aria-label="Conversation with the customer">
+      <header class="chat-head">
+        <span class="avatar" aria-hidden="true" id="custAvatar"></span>
+        <div class="chat-who">
+          <strong id="chatName">—</strong>
+          <span class="online"><i></i>Online</span>
         </div>
-        <div class="card-body"><div id="fields" class="field-grid"></div></div>
-      </div>
+        <div class="spacer"></div>
+        <button class="icon-btn" type="button" data-demo="Calling" title="Call"></button>
+        <button class="icon-btn" type="button" data-demo="Video" title="Video call"></button>
+        <button class="icon-btn" type="button" data-demo="More" title="More"></button>
+      </header>
 
-      <div class="card">
-        <div class="card-head">
-          <svg class="head-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.6l1.9 5.4 5.4 1.9-5.4 1.9L12 18.2l-1.9-5.4L4.7 10.9l5.4-1.9z"/></svg>
-          <h2>AI copilot output</h2>
-          <div class="spacer"></div>
-          <span id="validator" class="hint"></span>
+      <div class="thread" id="custLog" role="log" aria-live="polite"></div>
+
+      <div class="composer-wrap">
+        <!-- the AI reply: yellow means a human has not approved it yet -->
+        <div class="ai-suggest" id="suggestCard">
+          <div class="suggest-head">
+            <span class="head-tile" aria-hidden="true" id="suggestIcon"></span>
+            <strong>AI Suggest Answer</strong>
+            <div class="spacer"></div>
+            <span id="confPill"></span>
+          </div>
+          <div class="suggest-body" id="suggestText"></div>
+          <div class="suggest-actions" id="suggestActions"></div>
         </div>
-        <div class="card-body" id="aiBody"></div>
-      </div>
 
-      <div class="card">
-        <div class="card-head"><h2>Transport</h2></div>
-        <div class="card-body" id="transport"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><h2>Customer reviews</h2></div>
-        <div class="card-body" id="reviews"></div>
+        <form class="composer" id="custForm">
+          <label class="sr-only" for="custInput">Write a reply to the customer</label>
+          <textarea id="custInput" rows="1" placeholder="Type a message…"></textarea>
+          <div class="composer-row">
+            <button class="icon-btn" type="button" data-demo="Attachments" title="Attach a file"></button>
+            <button class="icon-btn" type="button" data-demo="Emoji" title="Insert emoji"></button>
+            <button class="icon-btn" type="button" data-demo="Images" title="Insert image"></button>
+            <label class="sr-only" for="custChannel">Reply channel</label>
+            <select id="custChannel" title="Channel"></select>
+            <div class="spacer"></div>
+            <button class="send-btn" id="sendBtn" type="submit" title="Queue reply"></button>
+          </div>
+        </form>
       </div>
     </section>
 
-    <!-- ---------- column 3: conversation ---------- -->
-    <aside class="rail stack" aria-label="Conversation">
-      <div class="card" id="chatCard">
+    <!-- ---------- column 3: AI insights ---------- -->
+    <aside class="rail" aria-label="AI insights">
+      <h2 class="rail-title" id="railTitle"></h2>
+
+      <section class="card" aria-labelledby="watchTitle">
         <div class="card-head">
-          <h2>Ask about this case</h2>
+          <span class="head-tile bad" aria-hidden="true" id="watchIcon"></span>
+          <h2 id="watchTitle">Key Points to Watch</h2>
+        </div>
+        <div class="card-body">
+          <ol class="points" id="watchPoints" style="margin-top:0"></ol>
+          <div class="hitl-row" id="watchActions"></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="recTitle">
+        <div class="card-head">
+          <span class="head-tile ai" aria-hidden="true" id="recIcon"></span>
+          <h2 id="recTitle">Recommended Next Action<span class="ai-tag">AI</span></h2>
+        </div>
+        <div class="card-body">
+          <div id="recText" style="font-size:13.5px;color:var(--navy-800)"></div>
+          <div class="hitl-row" id="recActions"></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="tagTitle">
+        <div class="card-head">
+          <span class="head-tile good" aria-hidden="true" id="tagIcon"></span>
+          <h2 id="tagTitle">Evidence Tags</h2>
+        </div>
+        <div class="card-body"><div class="tags" id="tags"></div></div>
+      </section>
+
+      <section class="card" aria-labelledby="slaTitle">
+        <div class="card-head">
+          <span class="head-tile" aria-hidden="true" id="slaIcon"></span>
+          <h2 id="slaTitle">SLA Status</h2>
+        </div>
+        <div class="card-body">
+          <div class="sla-big" id="slaPct">—</div>
+          <div class="sla-cap">of customer contacts are responded late</div>
+          <div class="bar"><i id="slaBar" style="width:0%"></i></div>
+          <button class="link-btn" id="slaMore" type="button" aria-expanded="false">View details</button>
+          <div class="muted" id="slaDetails" hidden style="font-size:12.5px;margin-top:6px"></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="docTitle">
+        <div class="card-head">
+          <span class="head-tile" aria-hidden="true" id="docIcon"></span>
+          <h2 id="docTitle">Case Documents</h2>
+        </div>
+        <div class="card-body flush"><div class="rel-list" id="docList"></div></div>
+      </section>
+
+      <section class="card" aria-labelledby="chatTitle">
+        <div class="card-head">
+          <span class="head-tile" aria-hidden="true" id="askIcon"></span>
+          <h2 id="chatTitle">Ask the copilot</h2>
           <div class="spacer"></div>
           <span class="hint">read-only</span>
         </div>
@@ -92,25 +166,7 @@
           </form>
           <div id="chatStatus" class="sr-only" role="status"></div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <h2>Conversation with customer</h2>
-          <div class="spacer"></div>
-          <span class="hint">queued locally</span>
-        </div>
-        <div class="card-body">
-          <div id="custLog" class="chat-log"></div>
-          <form id="custForm" class="chat-form">
-            <label class="sr-only" for="custChannel">Reply channel</label>
-            <select id="custChannel" title="Channel"></select>
-            <label class="sr-only" for="custInput">Write a reply to the customer</label>
-            <textarea id="custInput" rows="1" placeholder="Write a reply…"></textarea>
-            <button class="btn btn-primary" type="submit">Add reply</button>
-          </form>
-        </div>
-      </div>
+      </section>
     </aside>
   </div>
 </main>
@@ -118,178 +174,193 @@
 <script src="app.js"></script>
 <script>
 renderTopbar("case");
-$("#backLink").innerHTML = icon("arrowLeft") + "All cases";
 
 const caseId = new URLSearchParams(location.search).get("case_id");
 let CASE = null;
 let DRAFT = null;
-let QUEUE = [];
-const decisions = {};   // item key -> action
+const decisions = {};            // item key -> "approve" | "edit" | "reject"
+const AI_TEXT = {};              // item key -> the AI's original text
 
-function field(k, v, isList) {
-  const empty = v === "" || v == null || (isList && (!v || v.length === 0));
-  const val = isList ? (Array.isArray(v) && v.length ? v.join(", ") : "") : v;
-  return `<div class="field"><div class="k">${esc(k)}</div>
-    <div class="v ${empty ? "empty" : ""}">${empty ? "blank" : esc(val)}</div></div>`;
+/* icons that are injected rather than written in the markup */
+$("#backLink").innerHTML = icon("arrowLeft") + "Back to cases";
+$("#idTile").innerHTML = icon("plane");
+$("#sumIcon").innerHTML = icon("spark");
+$("#watchIcon").innerHTML = icon("alert");
+$("#recIcon").innerHTML = icon("spark");
+$("#tagIcon").innerHTML = icon("shield");
+$("#slaIcon").innerHTML = icon("clock");
+$("#docIcon").innerHTML = icon("file");
+$("#askIcon").innerHTML = icon("clipboard");
+$("#custAvatar").innerHTML = icon("user");
+$("#suggestIcon").innerHTML = icon("spark");
+$("#sendBtn").innerHTML = icon("send");
+$("#railTitle").innerHTML = icon("spark") + "AI Insights";
+$$("[data-demo]").forEach((b) => {
+  b.innerHTML = icon(b.dataset.demo === "Calling" ? "phone" : b.dataset.demo === "Video" ? "video"
+    : b.dataset.demo === "More" ? "dots" : b.dataset.demo === "Attachments" ? "paperclip"
+    : b.dataset.demo === "Emoji" ? "emoji" : "image");
+  b.addEventListener("click", () => toast(`${b.dataset.demo} is not part of this demo — nothing was sent.`));
+});
+
+const DOC_LABEL = (d) => String(d || "").replace(/_/g, " ");
+
+/* ---------- column 1: identity + case summary ---------- */
+function renderIdentity(c) {
+  $("#cid").textContent = "#" + c.case_id;
+  $("#idBadges").innerHTML =
+    (c.flag_count ? badge("Needs attention", "warn") : "") +
+    (c.has_conflict ? badge("conflict", "bad") : "");
+  const rows = [
+    `<div class="id-row">${icon("user")}<span>${esc(c.customer_id)} <span class="dim">· ${esc(c.customer_nationality)}</span></span></div>`,
+    `<div class="id-row">${icon("plane")}<span>${esc(c.journey_type)} → ${esc(c.destination_country)}</span></div>`,
+  ];
+  if (c.transport) {
+    rows.push(`<div class="id-row">${icon("bag")}<span>${esc(c.transport.itinerary_value)}${c.transport.conflict ? " " + badge("itinerary ≠ note", "bad") : ""}</span></div>`);
+  }
+  rows.push(`<div class="id-row">${icon("calendar")}<span>Opened ${esc(fmtShort(c.case_created_at))} · ${c.days_open} days open</span></div>`);
+  $("#idRows").innerHTML = rows.join("");
 }
 
-/* ---------- queue column ---------- */
-function queueItem(c) {
-  const selected = c.case_id === caseId;
-  const flagKind0 = c.flag_types && c.flag_types.length ? flagKind(c.flag_types[0]) : "neutral";
-  return `<button type="button" class="queue-item ${selected ? "selected" : ""}" data-id="${esc(c.case_id)}"
-      ${selected ? 'aria-current="true"' : ""}>
-    <div class="q-top">
-      <span class="q-id">${esc(c.case_id)}</span>
-      <span class="spacer"></span>
-      ${c.has_conflict ? badge("conflict", "bad") : ""}
-    </div>
-    <div class="q-meta">
-      ${statusBadge(c.current_status)}
-      <span class="sep">·</span>
-      <span>${esc(c.journey_type || "—")}</span>
-      <span class="sep">·</span>
-      <span>${c.days_open}d</span>
-      ${c.flag_count ? `<span class="sep">·</span>${badge(c.flag_count + " flags", flagKind0)}` : ""}
-    </div>
-  </button>`;
+function pointsHtml(flags, limit) {
+  const shown = limit ? flags.slice(0, limit) : flags;
+  const rest = flags.length - shown.length;
+  return shown.map((f, i) => `<li>
+      <span class="n ${flagKind(f.issue_type)}">${i + 1}</span>
+      <span><span class="t">${esc(flagLabel(f.issue_type))}</span>
+      <span class="d">${esc(f.note || f.evidence || "")}</span></span>
+    </li>`).join("") +
+    (rest > 0 ? `<li><span class="n">+</span><span class="d">${rest} more in AI Insights</span></li>` : "");
 }
 
-function renderQueue() {
-  const q = $("#queueSearch").value.trim().toLowerCase();
-  const rows = QUEUE.filter((c) =>
-    !q || `${c.case_id} ${c.current_status} ${c.case_owner_staff_id}`.toLowerCase().includes(q));
-  $("#queueCount").textContent = `${rows.length} of ${QUEUE.length}`;
-  const list = $("#queueList");
-  list.innerHTML = rows.length
-    ? rows.map(queueItem).join("")
-    : '<div class="chat-empty">No cases match.</div>';
-  $$("#queueList .queue-item").forEach((b) =>
-    b.addEventListener("click", () => { location.href = `case.html?case_id=${encodeURIComponent(b.dataset.id)}`; }));
-  const sel = $("#queueList .queue-item.selected");
-  if (sel) sel.scrollIntoView({ block: "nearest" });
+function renderSummary(c, d) {
+  $("#sumText").textContent = d.summary || "No summary produced.";
+  AI_TEXT.summary = String(d.summary || "");
+  $("#sumPoints").innerHTML = d.flags.length
+    ? pointsHtml(d.flags, 3)
+    : '<li><span class="n">–</span><span class="d">No flags detected on this case.</span></li>';
 }
 
-/* ---------- case record ---------- */
-function renderRecord(c) {
-  $("#title").textContent = c.case_id;
-  $("#subtitle").innerHTML =
-    `${esc(c.journey_type)} · opened ${fmtShort(c.case_created_at)} · ${c.days_open} days open`;
-  $("#recordBadges").innerHTML =
-    (c.sla_breached ? badge("SLA breached", "bad", true) : badge("SLA on-time", "good", true)) + " " +
-    (c.has_conflict ? badge("transport conflict", "bad") : "");
+function renderRelated(c) {
+  const contacts = c.contacts || [];
+  const received = (c.documents_received || []).length;
+  const required = (c.required_documents || []).length;
+  const rows = [
+    ["message", "Customer Contact History", `${contacts.length} record${contacts.length === 1 ? "" : "s"}`, "thread"],
+    ["bag", "Airport Transfer Booking", c.transport ? "1 record" : "none on file", "details"],
+    ["file", "Case Documents", `${received} of ${required} received`, "details"],
+    ["star", "Reviews", `${(c.reviews || []).length} review${(c.reviews || []).length === 1 ? "" : "s"}`, "details", "warn"],
+  ];
+  $("#relList").innerHTML = rows.map(([ic, title, sub, target, tone]) =>
+    `<button class="rel-row" type="button" data-target="${target}">
+      <span class="rel-ico ${tone || ""}" aria-hidden="true">${icon(ic)}</span>
+      <span class="rel-text"><strong>${esc(title)}</strong><small>${esc(sub)}</small></span>
+      ${icon("chevronRight")}
+    </button>`).join("");
+  $$("#relList .rel-row").forEach((b) => b.addEventListener("click", () => {
+    if (b.dataset.target === "thread") $("#custLog").scrollIntoView({ behavior: "smooth", block: "center" });
+    else { showDetails(true); $("#detailsPanel").scrollIntoView({ behavior: "smooth", block: "center" }); }
+  }));
+}
 
-  $("#fields").innerHTML = [
-    field("Case ID", c.case_id), field("Status", c.current_status),
-    field("Journey type", c.journey_type), field("Destination", c.destination_country),
-    field("Owner staff id", c.case_owner_staff_id),
-    field("Customer id", c.customer_id),
-    field("Nationality", c.customer_nationality),
-    field("Message language", c.message_language),
-    field("Created at", c.case_created_at), field("Last customer update", c.last_customer_update_at),
-    field("Days open", c.days_open), field("Hours elapsed", c.hours_elapsed),
-    field("SLA target (h)", c.sla_target_hours), field("Payment status", c.payment_status),
-    field("Required documents", c.required_documents, true),
-    field("Documents received", c.documents_received, true),
-  ].join("");
+function showDetails(open) {
+  $("#detailsPanel").hidden = !open;
+  $("#detailsToggle").setAttribute("aria-expanded", String(open));
+  $("#detailsToggle").innerHTML = open ? "Hide full case details" : "View full case details " + icon("arrowRight");
+}
 
+function renderDetails(c) {
+  const field = (k, v, isList) => {
+    const empty = v === "" || v == null || (isList && (!v || v.length === 0));
+    const val = isList ? (Array.isArray(v) && v.length ? v.join(", ") : "") : v;
+    return `<div class="field"><div class="k">${esc(k)}</div>
+      <div class="v ${empty ? "empty" : ""}">${empty ? "blank" : esc(val)}</div></div>`;
+  };
   const t = c.transport;
-  $("#transport").innerHTML = !t
-    ? '<span class="muted">No transport booking on file.</span>'
-    : `<div class="field-grid">
-        ${field("Itinerary", t.itinerary_value)}
-        ${field("Internal note", t.internal_note_value)}
-        ${field("Airport code", t.airport_code)}
-        ${field("Departure", t.departure_date)}
-      </div>${t.conflict ? `<div class="banner banner-warn" style="margin:14px 0 0">${icon("alert")}<div><strong>The itinerary, internal note and airport code disagree.</strong> Confirm the correct airport with the customer before rebooking.</div></div>` : ""}`;
-
-  $("#reviews").innerHTML = !c.reviews.length
-    ? '<span class="muted">No reviews on file.</span>'
-    : c.reviews.map((r) =>
-        `<div><span style="color:var(--caution-ink)">${icon("star")}</span>
-           <strong>${r.rating}★</strong> <span class="muted">${fmtShort(r.review_at)}</span>
-           <div style="margin-top:2px">${esc(r.review_text)}</div></div>`)
-        .join('<hr class="soft">');
-}
-
-/* ---------- AI output ---------- */
-function flagsHtml(flags) {
-  if (!flags.length) return '<span class="muted">No flags detected.</span>';
-  return flags.map((f) => `<div class="flag">
-      <div style="flex:1">
-        <div class="type">${esc(f.issue_type)} <span class="faint mono">${esc(f.field)}</span></div>
-        <div class="ev">${esc(f.note || f.evidence || "")}</div>
-      </div>
-      <span class="conf-tag conf-${esc(f.confidence)}">${esc(f.confidence.replace(" data", ""))}</span>
-    </div>`).join("");
-}
-
-function decisionRow(key, label, aiText, aiRender, editable) {
-  const decided = decisions[key];
-  const decidedIcon = decided === "approve" ? "check" : decided === "edit" ? "pencil" : "x";
-  return `<div class="ai-block" data-item="${key}">
-    <h3>${icon("spark")}${esc(label)}</h3>
-    <div class="body">${aiRender || `<div class="summary">${esc(aiText)}</div>`}</div>
-    <div class="actions">
-      ${decided
-        ? `<span class="decided ${decided}">${icon(decidedIcon)}${decided === "approve" ? "Approved" : decided === "edit" ? "Edited &amp; saved" : "Rejected"} by ${esc(getStaff())}</span>`
-        : `<button class="btn btn-approve btn-sm" data-act="approve" type="button">${icon("check")}Approve</button>
-           ${editable ? `<button class="btn btn-edit btn-sm" data-act="edit" type="button">${icon("pencil")}Edit</button>` : ""}
-           <button class="btn btn-reject btn-sm" data-act="reject" type="button">${icon("x")}Reject</button>
-           <div class="spacer"></div><span class="decisionRow-note">AI suggestion — nothing counts until you decide</span>`}
+  const received = new Set((c.documents_received || []).map(String));
+  $("#detailsPanel").innerHTML =
+    `<div class="field-grid">
+      ${field("Status", c.current_status)}
+      ${field("Owner staff id", c.case_owner_staff_id)}
+      ${field("Message language", c.message_language)}
+      ${field("Created at", c.case_created_at)}
+      ${field("Last customer update", c.last_customer_update_at)}
+      ${field("Hours elapsed", c.hours_elapsed)}
+      ${field("SLA target (h)", c.sla_target_hours)}
+      ${field("Payment status", c.payment_status)}
+      ${field("Required documents", c.required_documents, true)}
+      ${field("Documents received", c.documents_received, true)}
     </div>
-  </div>`;
+    <div class="divider"></div>
+    <div class="field-grid">
+      ${field("Itinerary", t ? t.itinerary_value : "")}
+      ${field("Internal note", t ? t.internal_note_value : "")}
+      ${field("Airport code", t ? t.airport_code : "")}
+      ${field("Departure", t ? t.departure_date : "")}
+    </div>
+    <div class="divider"></div>
+    <div class="muted" style="font-size:12.5px">
+      ${(c.reviews || []).length
+        ? c.reviews.map((r) => `<div style="margin-bottom:6px">${icon("star")} <strong>${r.rating}★</strong>
+             <span class="muted">${esc(fmtShort(r.review_at))}</span> — ${esc(r.review_text)}</div>`).join("")
+        : "No reviews on file."}
+    </div>`;
 }
 
-function renderAI() {
-  const d = DRAFT;
-  const body = $("#aiBody");
-  body.innerHTML =
-    decisionRow("summary", "Case summary", d.summary, null, true) +
-    decisionRow("flags", "Flags & missing items", null, flagsHtml(d.flags), false) +
-    decisionRow("recommended_action", "Recommended next action", d.recommended_action, null, true) +
-    decisionRow("draft_message", "Draft customer update",
-      d.draft_message || "(none produced — insufficient information)",
-      d.draft_message ? null : '<div class="muted">No draft produced.</div>', true);
+/* ---------- the AI decision rows (approve / edit / reject) ---------- */
+function hitl(key, opts) {
+  const decided = decisions[key];
+  if (decided) {
+    const ic = decided === "approve" ? "check" : decided === "edit" ? "pencil" : "x";
+    const word = decided === "approve" ? "Approved" : decided === "edit" ? "Edited &amp; saved" : "Rejected";
+    return `<span class="decided ${decided}">${icon(ic)}${word} by ${esc(getStaff())}</span>`;
+  }
+  const btn = (act, cls, [ic, label]) =>
+    `<button class="btn ${cls} btn-sm" data-act="${act}" type="button">${icon(ic)}${label}</button>`;
+  return btn("approve", "btn-approve", opts.approve) +
+    (opts.edit ? btn("edit", "btn-edit", opts.edit) : "") +
+    (opts.reject ? btn("reject", "btn-reject", opts.reject) : "") +
+    `<div class="spacer"></div><span class="note">${esc(opts.note)}</span>`;
+}
 
-  $$("#aiBody [data-act]").forEach((btn) => btn.addEventListener("click", onDecision));
+const HITL = [
+  ["sumActions", "summary", { approve: ["check", "Approve"], edit: ["pencil", "Edit"], reject: ["x", "Reject"], note: "AI wrote this summary — nothing counts until you decide" }],
+  ["watchActions", "flags", { approve: ["check", "Acknowledge"], reject: ["x", "Dismiss"], note: "Flagged by the copilot, not by a person" }],
+  ["recActions", "recommended_action", { approve: ["check", "Approve"], edit: ["pencil", "Edit"], reject: ["x", "Reject"], note: "Suggestion only" }],
+  ["suggestActions", "draft_message", { approve: ["send", "Use this answer"], edit: ["pencil", "Edit"], reject: ["dots", ""], note: "" }],
+];
+
+function renderDecisions() {
+  for (const [el, item, opts] of HITL) {
+    const box = $("#" + el);
+    box.dataset.item = item;
+    box.innerHTML = hitl(item, opts);
+  }
+  $$("[data-act]").forEach((b) => b.addEventListener("click", onDecision));
 }
 
 async function onDecision(ev) {
   const btn = ev.currentTarget;
   const act = btn.dataset.act;
-  const key = btn.closest(".ai-block").dataset.item;
-  const d = DRAFT;
-  const aiOutput = {
-    summary: d.summary,
-    flags: d.flags,
-    recommended_action: d.recommended_action,
-    draft_message: d.draft_message,
-  };
-  const aiText = key === "flags" ? JSON.stringify(d.flags) : String(aiOutput[key] ?? "");
+  const key = btn.closest("[data-item]").dataset.item;
+  const aiText = key === "flags" ? JSON.stringify(DRAFT.flags) : String(AI_TEXT[key] ?? "");
 
-  if (act === "reject") {
-    await logDecision(key, "reject", aiText, null);
-    return;
-  }
   if (act === "approve") {
+    if (key === "draft_message") $("#custInput").value = AI_TEXT.draft_message || "";
     await logDecision(key, "approve", aiText, aiText);
     return;
   }
+  if (act === "reject") { await logDecision(key, "reject", aiText, null); return; }
 
-  // edit: inline textarea
-  const block = btn.closest(".ai-block");
-  const body = block.querySelector(".body");
+  // edit: swap the body for a textarea
+  const body = $("#" + ({ summary: "sumText", recommended_action: "recText", draft_message: "suggestText" }[key]));
   const original = body.innerHTML;
-  body.innerHTML = `<textarea id="editBox">${esc(aiText)}</textarea>
-    <div class="actions" style="border-top-color:var(--ai-border)">
+  body.innerHTML = `<textarea id="editBox" rows="4" style="min-height:0">${esc(aiText)}</textarea>
+    <div class="hitl-row">
       <button class="btn btn-primary btn-sm" id="saveEdit" type="button">${icon("check")}Save edit</button>
       <button class="btn btn-sm" id="cancelEdit" type="button">Cancel</button>
     </div>`;
   $("#cancelEdit").addEventListener("click", () => { body.innerHTML = original; });
-  $("#saveEdit").addEventListener("click", async () => {
-    await logDecision(key, "edit", aiText, $("#editBox").value);
-  });
+  $("#saveEdit").addEventListener("click", () => logDecision(key, "edit", aiText, $("#editBox").value));
 }
 
 async function logDecision(key, action, aiText, finalText) {
@@ -302,14 +373,128 @@ async function logDecision(key, action, aiText, finalText) {
       final_output: action === "reject" ? { item: key, text: null } : { item: key, text: finalText },
     });
     decisions[key] = action;
-    toast(`${key.replace("_", " ")} — ${action}d and logged`);
-    renderAI();
+    toast(`${key.replace(/_/g, " ")} — ${action}d and logged`);
+    renderDecisions();
   } catch (e) {
     toast("Could not log decision: " + e.message);
   }
 }
 
-/* ---------- scoped case chat ---------- */
+/* ---------- column 3: insights ---------- */
+function renderInsights(c, d) {
+  $("#watchPoints").innerHTML = d.flags.length
+    ? pointsHtml(d.flags)
+    : '<li><span class="n">–</span><span class="d">Nothing to watch on this case.</span></li>';
+
+  $("#recText").textContent = d.recommended_action || "No action recommended.";
+  AI_TEXT.recommended_action = String(d.recommended_action || "");
+
+  const seen = new Set();
+  const tags = [];
+  for (const f of d.flags) {
+    const [text, tone] = flagTag(f.issue_type);
+    if (seen.has(text)) continue;
+    seen.add(text);
+    tags.push(`<span class="tag tag-${tone}">${esc(text)}</span>`);
+  }
+  $("#tags").innerHTML = tags.length ? tags.join("") : '<span class="muted" style="font-size:12.5px">No evidence tags.</span>';
+
+  const contacts = c.contacts || [];
+  const late = contacts.filter((x) => !String(x.response_sent_at || "").trim()).length;
+  const pct = contacts.length ? Math.round((100 * late) / contacts.length) : 0;
+  $("#slaPct").textContent = pct + "%";
+  $("#slaBar").style.width = pct + "%";
+  $("#slaBar").classList.toggle("is-bad", pct >= 50);
+  $("#slaDetails").innerHTML =
+    `${c.hours_elapsed}h elapsed against a ${c.sla_target_hours}h response target ` +
+    (c.sla_breached ? badge("breached", "bad") : badge("on-time", "good")) +
+    `<br>${late} of ${contacts.length} customer contacts have no response logged.`;
+
+  const received = new Set((c.documents_received || []).map(String));
+  $("#docList").innerHTML = (c.required_documents || []).length
+    ? c.required_documents.map((doc) =>
+        `<div class="rel-row" style="cursor:default">
+          <span class="rel-ico ${received.has(String(doc)) ? "" : "warn"}" aria-hidden="true">${icon("file")}</span>
+          <span class="rel-text"><strong>${esc(DOC_LABEL(doc))}</strong>
+          <small>${received.has(String(doc)) ? "Received" : "Missing"}</small></span>
+        </div>`).join("")
+    : '<div class="muted" style="padding:10px;font-size:12.5px">No documents required.</div>';
+}
+
+/* ---------- column 2: the thread ---------- */
+function renderThread(thread) {
+  const log = $("#custLog");
+  if (!thread || !thread.length) {
+    log.innerHTML = '<div class="chat-empty">No conversation recorded for this case.</div>';
+    return;
+  }
+  let lastDay = "";
+  log.innerHTML = thread.map((m) => {
+    const day = m.ts ? fmtShort(m.ts) : "";
+    const chip = day && day !== lastDay ? (lastDay = day, `<div class="day-chip">${esc(fmtDay(m.ts))}</div>`) : "";
+    if (m.kind === "system") {
+      return chip + `<div class="msg system"><span class="sysline">— ${esc(m.text)} · ${esc(fmtDate(m.ts))} —</span></div>`;
+    }
+    const outgoing = m.kind === "staff";
+    const meta = [m.channel, fmtDate(m.ts), outgoing ? "queued locally — not sent" : ""].filter(Boolean).join(" · ");
+    return chip + `<div class="msg ${outgoing ? "staff" : "customer"}">
+        <span class="avatar" aria-hidden="true">${icon("user")}</span>
+        <div class="col">
+          <div class="bubble">${esc(m.text)}</div>
+          <div class="meta">${esc(meta)}</div>
+        </div>
+      </div>`;
+  }).join("");
+  log.scrollTop = log.scrollHeight;
+}
+
+const CHANNELS = ["Phone", "Email", "Web chat", "LINE", "Office visit"];
+
+async function loadThread() {
+  const res = await fetch(`/cases/${encodeURIComponent(caseId)}/customer-messages`);
+  if (!res.ok) throw new Error("conversation unavailable (" + res.status + ")");
+  const data = await res.json();
+  renderThread(data.thread);
+}
+
+function initComposer() {
+  const sel = $("#custChannel");
+  sel.innerHTML = CHANNELS.map((c) => `<option>${esc(c)}</option>`).join("");
+  const last = (CASE.contacts || []).slice(-1)[0];
+  if (last && last.channel && CHANNELS.includes(last.channel)) sel.value = last.channel;
+
+  const input = $("#custInput");
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#custForm").requestSubmit(); }
+  });
+
+  $("#custForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    const channel = sel.value;
+    input.value = "";
+    try {
+      const res = await fetch(`/cases/${encodeURIComponent(caseId)}/customer-messages`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, channel, staff_id: getStaff() }),
+      });
+      if (!res.ok) throw new Error("could not queue reply (" + res.status + ")");
+      const data = await res.json();
+      renderThread(data.thread);
+      toast("Reply queued locally — nothing was transmitted");
+    } catch (err) {
+      toast("Could not queue reply: " + err.message);
+    }
+  });
+
+  loadThread().catch((err) => {
+    $("#custLog").innerHTML = `<div class="chat-empty">${esc(err.message)}</div>`;
+  });
+}
+
+/* ---------- the read-only case assistant ---------- */
 const CHAT = [];
 const SUGGESTIONS = [
   "What's the current status?",
@@ -345,7 +530,7 @@ async function sendChat(text) {
   $("#chatInput").value = "";
   $("#chatSend").disabled = true;
   renderChat();
-  const history = CHAT.slice(0, -2).slice(-8);   // prior turns, before this one
+  const history = CHAT.slice(0, -2).slice(-8);
   try {
     const res = await fetch(`/cases/${encodeURIComponent(caseId)}/chat`, {
       method: "POST",
@@ -373,106 +558,70 @@ function initChat() {
   });
 }
 
-/* ---------- conversation with customer ---------- */
-const CHANNELS = ["Phone", "Email", "Web chat", "LINE", "Office visit"];
-
-function renderConversation(thread) {
-  const log = $("#custLog");
-  if (!thread || !thread.length) {
-    log.innerHTML = '<div class="chat-empty">No conversation recorded for this case.</div>';
-    return;
-  }
-  log.innerHTML = thread.map((m) => {
-    if (m.kind === "system") {
-      return `<div class="msg system"><span class="sysline">— ${esc(m.text)}${m.staff_id ? " · " + esc(m.staff_id) : ""} · ${fmtDate(m.ts)} —</span></div>`;
-    }
-    const outgoing = m.kind === "staff";
-    const meta = [m.channel, fmtDate(m.ts), outgoing ? "queued locally — not sent" : "customer"]
-      .filter(Boolean).join(" · ");
-    return `<div class="msg ${outgoing ? "user" : "assistant"}">
-        <div class="col">
-          <div class="bubble">${esc(m.text)}</div>
-          <div class="meta">${esc(meta)}</div>
-        </div>
-      </div>`;
-  }).join("");
-  log.scrollTop = log.scrollHeight;
-}
-
-async function loadConversation() {
-  const res = await fetch(`/cases/${encodeURIComponent(caseId)}/customer-messages`);
-  if (!res.ok) throw new Error("conversation unavailable (" + res.status + ")");
-  const data = await res.json();
-  renderConversation(data.thread);
-  const last = (CASE.contacts || []).slice(-1)[0];
-  if (last && last.channel && CHANNELS.includes(last.channel)) $("#custChannel").value = last.channel;
-}
-
-function initCustomerChat() {
-  const sel = $("#custChannel");
-  sel.innerHTML = CHANNELS.map((c) => `<option>${esc(c)}</option>`).join("");
-  $("#custForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const text = $("#custInput").value.trim();
-    if (!text) return;
-    const channel = sel.value;
-    $("#custInput").value = "";
-    try {
-      const res = await fetch(`/cases/${encodeURIComponent(caseId)}/customer-messages`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, channel, staff_id: getStaff() }),
-      });
-      if (!res.ok) throw new Error("could not queue reply (" + res.status + ")");
-      const data = await res.json();
-      renderConversation(data.thread);
-      toast("Reply queued locally — nothing was transmitted");
-    } catch (err) {
-      toast("Could not queue reply: " + err.message);
-    }
-  });
-  loadConversation().catch((err) => {
-    $("#custLog").innerHTML = `<div class="chat-empty">${esc(err.message)}</div>`;
-  });
-}
-
+/* ---------- boot ---------- */
 async function init() {
-  if (!caseId) { $("#subtitle").textContent = "No case_id provided."; return; }
+  if (!caseId) { $("#cid").textContent = "No case selected"; $("#banner").innerHTML = `<div class="banner banner-info">${icon("info")}<div>Open a case from the <a href="index.html" style="text-decoration:underline">Cases</a> list.</div></div>`; return; }
 
   let cases = [];
   try {
     cases = await getCases();
   } catch (e) {
-    $("#subtitle").innerHTML = `<span style="color:var(--bad)">Could not load cases — start the app with <code>python server.py</code>.</span>`;
+    $("#banner").innerHTML = `<div class="banner banner-warn">${icon("alert")}<div>Could not load cases — start the app with <code>python server.py</code>.</div></div>`;
     return;
   }
-  QUEUE = cases;
-  renderQueue();
-  $("#queueSearch").addEventListener("input", renderQueue);
+  setBellCount(cases.filter((c) => c.flag_count).length);
 
   CASE = cases.find((c) => c.case_id === caseId);
-  if (!CASE) { $("#subtitle").innerHTML = `<span style="color:var(--bad)">Unknown case ${esc(caseId)}.</span>`; return; }
+  if (!CASE) {
+    $("#banner").innerHTML = `<div class="banner banner-warn">${icon("alert")}<div>Unknown case ${esc(caseId)}.</div></div>`;
+    return;
+  }
 
   DRAFT = CASE.draft;
-  renderRecord(CASE);
+  $("#chatName").textContent = CASE.customer_id;
 
-  // live regenerate + validator status
+  renderIdentity(CASE);
+  renderSummary(CASE, DRAFT);
+  renderDetails(CASE);
+  renderRelated(CASE);
+  renderInsights(CASE, DRAFT);
+  renderDecisions();
+
+  $("#detailsToggle").addEventListener("click", () =>
+    showDetails($("#detailsPanel").hidden));
+  showDetails(false);
+
+  $("#slaMore").addEventListener("click", () => {
+    const open = $("#slaDetails").hidden;
+    $("#slaDetails").hidden = !open;
+    $("#slaMore").setAttribute("aria-expanded", String(open));
+    $("#slaMore").textContent = open ? "Hide details" : "View details";
+  });
+
+  initComposer();
+  initChat();
+
+  // live regenerate + validator status on the AI reply card
   const live = await getDraft(caseId).catch(() => null);
-  if (live) {
+  if (live && live.draft) {
     DRAFT = live.draft;
     const v = live.validator || {};
-    $("#validator").innerHTML = v.ok
-      ? badge("hard-rule validator passed", "good", true)
-      : badge("validator rejected → regenerated", "warn", true);
+    $("#confPill").innerHTML = (v.ok ? badge("validator passed", "good", true) : badge("regenerated after rule check", "warn", true)) + " " +
+      badge(`${DRAFT.confidence_overall || "unknown"} confidence`, "neutral");
   }
+
   if (DRAFT.insufficient_information) {
-    $("#banner").innerHTML = `<div class="banner banner-info">${icon("info")}<div><strong>Insufficient information.</strong> Required fields are missing (no status, no contact history), so the copilot is not recommending an action. It says so rather than guessing.</div></div>`;
+    $("#banner").innerHTML = `<div class="banner banner-info">${icon("info")}<div><strong>Insufficient information.</strong>
+      Required fields are missing, so the copilot is not recommending an action. It says so rather than guessing.</div></div>`;
   } else if (CASE.has_conflict) {
-    $("#banner").innerHTML = `<div class="banner banner-warn">${icon("alert")}<div><strong>Transport conflict detected.</strong> The copilot will ask the customer to confirm the airport and will not state either value as correct.</div></div>`;
+    $("#banner").innerHTML = `<div class="banner banner-warn">${icon("alert")}<div><strong>Transport conflict detected.</strong>
+      The copilot will ask the customer to confirm the airport and will not state either value as correct.</div></div>`;
   }
-  renderAI();
-  initChat();
-  initCustomerChat();
+
+  renderSummary(CASE, DRAFT);
+  AI_TEXT.draft_message = String(DRAFT.draft_message || "");
+  $("#suggestText").textContent = DRAFT.draft_message || "No draft produced — insufficient information.";
+  renderDecisions();
 }
 init();
 </script>

@@ -191,6 +191,7 @@ async function init() {
     return;
   }
   renderKpis();
+  setBellCount(CASES.filter((c) => c.flag_count).length);
   const statuses = [...new Set(CASES.map((c) => c.current_status))].sort();
   const sel = $("#statusFilter");
   for (const s of statuses) {
@@ -200,6 +201,8 @@ async function init() {
   }
   ["q", "statusFilter", "flagOnly", "conflictOnly", "showAll"].forEach((id) =>
     $("#" + id).addEventListener("input", render));
+  // the topbar bell links here with ?filter=flagged
+  if (new URLSearchParams(location.search).get("filter") === "flagged") $("#flagOnly").checked = true;
   render();
 }
 init();

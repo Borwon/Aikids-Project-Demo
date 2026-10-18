@@ -97,6 +97,7 @@ async function load() {
 $("#refresh").addEventListener("click", () => { load(); loadBias(); });
 loadBias();
 load();
+getCases().then((cs) => setBellCount(cs.filter((c) => c.flag_count).length)).catch(() => {});
 </script>
 </body>
 </html>
