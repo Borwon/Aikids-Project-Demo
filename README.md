@@ -45,6 +45,8 @@ app/                           three-screen frontend (no framework, no CDN)
   index.html                   Case List
   case.html                    Case Copilot (detail)
   log.html                     Approval Log
+  app.js                       shared: icons, api helpers, evidence wording
+  pickup.js                    airport pickup: synthetic terminal plan + routing + GPS dot
 server.py                      stdlib HTTP server + approvals/draft/bias API
 run_pipeline.py                runs all four pipeline steps in order
 tests/                         24 tests: safety, bias audit, conversation, chat
@@ -121,6 +123,29 @@ same validator, same screens.
    control is clicked. A live `/api/draft` call shows the hard-rule validator status.
 3. **Approval Log** — read-only, timestamped audit trail of every decision, with
    the AI's proposal next to the human's final text, plus the fairness badge.
+
+### Airport pickup (on the Case Copilot screen)
+
+When a case has a transfer booking, the case screen adds an **Airport pickup**
+card: an illustrative 2D terminal plan with the customer's route inside (gate →
+baggage belt → exit) and the driver's route outside (kerbside lane → meeting
+point → pickup point), with step-by-step distances.
+
+What is real and what is not — the panel says this on screen, not just here:
+
+- **Illustrative.** The dataset stores no terminal, gate, belt or pickup fields,
+  so the waypoints are derived from the booking's `airport_code` and a hash of the
+  case id. This demo ships no airport floor plan; the plan and distances are
+  indicative only.
+- **Realtime position is device GPS or a labelled simulation.** `Use my location`
+  reads the browser's geolocation (outdoor-grade, unreliable inside a terminal)
+  and `Simulate walk` animates a labelled walk along the route. Because a device
+  fix cannot honestly be placed on an illustrative plan, a fix is shown as
+  coordinates plus an accuracy radius and the dot marks the kerbside lane — stated
+  on screen, not implied. There is no indoor positioning here.
+- **It refuses to guess.** When the booking sources disagree about the airport
+  (`itinerary` vs `internal_note` vs `airport_code`) the card draws no route and
+  asks a human to confirm first — the same rule the rest of the app follows.
 
 ---
 

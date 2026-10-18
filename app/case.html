@@ -183,9 +183,29 @@
       </section>
     </aside>
   </div>
+
+  <!-- airport pickup assist: illustrative plan, real device location or a labelled simulation -->
+  <section class="card pickup-card" id="pickupCard" hidden aria-labelledby="pickupTitle">
+    <div class="card-head">
+      <span class="head-tile" aria-hidden="true" id="pickupIcon"></span>
+      <h2 id="pickupTitle">Airport pickup</h2>
+      <div class="spacer"></div>
+      <span class="loc-chip" id="locChip">location off</span>
+      <button class="btn btn-sm" id="locBtn" type="button">Use my location</button>
+      <button class="btn btn-sm" id="simBtn" type="button">Simulate walk</button>
+    </div>
+    <div class="card-body pickup-body">
+      <div class="pickup-map" id="pickupMap"></div>
+      <div class="pickup-side">
+        <div id="pickupSteps"></div>
+        <p class="pk-note" id="pickupNote"></p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script src="app.js"></script>
+<script src="pickup.js"></script>
 <script>
 renderTopbar("case");
 
@@ -208,6 +228,7 @@ $("#custAvatar").innerHTML = icon("user");
 $("#suggestIcon").innerHTML = icon("spark");
 $("#sendBtn").innerHTML = icon("send");
 $("#replyIcon").innerHTML = icon("user");
+$("#pickupIcon").innerHTML = icon("plane");
 $("#prevCase").innerHTML = icon("arrowLeft");
 $("#nextCase").innerHTML = icon("arrowRight");
 $(".bar-jump").insertAdjacentHTML("afterbegin", icon("search"));
@@ -260,7 +281,7 @@ function renderRelated(c) {
   const required = (c.required_documents || []).length;
   const rows = [
     ["message", "Customer Contact History", `${contacts.length} record${contacts.length === 1 ? "" : "s"}`, "thread"],
-    ["bag", "Airport Transfer Booking", c.transport ? "1 record" : "none on file", "details"],
+    ["bag", "Airport Transfer Booking", c.transport ? "1 record" : "none on file", c.transport ? "pickup" : "details"],
     ["file", "Case Documents", `${received} of ${required} received`, "details"],
     ["star", "Reviews", `${(c.reviews || []).length} review${(c.reviews || []).length === 1 ? "" : "s"}`, "details", "warn"],
   ];
@@ -272,6 +293,7 @@ function renderRelated(c) {
     </button>`).join("");
   $$("#relList .rel-row").forEach((b) => b.addEventListener("click", () => {
     if (b.dataset.target === "thread") $("#custLog").scrollIntoView({ behavior: "smooth", block: "center" });
+    else if (b.dataset.target === "pickup") $("#pickupCard").scrollIntoView({ behavior: "smooth", block: "start" });
     else { showDetails(true); $("#detailsPanel").scrollIntoView({ behavior: "smooth", block: "center" }); }
   }));
 }
@@ -692,6 +714,18 @@ async function init() {
 
   initComposer();
   initChat();
+
+  if (CASE.transport) {
+    $("#pickupCard").hidden = false;
+    mountPickup(CASE, {
+      map: $("#pickupMap"),
+      steps: $("#pickupSteps"),
+      note: $("#pickupNote"),
+      chip: $("#locChip"),
+      locBtn: $("#locBtn"),
+      simBtn: $("#simBtn"),
+    });
+  }
 
   // live regenerate + validator status on the AI reply card
   const live = await getDraft(caseId).catch(() => null);
