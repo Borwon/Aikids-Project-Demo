@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Copilot · VisaConnect</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="container">
+  <div class="page-head">
+    <div>
+      <h1 id="title">Case Copilot</h1>
+      <p id="subtitle">Loading…</p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn" href="index.html">← Back to list</a>
+  </div>
+
+  <div id="banner"></div>
+
+  <div class="card">
+    <div class="card-head"><h2>Case record (raw fields — nothing hidden)</h2>
+      <div class="spacer"></div><span id="recordBadges"></span></div>
+    <div class="card-body"><div id="fields" class="field-grid"></div></div>
+  </div>
+
+  <div class="detail-grid" style="margin-top:18px">
+    <div>
+      <div class="card">
+        <div class="card-head"><h2>AI copilot output</h2>
+          <div class="spacer"></div>
+          <span id="validator" class="muted" style="font-size:12px"></span>
+        </div>
+        <div class="card-body" id="aiBody"></div>
+      </div>
+
+      <div class="card" id="chatCard">
+        <div class="card-head"><h2>Ask about this case</h2>
+          <div class="spacer"></div>
+          <span class="muted" style="font-size:11.5px">read-only · scoped to this case</span>
+        </div>
+        <div class="card-body">
+          <div id="chatLog" class="chat-log"></div>
+          <div id="chatSuggest" class="chat-suggest"></div>
+          <form id="chatForm" class="chat-form">
+            <textarea id="chatInput" rows="2" placeholder="Ask about status, flags, SLA, last contact…" autocomplete="off"></textarea>
+            <button class="btn btn-primary" id="chatSend" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-head"><h2>Conversation with customer</h2>
+          <div class="spacer"></div>
+          <span class="muted" style="font-size:11.5px">demo · replies queued locally, never transmitted</span>
+        </div>
+        <div class="card-body">
+          <div id="custLog" class="chat-log"></div>
+          <form id="custForm" class="chat-form">
+            <select id="custChannel" title="Channel"></select>
+            <textarea id="custInput" rows="1" placeholder="Write a reply to the customer…"></textarea>
+            <button class="btn btn-primary" type="submit">Add reply</button>
+          </form>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Transport</h2></div>
+        <div class="card-body" id="transport"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Reviews</h2></div>
+        <div class="card-body" id="reviews"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="app.js"></script>
+<script>
+renderTopbar("case");
+
+const caseId = new URLSearchParams(location.search).get("case_id");
+let CASE = null;
+let DRAFT = null;
+const decisions = {};   // item key -> action
+
+function field(k, v, isList) {
+  const empty = v === "" || v == null || (isList && (!v || v.length === 0));
+  const val = isList ? (Array.isArray(v) && v.length ? v.join(", ") : "") : v;
+  return `<div class="field"><div class="k">${esc(k)}</div>
+    <div class="v ${empty ? "empty" : ""}">${empty ? "blank" : esc(val)}</div></div>`;
+}
+
+function renderRecord(c) {
+  $("#title").textContent = c.case_id;
+  $("#subtitle").innerHTML = `${esc(c.journey_type)} · opened ${fmtShort(c.case_created_at)} · ${c.days_open} days open`;
+  $("#recordBadges").innerHTML =
+    (c.sla_breached ? badge("SLA breached", "bad", true) : badge("SLA on-time", "good", true)) + " " +
+    (c.has_conflict ? badge("transport conflict", "bad") : "");
+
+  $("#fields").innerHTML = [
+    field("Case ID", c.case_id), field("Status", c.current_status),
+    field("Journey type", c.journey_type), field("Destination", c.destination_country),
+    field("Owner staff id", c.case_owner_staff_id),
+    field("Customer id", c.customer_id),
+    field("Nationality", c.customer_nationality),
+    field("Message language", c.message_language),
+    field("Created at", c.case_created_at), field("Last customer update", c.last_customer_update_at),
+    field("Days open", c.days_open), field("Hours elapsed", c.hours_elapsed),
+    field("SLA target (h)", c.sla_target_hours), field("Payment status", c.payment_status),
+    field("Required documents", c.required_documents, true),
+    field("Documents received", c.documents_received, true),
+  ].join("");
+
+  // contacts are rendered as the customer conversation panel (loadConversation)
+
+  // transport
+  const t = c.transport;
+  $("#transport").innerHTML = !t
+    ? '<span class="muted">No transport booking on file.</span>'
+    : `<div class="field-grid">
+        ${field("Itinerary", t.itinerary_value)}
+        ${field("Internal note", t.internal_note_value)}
+        ${field("Airport code", t.airport_code)}
+        ${field("Departure", t.departure_date)}
+      </div>${t.conflict ? '<div class="banner banner-warn" style="margin-top:12px">Itinerary, internal note and airport code disagree — resolve before advising the customer.</div>' : ""}`;
+
+  // reviews
+  $("#reviews").innerHTML = !c.reviews.length
+    ? '<span class="muted">No reviews on file.</span>'
+    : c.reviews.map((r) =>
+        `<div><strong>${r.rating}★</strong> <span class="muted">${fmtShort(r.review_at)}</span>
+         <div>${esc(r.review_text)}</div></div>`).join("<hr style='border:none;border-top:1px dashed var(--border);margin:10px 0'>");
+}
+
+function flagsHtml(flags) {
+  if (!flags.length) return '<span class="muted">No flags detected.</span>';
+  return flags.map((f) => `<div class="flag">
+      <div style="flex:1">
+        <div class="type">${esc(f.issue_type)} <span class="faint mono">${esc(f.field)}</span></div>
+        <div class="ev">${esc(f.note || f.evidence || "")}</div>
+      </div>
+      <span class="conf-tag conf-${esc(f.confidence)}">${esc(f.confidence.replace(" data", ""))}</span>
+    </div>`).join("");
+}
+
+function decisionRow(key, label, aiText, aiRender, editable) {
+  const decided = decisions[key];
+  return `<div class="ai-block" data-item="${key}" style="margin-bottom:12px">
+    <h3>${esc(label)}</h3>
+    <div class="body">${aiRender || `<div class="summary">${esc(aiText)}</div>`}</div>
+    <div class="actions">
+      ${decided
+        ? `<span class="decided ${decided}">${decided === "approve" ? "✓ Approved" : decided === "edit" ? "✎ Edited & saved" : "✕ Rejected"} by ${esc(getStaff())}</span>`
+        : `<button class="btn btn-approve btn-sm" data-act="approve">Approve</button>
+           ${editable ? '<button class="btn btn-edit btn-sm" data-act="edit">Edit</button>' : ""}
+           <button class="btn btn-reject btn-sm" data-act="reject">Reject</button>
+           <div class="spacer"></div><span class="muted" style="font-size:11.5px">AI suggestion — nothing counts until you decide</span>`}
+    </div>
+  </div>`;
+}
+
+function renderAI() {
+  const d = DRAFT;
+  const body = $("#aiBody");
+  body.innerHTML =
+    decisionRow("summary", "Case summary", d.summary, null, true) +
+    decisionRow("flags", "Flags & missing items", null, flagsHtml(d.flags), false) +
+    decisionRow("recommended_action", "Recommended next action", d.recommended_action, null, true) +
+    decisionRow("draft_message", "Draft customer update",
+      d.draft_message || "(none produced — insufficient information)",
+      d.draft_message ? null : '<div class="muted">No draft produced.</div>', true);
+
+  $$("#aiBody [data-act]").forEach((btn) => btn.addEventListener("click", onDecision));
+}
+
+async function onDecision(ev) {
+  const btn = ev.currentTarget;
+  const act = btn.dataset.act;
+  const key = btn.closest(".ai-block").dataset.item;
+  const d = DRAFT;
+  const aiOutput = {
+    summary: d.summary,
+    flags: d.flags,
+    recommended_action: d.recommended_action,
+    draft_message: d.draft_message,
+  };
+  const aiText = key === "flags" ? JSON.stringify(d.flags) : String(aiOutput[key] ?? "");
+
+  if (act === "reject") {
+    await logDecision(key, "reject", aiText, null);
+    return;
+  }
+  if (act === "approve") {
+    await logDecision(key, "approve", aiText, aiText);
+    return;
+  }
+
+  // edit: inline textarea
+  const block = btn.closest(".ai-block");
+  const body = block.querySelector(".body");
+  const original = body.innerHTML;
+  body.innerHTML = `<textarea id="editBox">${esc(aiText)}</textarea>
+    <div class="actions"><button class="btn btn-primary btn-sm" id="saveEdit">Save edit</button>
+    <button class="btn btn-sm" id="cancelEdit">Cancel</button></div>`;
+  $("#cancelEdit").addEventListener("click", () => { body.innerHTML = original; });
+  $("#saveEdit").addEventListener("click", async () => {
+    await logDecision(key, "edit", aiText, $("#editBox").value);
+  });
+}
+
+async function logDecision(key, action, aiText, finalText) {
+  try {
+    await postApproval({
+      case_id: caseId,
+      staff_id: getStaff(),
+      action,
+      ai_output: { item: key, text: aiText },
+      final_output: action === "reject" ? { item: key, text: null } : { item: key, text: finalText },
+    });
+    decisions[key] = action;
+    toast(`${key.replace("_", " ")} — ${action}d and logged`);
+    renderAI();
+  } catch (e) {
+    toast("Could not log decision: " + e.message);
+  }
+}
+
+/* ---------- scoped case chat ---------- */
+const CHAT = [];
+const SUGGESTIONS = [
+  "What's the current status?",
+  "Any flags or problems?",
+  "Is the SLA breached?",
+  "What was the last contact and channel?",
+  "Who owns this case?",
+];
+
+function renderSuggestions() {
+  $("#chatSuggest").innerHTML = SUGGESTIONS
+    .map((s) => `<button type="button" class="chip" data-q="${esc(s)}">${esc(s)}</button>`).join("");
+  $$("#chatSuggest .chip").forEach((b) =>
+    b.addEventListener("click", () => { $("#chatInput").value = b.dataset.q; $("#chatInput").focus(); }));
+}
+
+function renderChat() {
+  const log = $("#chatLog");
+  if (!CHAT.length) {
+    log.innerHTML = '<div class="chat-empty muted">Ask anything about this case — the assistant answers only from this case\'s data.</div>';
+    return;
+  }
+  log.innerHTML = CHAT.map((m) =>
+    `<div class="msg ${m.role}"><div class="bubble">${esc(m.content)}</div></div>`).join("");
+  log.scrollTop = log.scrollHeight;
+}
+
+async function sendChat(text) {
+  const message = String(text || "").trim();
+  if (!message) return;
+  CHAT.push({ role: "user", content: message });
+  CHAT.push({ role: "assistant", content: "…" });
+  $("#chatInput").value = "";
+  $("#chatSend").disabled = true;
+  renderChat();
+  const history = CHAT.slice(0, -2).slice(-8);   // prior turns, before this one
+  try {
+    const res = await fetch(`/cases/${encodeURIComponent(caseId)}/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message, history }),
+    });
+    if (!res.ok) throw new Error("assistant unavailable (" + res.status + ")");
+    const data = await res.json();
+    CHAT[CHAT.length - 1] = { role: "assistant", content: data.reply };
+  } catch (e) {
+    CHAT[CHAT.length - 1] = { role: "assistant", content: "Could not reach the assistant: " + e.message };
+  } finally {
+    $("#chatSend").disabled = false;
+    renderChat();
+  }
+}
+
+function initChat() {
+  renderSuggestions();
+  renderChat();
+  $("#chatForm").addEventListener("submit", (e) => { e.preventDefault(); sendChat($("#chatInput").value); });
+  $("#chatInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat($("#chatInput").value); }
+  });
+}
+
+/* ---------- conversation with customer ---------- */
+const CHANNELS = ["Phone", "Email", "Web chat", "LINE", "Office visit"];
+
+function renderConversation(thread) {
+  const log = $("#custLog");
+  if (!thread || !thread.length) {
+    log.innerHTML = '<div class="chat-empty muted">No conversation recorded for this case.</div>';
+    return;
+  }
+  log.innerHTML = thread.map((m) => {
+    if (m.kind === "system") {
+      return `<div class="msg system"><span class="sysline">— ${esc(m.text)}${m.staff_id ? " · " + esc(m.staff_id) : ""} · ${fmtDate(m.ts)} —</span></div>`;
+    }
+    const outgoing = m.kind === "staff";
+    const meta = [m.channel, fmtDate(m.ts), outgoing ? "queued locally — not sent" : "customer"]
+      .filter(Boolean).join(" · ");
+    return `<div class="msg ${outgoing ? "user" : "assistant"}">
+        <div class="col">
+          <div class="bubble">${esc(m.text)}</div>
+          <div class="meta">${esc(meta)}</div>
+        </div>
+      </div>`;
+  }).join("");
+  log.scrollTop = log.scrollHeight;
+}
+
+async function loadConversation() {
+  const res = await fetch(`/cases/${encodeURIComponent(caseId)}/customer-messages`);
+  if (!res.ok) throw new Error("conversation unavailable (" + res.status + ")");
+  const data = await res.json();
+  renderConversation(data.thread);
+  // default the reply channel to the most recent customer channel
+  const last = (CASE.contacts || []).slice(-1)[0];
+  if (last && last.channel && CHANNELS.includes(last.channel)) $("#custChannel").value = last.channel;
+}
+
+function initCustomerChat() {
+  const sel = $("#custChannel");
+  sel.innerHTML = CHANNELS.map((c) => `<option>${esc(c)}</option>`).join("");
+  $("#custForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const text = $("#custInput").value.trim();
+    if (!text) return;
+    const channel = sel.value;
+    $("#custInput").value = "";
+    try {
+      const res = await fetch(`/cases/${encodeURIComponent(caseId)}/customer-messages`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, channel, staff_id: getStaff() }),
+      });
+      if (!res.ok) throw new Error("could not queue reply (" + res.status + ")");
+      const data = await res.json();
+      renderConversation(data.thread);
+      toast("Reply queued locally — nothing was transmitted");
+    } catch (err) {
+      toast("Could not queue reply: " + err.message);
+    }
+  });
+  loadConversation().catch((err) => {
+    $("#custLog").innerHTML = `<div class="chat-empty muted">${esc(err.message)}</div>`;
+  });
+}
+
+async function init() {
+  if (!caseId) { $("#subtitle").textContent = "No case_id provided."; return; }
+  const cases = await getCases();
+  CASE = cases.find((c) => c.case_id === caseId);
+  if (!CASE) { $("#subtitle").innerHTML = `<span style="color:#b91c1c">Unknown case ${esc(caseId)}.</span>`; return; }
+
+  DRAFT = CASE.draft;
+  renderRecord(CASE);
+
+  // live regenerate + validator status
+  const live = await getDraft(caseId).catch(() => null);
+  if (live) {
+    DRAFT = live.draft;
+    const v = live.validator || {};
+    $("#validator").innerHTML = v.ok
+      ? badge("hard-rule validator: passed", "good", true)
+      : badge("validator: rejected → regenerated", "warn", true);
+  }
+  if (DRAFT.insufficient_information) {
+    $("#banner").innerHTML = '<div class="banner banner-info"><strong>Insufficient information.</strong> Required fields are missing (no status / no contact history), so the copilot is not recommending an action. It says so rather than guessing.</div>';
+  } else if (CASE.has_conflict) {
+    $("#banner").innerHTML = '<div class="banner banner-warn"><strong>Transport conflict detected.</strong> The copilot will ask the customer to confirm the airport and will not state either value as correct.</div>';
+  }
+  renderAI();
+  initChat();
+  initCustomerChat();
+}
+init();
+</script>
+</body>
+</html>

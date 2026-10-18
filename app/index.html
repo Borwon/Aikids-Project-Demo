@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case List · VisaConnect Case Copilot</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="container">
+  <div class="page-head">
+    <div>
+      <h1>Case List</h1>
+      <p id="subtitle">Loading cases…</p>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Search case id or status…" style="min-width:260px">
+    <select id="statusFilter"><option value="">All statuses</option></select>
+    <label class="inline"><input type="checkbox" id="flagOnly"> Flagged only</label>
+    <label class="inline"><input type="checkbox" id="conflictOnly"> Transport conflict only</label>
+    <div class="spacer"></div>
+    <label class="inline"><input type="checkbox" id="showAll"> Show nationality / language columns</label>
+  </div>
+
+  <div class="card">
+    <div style="max-height:70vh; overflow:auto">
+      <table id="casesTable">
+        <thead><tr id="headRow"></tr></thead>
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+    <div id="empty" class="empty-state" hidden>No cases match the current filters.</div>
+  </div>
+</main>
+
+<script src="app.js"></script>
+<script>
+renderTopbar("list");
+
+let CASES = [];
+let sortKey = "case_id";
+let sortDir = 1;
+
+const COLUMNS = [
+  { key: "case_id", label: "Case", sortable: true },
+  { key: "current_status", label: "Status", sortable: true, cell: (c) => c.current_status ? esc(c.current_status) : '<span class="faint">— none —</span>' },
+  { key: "journey_type", label: "Journey", sortable: true },
+  { key: "days_open", label: "Days open", sortable: true, cls: "num", cell: (c) => c.days_open },
+  { key: "sla", label: "SLA", sortable: true, cell: (c) =>
+      c.sla_breached ? badge("breached", "bad", true) : badge("on-time", "good", true) },
+  { key: "hours", label: "Elapsed / target", sortable: true, cls: "num", cell: (c) => `${c.hours_elapsed}h / ${c.sla_target_hours}h` },
+  { key: "flag_count", label: "Flags", sortable: true, cls: "num", cell: (c) =>
+      c.flag_count ? badge(String(c.flag_count), flagKind(c.flag_types[0]), true) : '<span class="faint">0</span>' },
+  { key: "has_conflict", label: "Conflict", sortable: true, cell: (c) =>
+      c.has_conflict ? badge("itinerary ≠ note", "bad") : '<span class="faint">—</span>' },
+  { key: "owner", label: "Owner", sortable: true, cell: (c) =>
+      c.case_owner_staff_id ? `<span class="mono">${esc(c.case_owner_staff_id)}</span>` : badge("unassigned", "warn") },
+];
+
+const HIDDEN_COLUMNS = [
+  { key: "customer_nationality", label: "Nationality", sortable: true },
+  { key: "message_language", label: "Language", sortable: true },
+];
+
+function sortVal(c, key) {
+  if (key === "sla") return c.sla_breached ? 1 : 0;
+  if (key === "has_conflict") return c.has_conflict ? 1 : 0;
+  if (key === "owner") return c.case_owner_staff_id || "";
+  return c[key];
+}
+
+function visibleColumns() {
+  return $("#showAll").checked ? COLUMNS.concat(HIDDEN_COLUMNS) : COLUMNS;
+}
+
+function renderHead() {
+  const row = $("#headRow");
+  clear(row);
+  for (const col of visibleColumns()) {
+    const th = document.createElement("th");
+    th.textContent = col.label;
+    if (col.sortable) {
+      th.className = "sortable";
+      if (col.key === sortKey) th.textContent += sortDir > 0 ? " ↑" : " ↓";
+      th.addEventListener("click", () => {
+        if (sortKey === col.key) sortDir *= -1; else { sortKey = col.key; sortDir = 1; }
+        render();
+      });
+    }
+    row.appendChild(th);
+  }
+}
+
+function applyFilters() {
+  const q = $("#q").value.trim().toLowerCase();
+  const status = $("#statusFilter").value;
+  const flagOnly = $("#flagOnly").checked;
+  const conflictOnly = $("#conflictOnly").checked;
+  let rows = CASES.filter((c) => {
+    if (status && c.current_status !== status) return false;
+    if (flagOnly && !c.flag_count) return false;
+    if (conflictOnly && !c.has_conflict) return false;
+    if (q) {
+      const hay = `${c.case_id} ${c.current_status} ${c.journey_type} ${c.case_owner_staff_id}`.toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+  rows.sort((a, b) => {
+    const av = sortVal(a, sortKey), bv = sortVal(b, sortKey);
+    if (av < bv) return -1 * sortDir;
+    if (av > bv) return 1 * sortDir;
+    return 0;
+  });
+  return rows;
+}
+
+function render() {
+  renderHead();
+  const cols = visibleColumns();
+  const rows = applyFilters();
+  const body = $("#body");
+  clear(body);
+  $("#empty").hidden = rows.length > 0;
+
+  for (const c of rows) {
+    const tr = document.createElement("tr");
+    tr.addEventListener("click", () => { location.href = `case.html?case_id=${encodeURIComponent(c.case_id)}`; });
+    for (const col of cols) {
+      const td = document.createElement("td");
+      if (col.cls) td.className = col.cls;
+      td.innerHTML = col.cell ? col.cell(c) : (c[col.key] === "" ? '<span class="faint">—</span>' : esc(c[col.key]));
+      tr.appendChild(td);
+    }
+    body.appendChild(tr);
+  }
+  $("#subtitle").textContent = `${rows.length} of ${CASES.length} cases shown · AI flags and drafts are suggestions until a staff member approves them.`;
+}
+
+async function init() {
+  try {
+    CASES = await getCases();
+  } catch (e) {
+    $("#subtitle").innerHTML = `<span style="color:#b91c1c">Could not load cases — start the app with <code>python server.py</code>.</span>`;
+    return;
+  }
+  const statuses = [...new Set(CASES.map((c) => c.current_status))].sort();
+  const sel = $("#statusFilter");
+  for (const s of statuses) {
+    const o = document.createElement("option");
+    o.value = s; o.textContent = s || "(blank)";
+    sel.appendChild(o);
+  }
+  ["q", "statusFilter", "flagOnly", "conflictOnly", "showAll"].forEach((id) =>
+    $("#" + id).addEventListener("input", render));
+  render();
+}
+init();
+</script>
+</body>
+</html>

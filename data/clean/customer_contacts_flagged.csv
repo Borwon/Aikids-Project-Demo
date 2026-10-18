@@ -1,0 +1,432 @@
+contact_id,case_id,channel,message_summary,message_language,sentiment_label,contact_at,response_sent_at,responded_by_staff_id,flags,has_flag
+CT-00001,VC-00001,Phone,Confirmed the passport has been uploaded to the portal.,French,negative,2026-09-15T12:00:00,2026-09-16T05:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00002,VC-00001,Phone,Requested clarification about the passport requirement.,French,negative,2026-09-22T21:00:00,2026-09-24T01:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00003,VC-00001,Email,Customer asked whether their passport was received.,French,neutral,2026-10-04T02:00:00,2026-10-04T12:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00004,VC-00001,Office visit,Requested clarification about the acceptance_letter requirement.,French,positive,2026-09-15T05:00:00,2026-09-15T10:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00005,VC-00003,Office visit,Customer asked whether their passport was received.,German,neutral,2026-10-09T15:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00006,VC-00003,Email,Confirmed the photo has been uploaded to the portal.,German,neutral,2026-10-10T05:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00007,VC-00003,LINE,Confirmed the photo has been uploaded to the portal.,German,neutral,2026-10-16T11:00:00,2026-10-18T09:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00008,VC-00004,Office visit,Asked for an update on the bank_statement review.,Burmese,neutral,2026-10-09T06:00:00,2026-10-11T22:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00009,VC-00004,Phone,Confirmed the invitation_letter has been uploaded to the portal.,Burmese,neutral,2026-10-02T21:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00010,VC-00005,Office visit,Confirmed the bank_statement has been uploaded to the portal.,Thai,neutral,2026-09-24T19:00:00,2026-09-26T20:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00011,VC-00005,Office visit,Customer resent a clearer copy of their bank_statement.,Thai,positive,2026-09-17T02:00:00,2026-09-18T01:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00012,VC-00005,Email,Following up on the outstanding itinerary request.,Thai,negative,2026-09-30T20:00:00,2026-10-01T03:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00013,VC-00005,Phone,Following up on the outstanding itinerary request.,Thai,negative,2026-09-18T10:00:00,2026-09-20T08:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00014,VC-00006,Web chat,Following up on the outstanding acceptance_letter request.,Burmese,positive,2026-10-13T20:00:00,2026-10-13T21:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00015,VC-00006,Email,Following up on the outstanding photo request.,Burmese,negative,2026-10-09T02:00:00,2026-10-11T06:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00016,VC-00006,Office visit,Following up on the outstanding photo request.,Burmese,negative,2026-09-30T04:00:00,2026-10-01T04:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00017,VC-00006,Phone,Requested clarification about the financial_proof requirement.,Burmese,neutral,2026-10-15T18:00:00,2026-10-15T21:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00018,VC-00007,Phone,Confirmed the relationship_proof has been uploaded to the portal.,Burmese,positive,2026-10-11T17:00:00,2026-10-12T15:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00019,VC-00007,Email,Customer asked whether their photo was received.,Burmese,positive,2026-10-04T11:00:00,2026-10-04T19:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00020,VC-00007,Web chat,Following up on the outstanding photo request.,Burmese,neutral,2026-10-15T14:00:00,2026-10-15T20:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00021,VC-00007,Phone,Requested clarification about the sponsor_letter requirement.,Burmese,negative,2026-10-13T00:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00022,VC-00008,Web chat,Customer asked whether their photo was received.,Burmese,neutral,2026-10-07T22:00:00,2026-10-08T01:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00023,VC-00008,Web chat,Customer asked whether their itinerary was received.,Burmese,neutral,2026-10-10T10:00:00,2026-10-10T18:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00024,VC-00009,Email,Customer asked whether their employment_contract was received.,Burmese,negative,2026-09-29T10:00:00,2026-09-30T06:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00025,VC-00010,Web chat,Confirmed the work_permit has been uploaded to the portal.,French,negative,2026-10-14T15:00:00,2026-10-15T15:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00026,VC-00011,Phone,Customer asked whether their passport was received.,Thai,positive,2026-10-17T03:00:00,2026-10-19T06:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00027,VC-00011,LINE,Requested clarification about the invitation_letter requirement.,Thai,negative,2026-10-16T17:00:00,2026-10-17T11:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00028,VC-00011,Office visit,Asked for an update on the photo review.,Thai,negative,2026-10-17T03:00:00,2026-10-19T03:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00029,VC-00011,Phone,Requested clarification about the photo requirement.,Thai,neutral,2026-10-16T22:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00030,VC-00013,Phone,Customer asked whether their itinerary was received.,English,negative,2026-10-10T12:00:00,2026-10-11T08:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00031,VC-00014,LINE,Following up on the outstanding bank_statement request.,French,neutral,2026-09-29T12:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00032,VC-00014,Office visit,Customer resent a clearer copy of their passport.,French,negative,2026-10-13T16:00:00,2026-10-13T18:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00033,VC-00014,Phone,Following up on the outstanding passport request.,French,neutral,2026-10-13T20:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00034,VC-00015,LINE,Customer resent a clearer copy of their passport.,Burmese,neutral,2026-09-26T00:00:00,2026-09-26T11:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00035,VC-00015,Phone,Customer asked whether their passport was received.,Burmese,negative,2026-10-07T06:00:00,2026-10-07T07:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00036,VC-00015,LINE,Customer asked whether their photo was received.,Burmese,neutral,2026-10-16T07:00:00,2026-10-17T16:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00037,VC-00017,Web chat,Asked for an update on the passport review.,Burmese,positive,2026-10-01T22:00:00,2026-10-03T03:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00038,VC-00017,Web chat,Customer resent a clearer copy of their bank_statement.,Burmese,negative,2026-10-13T14:00:00,2026-10-15T23:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00039,VC-00017,Web chat,Customer asked whether their passport was received.,Burmese,positive,2026-10-07T07:00:00,2026-10-08T05:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00040,VC-00017,LINE,Customer resent a clearer copy of their bank_statement.,Burmese,neutral,2026-09-26T23:00:00,2026-09-29T06:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00041,VC-00018,LINE,Asked for an update on the passport review.,French,positive,2026-10-14T04:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00042,VC-00018,Office visit,Customer asked whether their bank_statement was received.,French,positive,2026-10-15T03:00:00,2026-10-16T17:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00043,VC-00019,Web chat,Customer resent a clearer copy of their photo.,Thai,positive,2026-10-12T00:00:00,2026-10-14T16:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00044,VC-00019,Email,Customer asked whether their passport was received.,Thai,neutral,2026-10-03T04:00:00,2026-10-04T03:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00045,VC-00019,Email,Asked for an update on the invitation_letter review.,Thai,negative,2026-10-07T22:00:00,2026-10-08T08:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00046,VC-00022,Office visit,Requested clarification about the bank_statement requirement.,English,positive,2026-10-15T08:00:00,2026-10-17T02:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00047,VC-00023,LINE,Following up on the outstanding itinerary request.,Thai,neutral,2026-10-15T09:00:00,2026-10-16T11:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00048,VC-00023,Email,Asked for an update on the bank_statement review.,Thai,negative,2026-10-08T07:00:00,2026-10-10T16:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00049,VC-00023,Office visit,Requested clarification about the photo requirement.,Thai,positive,2026-10-10T01:00:00,2026-10-12T11:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00050,VC-00023,Phone,Customer asked whether their passport was received.,Thai,neutral,2026-10-07T16:00:00,2026-10-07T20:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00051,VC-00024,Web chat,Customer resent a clearer copy of their sponsor_letter.,English,neutral,2026-10-16T02:00:00,2026-10-18T08:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00052,VC-00024,Web chat,Following up on the outstanding passport request.,English,negative,2026-10-06T07:00:00,2026-10-08T08:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00053,VC-00025,LINE,Customer resent a clearer copy of their photo.,Burmese,neutral,2026-10-09T23:00:00,2026-10-10T01:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00054,VC-00027,Email,Confirmed the employment_contract has been uploaded to the portal.,Burmese,neutral,2026-10-06T22:00:00,2026-10-08T07:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00055,VC-00027,Phone,Confirmed the employment_contract has been uploaded to the portal.,Burmese,neutral,2026-10-17T02:00:00,2026-10-18T04:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00056,VC-00027,LINE,Asked for an update on the work_permit review.,Burmese,neutral,2026-10-01T00:00:00,2026-10-01T09:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00057,VC-00028,Phone,Customer resent a clearer copy of their bank_statement.,Thai,neutral,2026-10-11T23:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00058,VC-00028,Email,Asked for an update on the invitation_letter review.,Thai,positive,2026-10-16T05:00:00,2026-10-16T14:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00059,VC-00028,Email,Customer asked whether their invitation_letter was received.,Thai,negative,2026-10-17T04:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00060,VC-00028,Web chat,Asked for an update on the passport review.,Thai,neutral,2026-10-18T09:00:00,2026-10-18T18:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00061,VC-00029,Email,Customer resent a clearer copy of their itinerary.,English,neutral,2026-10-13T18:00:00,2026-10-15T12:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00062,VC-00030,Phone,Confirmed the relationship_proof has been uploaded to the portal.,English,neutral,2026-10-10T21:00:00,2026-10-11T10:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00063,VC-00031,LINE,Customer asked whether their passport was received.,Burmese,negative,2026-09-20T20:00:00,2026-09-22T17:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00064,VC-00032,LINE,Confirmed the photo has been uploaded to the portal.,English,positive,2026-09-30T07:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00065,VC-00032,Phone,Asked for an update on the passport review.,English,neutral,2026-10-04T12:00:00,2026-10-06T06:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00066,VC-00032,LINE,Confirmed the sponsor_letter has been uploaded to the portal.,English,negative,2026-10-04T23:00:00,2026-10-05T08:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00067,VC-00032,LINE,Asked for an update on the photo review.,English,negative,2026-10-17T11:00:00,2026-10-18T01:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00068,VC-00033,LINE,Customer resent a clearer copy of their photo.,English,neutral,2026-09-12T17:00:00,2026-09-13T00:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00069,VC-00033,Web chat,Asked for an update on the photo review.,English,neutral,2026-09-23T13:00:00,2026-09-25T11:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00070,VC-00034,Phone,Following up on the outstanding work_permit request.,Thai,neutral,2026-09-20T08:00:00,2026-09-03T16:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00071,VC-00034,Phone,Customer asked whether their work_permit was received.,Thai,neutral,2026-09-30T06:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00072,VC-00034,Email,Customer resent a clearer copy of their photo.,Thai,negative,2026-09-13T02:00:00,2026-09-14T05:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00073,VC-00035,Phone,Requested clarification about the bank_statement requirement.,English,negative,2026-10-07T07:00:00,2026-10-09T23:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00074,VC-00036,Web chat,Following up on the outstanding sponsor_letter request.,Burmese,negative,2026-10-08T11:00:00,2026-10-09T17:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00075,VC-00036,Office visit,Customer resent a clearer copy of their passport.,Burmese,positive,2026-10-07T19:00:00,2026-10-07T21:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00076,VC-00036,LINE,Customer asked whether their passport was received.,Burmese,positive,2026-09-28T20:00:00,2026-10-01T12:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00077,VC-00037,LINE,Customer resent a clearer copy of their acceptance_letter.,English,positive,2026-10-18T05:00:00,2026-10-21T04:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00078,VC-00037,Phone,Confirmed the acceptance_letter has been uploaded to the portal.,English,positive,2026-10-10T12:00:00,2026-10-11T22:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00079,VC-00037,Office visit,Customer resent a clearer copy of their photo.,English,neutral,2026-10-15T06:00:00,2026-10-17T13:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00080,VC-00037,LINE,Following up on the outstanding financial_proof request.,English,neutral,2026-10-18T06:00:00,2026-10-19T14:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00081,VC-00038,Office visit,Customer resent a clearer copy of their passport.,Burmese,negative,2026-10-10T01:00:00,2026-10-10T03:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00082,VC-00039,Web chat,Following up on the outstanding itinerary request.,German,negative,2026-10-15T01:00:00,2026-10-17T03:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00083,VC-00040,LINE,Confirmed the photo has been uploaded to the portal.,French,neutral,2026-10-13T03:00:00,2026-10-15T16:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00084,VC-00040,LINE,Asked for an update on the invitation_letter review.,French,negative,2026-10-09T22:00:00,2026-10-11T14:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00085,VC-00041,Phone,Confirmed the passport has been uploaded to the portal.,Thai,positive,2026-09-30T01:00:00,2026-09-30T09:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00086,VC-00041,Office visit,Following up on the outstanding financial_proof request.,Thai,negative,2026-10-02T04:00:00,2026-10-04T21:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00087,VC-00041,LINE,Confirmed the acceptance_letter has been uploaded to the portal.,Thai,negative,2026-09-24T01:00:00,2026-09-24T19:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00088,VC-00041,Email,Confirmed the passport has been uploaded to the portal.,Thai,neutral,2026-09-29T03:00:00,2026-09-29T11:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00089,VC-00042,Office visit,Asked for an update on the financial_proof review.,Burmese,positive,2026-10-15T13:00:00,2026-10-16T04:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00090,VC-00042,Phone,Asked for an update on the photo review.,Burmese,neutral,2026-10-14T17:00:00,2026-10-17T10:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00091,VC-00043,Office visit,Asked for an update on the bank_statement review.,German,neutral,2026-10-03T16:00:00,2026-10-04T12:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00092,VC-00043,Web chat,Customer asked whether their bank_statement was received.,German,positive,2026-10-12T17:00:00,2026-10-15T05:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00093,VC-00043,Email,Customer resent a clearer copy of their passport.,German,negative,2026-10-16T12:00:00,2026-10-17T18:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00094,VC-00043,Phone,Asked for an update on the passport review.,German,neutral,2026-09-20T13:00:00,2026-09-20T19:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00095,VC-00044,LINE,Confirmed the passport has been uploaded to the portal.,English,neutral,2026-10-08T20:00:00,2026-10-09T23:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00096,VC-00044,LINE,Asked for an update on the invitation_letter review.,English,neutral,2026-10-06T01:00:00,2026-10-08T14:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00097,VC-00044,Office visit,Asked for an update on the passport review.,English,positive,2026-10-01T10:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00098,VC-00044,Phone,Asked for an update on the bank_statement review.,English,negative,2026-10-02T11:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00099,VC-00045,Email,Requested clarification about the passport requirement.,Thai,neutral,2026-10-02T05:00:00,2026-10-04T23:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00100,VC-00046,Email,Requested clarification about the photo requirement.,German,neutral,2026-10-15T06:00:00,2026-10-17T17:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00101,VC-00046,Office visit,Customer asked whether their relationship_proof was received.,German,neutral,2026-10-17T11:00:00,2026-10-18T04:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00102,VC-00046,Office visit,Customer asked whether their relationship_proof was received.,German,neutral,2026-10-16T01:00:00,2026-10-17T11:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00103,VC-00048,Email,Customer asked whether their passport was received.,English,neutral,2026-10-13T07:00:00,2026-10-14T11:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00104,VC-00048,Email,Requested clarification about the passport requirement.,English,negative,2026-10-05T19:00:00,2026-10-07T08:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00105,VC-00048,LINE,Requested clarification about the relationship_proof requirement.,English,negative,2026-10-15T15:00:00,2026-10-16T00:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00106,VC-00048,Office visit,Confirmed the relationship_proof has been uploaded to the portal.,English,neutral,2026-10-12T00:00:00,2026-10-12T03:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00107,VC-00049,Web chat,Requested clarification about the passport requirement.,Thai,negative,2026-09-21T21:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00108,VC-00050,Phone,Requested clarification about the passport requirement.,Thai,neutral,2026-10-05T02:00:00,2026-10-07T11:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00109,VC-00052,Phone,Customer asked whether their photo was received.,French,negative,2026-09-21T09:00:00,2026-09-22T14:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00110,VC-00052,Office visit,Customer asked whether their relationship_proof was received.,French,negative,2026-10-01T18:00:00,2026-10-04T07:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00111,VC-00052,Office visit,Customer asked whether their relationship_proof was received.,French,negative,2026-09-18T12:00:00,2026-09-19T11:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00112,VC-00053,LINE,Confirmed the passport has been uploaded to the portal.,Burmese,positive,2026-10-15T15:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00113,VC-00053,Web chat,Asked for an update on the work_permit review.,Burmese,neutral,2026-10-17T13:00:00,2026-10-19T01:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00114,VC-00053,Web chat,Customer asked whether their employment_contract was received.,Burmese,neutral,2026-10-16T09:00:00,2026-10-19T04:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00115,VC-00057,Email,Customer asked whether their passport was received.,German,positive,2026-10-05T08:00:00,2026-10-07T07:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00116,VC-00057,Email,Asked for an update on the relationship_proof review.,German,negative,2026-10-01T01:00:00,2026-10-01T11:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00117,VC-00057,Phone,Asked for an update on the photo review.,German,neutral,2026-10-02T19:00:00,2026-10-02T23:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00118,VC-00057,Email,Following up on the outstanding photo request.,German,neutral,2026-09-26T18:00:00,2026-09-27T18:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00119,VC-00058,Phone,Requested clarification about the photo requirement.,Burmese,neutral,2026-10-09T22:00:00,2026-10-11T05:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00120,VC-00058,Email,Requested clarification about the photo requirement.,Burmese,positive,2026-09-10T08:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00121,VC-00058,Office visit,Requested clarification about the photo requirement.,Burmese,negative,2026-09-19T00:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00122,VC-00059,Web chat,Confirmed the photo has been uploaded to the portal.,German,negative,2026-10-09T23:00:00,2026-10-10T06:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00123,VC-00059,Phone,Customer resent a clearer copy of their photo.,German,negative,2026-10-17T20:00:00,2026-10-18T12:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00124,VC-00059,Web chat,Requested clarification about the passport requirement.,German,negative,2026-10-05T10:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00125,VC-00059,Email,Confirmed the relationship_proof has been uploaded to the portal.,German,positive,2026-10-10T22:00:00,2026-10-12T06:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00126,VC-00060,LINE,Requested clarification about the bank_statement requirement.,Burmese,neutral,2026-10-08T01:00:00,2026-10-10T23:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00127,VC-00061,Email,Requested clarification about the bank_statement requirement.,French,positive,2026-09-25T19:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00128,VC-00061,Phone,Customer asked whether their photo was received.,French,positive,2026-10-11T23:00:00,2026-10-14T05:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00129,VC-00061,Office visit,Confirmed the photo has been uploaded to the portal.,French,negative,2026-10-13T18:00:00,2026-10-16T09:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00130,VC-00061,Web chat,Customer resent a clearer copy of their bank_statement.,French,negative,2026-10-15T12:00:00,2026-10-17T03:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00131,VC-00062,Office visit,Following up on the outstanding passport request.,Burmese,positive,2026-09-21T08:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00132,VC-00062,Phone,Asked for an update on the itinerary review.,Burmese,negative,2026-10-05T14:00:00,2026-10-05T19:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00133,VC-00062,Office visit,Customer asked whether their bank_statement was received.,Burmese,negative,2026-09-28T23:00:00,2026-10-01T19:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00134,VC-00063,Email,Customer asked whether their photo was received.,Thai,negative,2026-09-15T23:00:00,2026-09-16T11:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00135,VC-00063,LINE,Following up on the outstanding sponsor_letter request.,Thai,neutral,2026-10-15T14:00:00,2026-10-16T22:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00136,VC-00065,Office visit,Asked for an update on the photo review.,German,positive,2026-10-17T20:00:00,2026-10-19T08:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00137,VC-00066,Email,Asked for an update on the passport review.,German,neutral,2026-09-16T22:00:00,2026-09-17T13:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00138,VC-00066,Phone,Asked for an update on the bank_statement review.,German,negative,2026-09-24T00:00:00,2026-09-24T21:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00139,VC-00068,Web chat,Following up on the outstanding bank_statement request.,English,positive,2026-10-18T01:00:00,2026-10-18T11:00:00,ST-001,,false
+CT-00140,VC-00071,Email,Following up on the outstanding passport request.,English,negative,2026-10-06T10:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00141,VC-00071,Email,Asked for an update on the photo review.,English,negative,2026-10-15T02:00:00,2026-10-16T03:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00142,VC-00071,Email,Requested clarification about the passport requirement.,English,neutral,2026-10-02T08:00:00,2026-10-04T11:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00143,VC-00071,Phone,Confirmed the photo has been uploaded to the portal.,English,negative,2026-10-06T09:00:00,2026-10-07T12:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00144,VC-00072,Office visit,Confirmed the photo has been uploaded to the portal.,Burmese,negative,2026-10-01T05:00:00,2026-10-02T18:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00145,VC-00072,Office visit,Requested clarification about the passport requirement.,Burmese,neutral,2026-10-13T16:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00146,VC-00072,Web chat,Asked for an update on the invitation_letter review.,Burmese,negative,2026-09-08T11:00:00,2026-09-08T21:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00147,VC-00072,Office visit,Asked for an update on the photo review.,Burmese,negative,2026-10-07T08:00:00,2026-10-07T21:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00148,VC-00073,Phone,Customer asked whether their passport was received.,French,negative,2026-10-15T01:00:00,2026-10-16T07:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00149,VC-00073,Office visit,Customer resent a clearer copy of their financial_proof.,French,neutral,2026-10-12T13:00:00,2026-10-15T01:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00150,VC-00073,Office visit,Requested clarification about the passport requirement.,French,positive,2026-10-12T01:00:00,2026-10-14T01:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00151,VC-00073,Web chat,Customer resent a clearer copy of their passport.,French,positive,2026-10-11T05:00:00,2026-10-13T05:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00152,VC-00076,Web chat,Customer asked whether their bank_statement was received.,Burmese,negative,2026-09-11T11:00:00,2026-09-13T01:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00153,VC-00076,Office visit,Customer asked whether their bank_statement was received.,Burmese,negative,2026-09-25T09:00:00,2026-09-25T12:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00154,VC-00076,Web chat,Customer resent a clearer copy of their passport.,Burmese,negative,2026-10-07T08:00:00,2026-10-09T15:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00155,VC-00078,Phone,Customer resent a clearer copy of their photo.,English,negative,2026-09-27T13:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00156,VC-00080,LINE,Confirmed the financial_proof has been uploaded to the portal.,French,negative,2026-10-16T14:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00157,VC-00081,LINE,Confirmed the photo has been uploaded to the portal.,English,negative,2026-09-30T01:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00158,VC-00082,Web chat,Asked for an update on the passport review.,German,neutral,2026-10-12T07:00:00,2026-10-15T05:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00159,VC-00082,Phone,Following up on the outstanding photo request.,German,negative,2026-10-07T22:00:00,2026-10-09T11:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00160,VC-00082,Email,Asked for an update on the photo review.,German,negative,2026-10-05T09:00:00,2026-10-05T19:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00161,VC-00083,Web chat,Customer asked whether their invitation_letter was received.,German,neutral,2026-10-11T08:00:00,2026-10-11T11:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00162,VC-00083,Email,Asked for an update on the invitation_letter review.,German,neutral,2026-10-11T21:00:00,2026-10-13T17:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00163,VC-00084,Email,Confirmed the passport has been uploaded to the portal.,German,neutral,2026-10-02T07:00:00,2026-10-05T04:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00164,VC-00084,Office visit,Customer asked whether their passport was received.,German,negative,2026-09-21T06:00:00,2026-09-22T18:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00165,VC-00086,Web chat,Customer resent a clearer copy of their photo.,French,neutral,2026-10-10T21:00:00,2026-10-11T11:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00166,VC-00086,LINE,Following up on the outstanding sponsor_letter request.,French,neutral,2026-09-19T18:00:00,2026-09-20T10:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00167,VC-00086,Office visit,Asked for an update on the photo review.,French,neutral,2026-10-05T14:00:00,2026-10-06T23:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00168,VC-00086,LINE,Asked for an update on the sponsor_letter review.,French,neutral,2026-10-09T02:00:00,2026-10-11T05:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00169,VC-00087,Web chat,Requested clarification about the photo requirement.,Burmese,neutral,2026-10-16T12:00:00,2026-10-18T02:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00170,VC-00087,Office visit,Confirmed the work_permit has been uploaded to the portal.,Burmese,negative,2026-10-04T15:00:00,2026-10-04T19:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00171,VC-00089,LINE,Following up on the outstanding financial_proof request.,German,neutral,2026-09-25T18:00:00,2026-09-26T15:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00172,VC-00089,Office visit,Confirmed the financial_proof has been uploaded to the portal.,German,neutral,2026-09-26T06:00:00,2026-09-28T09:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00173,VC-00090,Office visit,Requested clarification about the photo requirement.,French,neutral,2026-10-09T16:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00174,VC-00090,Phone,Confirmed the passport has been uploaded to the portal.,French,neutral,2026-10-16T13:00:00,2026-10-19T13:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00175,VC-00091,Phone,Confirmed the passport has been uploaded to the portal.,Thai,neutral,2026-10-08T23:00:00,2026-10-10T00:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00176,VC-00091,Office visit,Following up on the outstanding itinerary request.,Thai,neutral,2026-10-14T01:00:00,2026-10-16T03:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00177,VC-00092,Email,Customer asked whether their passport was received.,French,neutral,2026-10-13T16:00:00,2026-10-15T00:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00178,VC-00092,Office visit,Requested clarification about the photo requirement.,French,neutral,2026-10-17T01:00:00,2026-10-19T08:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00179,VC-00092,LINE,Following up on the outstanding photo request.,French,positive,2026-10-17T18:00:00,2026-10-20T03:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00180,VC-00093,Office visit,Requested clarification about the bank_statement requirement.,German,neutral,2026-09-21T07:00:00,2026-09-22T02:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00181,VC-00093,LINE,Following up on the outstanding photo request.,German,negative,2026-10-13T23:00:00,2026-10-14T17:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00182,VC-00093,Office visit,Customer resent a clearer copy of their bank_statement.,German,neutral,2026-09-21T01:00:00,2026-09-22T20:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00183,VC-00093,Web chat,Confirmed the invitation_letter has been uploaded to the portal.,German,neutral,2026-10-05T18:00:00,2026-10-06T10:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00184,VC-00094,Office visit,Following up on the outstanding photo request.,English,negative,2026-10-06T05:00:00,2026-10-08T07:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00185,VC-00094,LINE,Confirmed the invitation_letter has been uploaded to the portal.,English,neutral,2026-10-04T22:00:00,2026-10-05T13:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00186,VC-00094,Phone,Requested clarification about the passport requirement.,English,positive,2026-10-02T17:00:00,2026-10-05T10:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00187,VC-00095,Web chat,Confirmed the photo has been uploaded to the portal.,Burmese,negative,2026-10-13T08:00:00,2026-10-14T00:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00188,VC-00095,Phone,Customer asked whether their passport was received.,Burmese,neutral,2026-10-14T04:00:00,2026-10-16T20:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00189,VC-00095,Web chat,Requested clarification about the invitation_letter requirement.,Burmese,negative,2026-10-13T17:00:00,2026-10-14T01:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00190,VC-00097,Phone,Confirmed the bank_statement has been uploaded to the portal.,Thai,negative,2026-10-04T01:00:00,2026-10-04T15:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00191,VC-00097,Web chat,Customer resent a clearer copy of their passport.,Thai,neutral,2026-10-01T16:00:00,2026-10-04T11:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00192,VC-00098,Email,Asked for an update on the bank_statement review.,German,neutral,2026-10-10T18:00:00,2026-10-13T12:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00193,VC-00098,Web chat,Customer resent a clearer copy of their bank_statement.,German,negative,2026-09-23T06:00:00,2026-09-25T02:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00194,VC-00098,Phone,Customer resent a clearer copy of their photo.,German,neutral,2026-10-13T09:00:00,2026-10-13T19:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00195,VC-00099,Email,Requested clarification about the sponsor_letter requirement.,English,neutral,2026-10-14T09:00:00,2026-10-17T02:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00196,VC-00099,Email,Asked for an update on the relationship_proof review.,English,negative,2026-10-16T01:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00197,VC-00099,Email,Confirmed the relationship_proof has been uploaded to the portal.,English,neutral,2026-10-13T01:00:00,2026-10-15T00:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00198,VC-00101,LINE,Customer asked whether their photo was received.,French,neutral,2026-10-09T03:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00199,VC-00101,LINE,Requested clarification about the bank_statement requirement.,French,neutral,2026-10-11T05:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00200,VC-00101,Phone,Requested clarification about the photo requirement.,French,neutral,2026-10-10T10:00:00,2026-10-12T16:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00201,VC-00101,Phone,Asked for an update on the bank_statement review.,French,neutral,2026-09-26T20:00:00,2026-09-27T10:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00202,VC-00102,Email,Confirmed the bank_statement has been uploaded to the portal.,Burmese,neutral,2026-10-11T20:00:00,2026-10-14T07:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00203,VC-00103,LINE,Confirmed the sponsor_letter has been uploaded to the portal.,Burmese,neutral,2026-10-15T20:00:00,2026-10-18T16:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00204,VC-00104,LINE,Customer resent a clearer copy of their passport.,German,neutral,2026-09-27T03:00:00,2026-09-28T01:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00205,VC-00104,Office visit,Following up on the outstanding bank_statement request.,German,neutral,2026-10-02T01:00:00,2026-10-04T16:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00206,VC-00104,Office visit,Requested clarification about the passport requirement.,German,neutral,2026-10-12T15:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00207,VC-00104,Office visit,Customer resent a clearer copy of their photo.,German,neutral,2026-10-05T16:00:00,2026-10-07T10:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00208,VC-00105,Office visit,Asked for an update on the invitation_letter review.,English,positive,2026-10-13T03:00:00,2026-10-14T11:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00209,VC-00108,Phone,Confirmed the photo has been uploaded to the portal.,German,neutral,2026-10-08T12:00:00,2026-10-09T14:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00210,VC-00108,Web chat,Customer resent a clearer copy of their acceptance_letter.,German,negative,2026-10-05T16:00:00,2026-10-07T15:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00211,VC-00108,LINE,Asked for an update on the acceptance_letter review.,German,negative,2026-10-05T06:00:00,2026-10-05T13:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00212,VC-00109,Office visit,Requested clarification about the photo requirement.,German,neutral,2026-10-16T10:00:00,2026-10-17T01:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00213,VC-00112,Phone,Following up on the outstanding passport request.,Thai,negative,2026-10-15T01:00:00,2026-10-16T04:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00214,VC-00112,Web chat,Following up on the outstanding photo request.,Thai,negative,2026-10-02T15:00:00,2026-10-03T12:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00215,VC-00112,Email,Requested clarification about the passport requirement.,Thai,positive,2026-10-17T23:00:00,2026-10-20T10:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00216,VC-00112,Phone,Requested clarification about the invitation_letter requirement.,Thai,neutral,2026-10-11T12:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00217,VC-00115,Phone,Confirmed the passport has been uploaded to the portal.,German,neutral,2026-10-13T15:00:00,2026-10-15T04:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00218,VC-00115,Office visit,Customer asked whether their sponsor_letter was received.,German,negative,2026-10-14T16:00:00,2026-10-17T12:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00219,VC-00116,Web chat,Asked for an update on the sponsor_letter review.,Burmese,negative,2026-10-09T23:00:00,2026-10-11T01:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00220,VC-00116,Web chat,Confirmed the sponsor_letter has been uploaded to the portal.,Burmese,negative,2026-10-03T06:00:00,2026-10-05T04:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00221,VC-00116,LINE,Requested clarification about the relationship_proof requirement.,Burmese,positive,2026-09-18T17:00:00,2026-09-19T15:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00222,VC-00116,LINE,Asked for an update on the sponsor_letter review.,Burmese,positive,2026-09-28T03:00:00,2026-09-29T14:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00223,VC-00117,Phone,Asked for an update on the passport review.,Thai,neutral,2026-10-05T22:00:00,2026-10-06T11:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00224,VC-00117,Email,Following up on the outstanding acceptance_letter request.,Thai,negative,2026-09-23T23:00:00,2026-09-26T23:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00225,VC-00118,Email,Following up on the outstanding sponsor_letter request.,Thai,positive,2026-09-21T22:00:00,2026-09-22T22:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00226,VC-00118,Office visit,Asked for an update on the sponsor_letter review.,Thai,positive,2026-10-11T16:00:00,2026-10-11T21:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00227,VC-00118,Office visit,Requested clarification about the relationship_proof requirement.,Thai,neutral,2026-09-17T08:00:00,2026-09-18T23:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00228,VC-00119,Phone,Following up on the outstanding invitation_letter request.,German,negative,2026-10-17T13:00:00,2026-10-19T20:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00229,VC-00119,Office visit,Customer resent a clearer copy of their photo.,German,negative,2026-10-12T19:00:00,2026-10-15T13:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00230,VC-00119,Office visit,Asked for an update on the passport review.,German,neutral,2026-10-17T11:00:00,2026-10-17T23:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00231,VC-00119,Email,Asked for an update on the bank_statement review.,German,positive,2026-10-16T10:00:00,2026-10-18T03:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00232,VC-00120,LINE,Asked for an update on the passport review.,German,neutral,2026-10-09T01:00:00,2026-10-12T01:00:00,ST-011,,false
+CT-00233,VC-00120,LINE,Requested clarification about the passport requirement.,German,neutral,2026-09-22T17:00:00,2026-09-23T19:00:00,ST-005,,false
+CT-00234,VC-00120,Phone,Confirmed the financial_proof has been uploaded to the portal.,German,neutral,2026-09-16T15:00:00,2026-09-17T15:00:00,ST-003,,false
+CT-00235,VC-00121,Phone,Asked for an update on the work_permit review.,French,neutral,2026-10-09T17:00:00,2026-10-10T08:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00236,VC-00121,LINE,Asked for an update on the work_permit review.,French,negative,2026-09-21T22:00:00,2026-09-22T14:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00237,VC-00121,Phone,Following up on the outstanding photo request.,French,negative,2026-10-06T22:00:00,2026-10-07T05:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00238,VC-00121,Email,Customer asked whether their photo was received.,French,negative,2026-09-27T14:00:00,2026-09-28T10:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00239,VC-00122,Office visit,Customer asked whether their acceptance_letter was received.,English,negative,2026-09-20T23:00:00,2026-09-23T21:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00240,VC-00122,Web chat,Customer resent a clearer copy of their passport.,English,negative,2026-10-05T15:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00241,VC-00122,Web chat,Requested clarification about the financial_proof requirement.,English,negative,2026-09-21T22:00:00,2026-09-23T08:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00242,VC-00123,Office visit,Confirmed the passport has been uploaded to the portal.,English,neutral,2026-10-13T01:00:00,2026-10-14T10:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00243,VC-00123,Web chat,Customer resent a clearer copy of their financial_proof.,English,neutral,2026-10-12T12:00:00,2026-10-14T13:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00244,VC-00124,Phone,Following up on the outstanding passport request.,English,neutral,2026-10-15T17:00:00,2026-10-17T23:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00245,VC-00125,Phone,Asked for an update on the photo review.,German,positive,2026-10-12T13:00:00,2026-10-14T22:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00246,VC-00125,LINE,Customer asked whether their passport was received.,German,neutral,2026-10-13T10:00:00,2026-10-15T18:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00247,VC-00125,Office visit,Following up on the outstanding photo request.,German,negative,2026-10-08T21:00:00,2026-10-11T07:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00248,VC-00125,Phone,Asked for an update on the passport review.,German,positive,2026-10-16T19:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00249,VC-00126,Web chat,Following up on the outstanding bank_statement request.,Burmese,neutral,2026-10-14T13:00:00,2026-10-16T05:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00250,VC-00126,Email,Requested clarification about the photo requirement.,Burmese,positive,2026-10-16T07:00:00,2026-10-16T13:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00251,VC-00126,LINE,Confirmed the bank_statement has been uploaded to the portal.,Burmese,neutral,2026-10-13T17:00:00,2026-10-15T10:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00252,VC-00126,Office visit,Following up on the outstanding itinerary request.,Burmese,neutral,2026-10-17T15:00:00,2026-10-19T07:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00253,VC-00127,LINE,Asked for an update on the photo review.,German,negative,2026-10-15T18:00:00,2026-10-16T06:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00254,VC-00127,Phone,Customer resent a clearer copy of their relationship_proof.,German,neutral,2026-10-12T10:00:00,2026-10-14T12:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00255,VC-00128,LINE,Confirmed the photo has been uploaded to the portal.,English,negative,2026-09-23T13:00:00,2026-09-26T09:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00256,VC-00128,LINE,Asked for an update on the acceptance_letter review.,English,negative,2026-10-03T02:00:00,2026-10-04T03:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00257,VC-00128,Phone,Confirmed the financial_proof has been uploaded to the portal.,English,negative,2026-10-12T06:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00258,VC-00130,Web chat,Following up on the outstanding passport request.,German,neutral,2026-09-25T12:00:00,2026-09-27T15:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00259,VC-00130,Email,Asked for an update on the sponsor_letter review.,German,neutral,2026-09-22T04:00:00,2026-09-24T18:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00260,VC-00130,LINE,Asked for an update on the photo review.,German,neutral,2026-09-16T23:00:00,2026-09-19T13:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00261,VC-00130,Office visit,Confirmed the relationship_proof has been uploaded to the portal.,German,positive,2026-10-11T14:00:00,2026-10-11T17:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00262,VC-00131,Phone,Customer resent a clearer copy of their relationship_proof.,English,negative,2026-10-08T22:00:00,2026-10-10T14:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00263,VC-00131,Web chat,Asked for an update on the photo review.,English,negative,2026-09-17T20:00:00,2026-09-19T21:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00264,VC-00131,LINE,Requested clarification about the passport requirement.,English,neutral,2026-10-06T07:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00265,VC-00132,LINE,Customer asked whether their passport was received.,Thai,neutral,2026-09-09T14:00:00,2026-09-11T19:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00266,VC-00132,LINE,Customer resent a clearer copy of their photo.,Thai,neutral,2026-09-29T15:00:00,2026-10-01T07:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00267,VC-00132,LINE,Customer resent a clearer copy of their photo.,Thai,positive,2026-10-02T09:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00268,VC-00132,LINE,Following up on the outstanding work_permit request.,Thai,positive,2026-09-26T01:00:00,2026-09-28T13:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00269,VC-00133,Web chat,Requested clarification about the employment_contract requirement.,German,positive,2026-10-17T18:00:00,2026-10-19T14:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00270,VC-00134,Email,Confirmed the passport has been uploaded to the portal.,Burmese,neutral,2026-10-14T19:00:00,2026-10-16T21:00:00,ST-001,,false
+CT-00271,VC-00134,LINE,Customer resent a clearer copy of their photo.,Burmese,neutral,2026-10-15T17:00:00,2026-10-18T01:00:00,ST-004,,false
+CT-00272,VC-00134,Email,Confirmed the photo has been uploaded to the portal.,Burmese,neutral,2026-10-16T08:00:00,2026-10-16T19:00:00,ST-012,,false
+CT-00273,VC-00135,Phone,Customer resent a clearer copy of their photo.,Burmese,negative,2026-10-17T04:00:00,2026-10-18T13:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00274,VC-00135,Phone,Customer resent a clearer copy of their bank_statement.,Burmese,neutral,2026-09-28T20:00:00,2026-09-29T15:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00275,VC-00135,Office visit,Customer asked whether their bank_statement was received.,Burmese,neutral,2026-09-25T22:00:00,2026-09-27T12:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00276,VC-00135,Office visit,Asked for an update on the invitation_letter review.,Burmese,neutral,2026-10-15T18:00:00,2026-10-16T22:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00277,VC-00136,LINE,Customer asked whether their photo was received.,German,neutral,2026-10-16T01:00:00,2026-10-17T18:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00278,VC-00136,Web chat,Following up on the outstanding passport request.,German,positive,2026-10-17T10:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00279,VC-00137,Web chat,Customer asked whether their photo was received.,Burmese,negative,2026-10-15T18:00:00,2026-10-17T14:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00280,VC-00137,Email,Confirmed the work_permit has been uploaded to the portal.,Burmese,negative,2026-10-06T03:00:00,2026-10-08T23:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00281,VC-00137,Office visit,Asked for an update on the passport review.,Burmese,positive,2026-10-06T09:00:00,2026-10-08T07:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00282,VC-00138,Phone,Customer asked whether their financial_proof was received.,German,neutral,2026-09-26T16:00:00,2026-09-29T12:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00283,VC-00138,LINE,Asked for an update on the acceptance_letter review.,German,positive,2026-09-10T10:00:00,2026-09-11T18:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00284,VC-00138,Email,Asked for an update on the financial_proof review.,German,positive,2026-10-08T13:00:00,2026-10-08T22:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00285,VC-00139,Web chat,Asked for an update on the sponsor_letter review.,German,positive,2026-10-15T19:00:00,2026-10-16T12:00:00,ST-007,,false
+CT-00286,VC-00139,Email,Confirmed the photo has been uploaded to the portal.,German,positive,2026-10-17T13:00:00,2026-10-18T15:00:00,ST-005,,false
+CT-00287,VC-00139,Web chat,Confirmed the passport has been uploaded to the portal.,German,neutral,2026-10-14T12:00:00,2026-10-16T17:00:00,ST-004,,false
+CT-00288,VC-00139,Phone,Customer resent a clearer copy of their sponsor_letter.,German,positive,2026-10-16T13:00:00,2026-10-17T05:00:00,ST-012,,false
+CT-00289,VC-00140,Email,Requested clarification about the work_permit requirement.,Thai,negative,2026-10-17T04:00:00,2026-10-17T09:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00290,VC-00140,Phone,Requested clarification about the employment_contract requirement.,Thai,negative,2026-10-15T07:00:00,2026-10-17T00:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00291,VC-00140,Phone,Confirmed the passport has been uploaded to the portal.,Thai,neutral,2026-10-11T20:00:00,2026-10-14T14:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00292,VC-00140,LINE,Following up on the outstanding photo request.,Thai,negative,2026-10-10T22:00:00,2026-10-13T14:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00293,VC-00141,Office visit,Following up on the outstanding passport request.,French,negative,2026-10-13T05:00:00,2026-10-16T04:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00294,VC-00142,Office visit,Confirmed the invitation_letter has been uploaded to the portal.,Burmese,negative,2026-09-13T18:00:00,2026-09-15T03:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00295,VC-00143,Office visit,Following up on the outstanding sponsor_letter request.,English,positive,2026-10-11T17:00:00,2026-10-12T20:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00296,VC-00143,LINE,Following up on the outstanding relationship_proof request.,English,negative,2026-10-06T19:00:00,2026-10-06T22:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00297,VC-00143,Email,Customer resent a clearer copy of their relationship_proof.,English,negative,2026-10-07T20:00:00,2026-10-09T10:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00298,VC-00143,Email,Requested clarification about the passport requirement.,English,neutral,2026-10-16T10:00:00,2026-10-16T15:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00299,VC-00144,Office visit,Customer asked whether their passport was received.,Burmese,neutral,2026-09-20T10:00:00,2026-09-23T00:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00300,VC-00144,LINE,Requested clarification about the photo requirement.,Burmese,negative,2026-09-17T11:00:00,2026-09-17T13:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00301,VC-00144,Office visit,Confirmed the photo has been uploaded to the portal.,Burmese,neutral,2026-09-17T09:00:00,2026-09-19T02:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00302,VC-00145,Email,Asked for an update on the photo review.,Burmese,neutral,2026-09-25T09:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00303,VC-00145,Office visit,Following up on the outstanding bank_statement request.,Burmese,positive,2026-10-02T08:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00304,VC-00145,Office visit,Asked for an update on the itinerary review.,Burmese,negative,2026-09-18T19:00:00,2026-09-21T08:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00305,VC-00146,Web chat,Customer asked whether their photo was received.,Burmese,neutral,2026-09-25T18:00:00,2026-09-27T01:00:00,ST-006,,false
+CT-00306,VC-00146,LINE,Following up on the outstanding passport request.,Burmese,positive,2026-10-13T15:00:00,2026-10-14T17:00:00,ST-005,,false
+CT-00307,VC-00148,LINE,Requested clarification about the passport requirement.,Burmese,neutral,2026-09-07T19:00:00,2026-09-08T07:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00308,VC-00148,Web chat,Customer resent a clearer copy of their photo.,Burmese,negative,2026-09-26T20:00:00,2026-09-27T10:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00309,VC-00148,Email,Customer asked whether their invitation_letter was received.,Burmese,neutral,2026-10-13T13:00:00,2026-10-16T11:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00310,VC-00148,Phone,Requested clarification about the passport requirement.,Burmese,positive,2026-09-12T00:00:00,2026-09-14T13:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00311,VC-00149,Web chat,Customer resent a clearer copy of their passport.,English,neutral,2026-09-11T13:00:00,2026-09-12T18:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00312,VC-00149,Office visit,Customer resent a clearer copy of their bank_statement.,English,neutral,2026-09-26T11:00:00,2026-09-28T20:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00313,VC-00150,Web chat,Confirmed the employment_contract has been uploaded to the portal.,English,negative,2026-10-13T05:00:00,2026-10-15T07:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00314,VC-00150,Email,Customer asked whether their photo was received.,English,negative,2026-10-16T08:00:00,2026-10-17T00:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00315,VC-00150,Web chat,Asked for an update on the work_permit review.,English,neutral,2026-10-17T14:00:00,2026-10-19T17:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00316,VC-00151,Web chat,Customer resent a clearer copy of their relationship_proof.,German,negative,2026-10-14T13:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00317,VC-00152,LINE,Asked for an update on the work_permit review.,Burmese,neutral,2026-10-11T20:00:00,2026-10-13T17:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00318,VC-00152,LINE,Customer resent a clearer copy of their employment_contract.,Burmese,neutral,2026-10-13T00:00:00,2026-10-14T02:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00319,VC-00153,Phone,Asked for an update on the passport review.,English,positive,2026-09-24T12:00:00,2026-09-24T15:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00320,VC-00153,Web chat,Requested clarification about the invitation_letter requirement.,English,neutral,2026-10-07T13:00:00,2026-10-08T15:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00321,VC-00153,LINE,Customer resent a clearer copy of their invitation_letter.,English,neutral,2026-10-15T02:00:00,2026-10-15T04:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00322,VC-00154,LINE,Customer resent a clearer copy of their passport.,Burmese,negative,2026-10-07T23:00:00,2026-10-09T08:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00323,VC-00155,Email,Customer resent a clearer copy of their photo.,French,positive,2026-10-07T06:00:00,2026-10-09T12:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00324,VC-00155,Office visit,Requested clarification about the passport requirement.,French,positive,2026-10-10T18:00:00,2026-10-13T12:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00325,VC-00156,Office visit,Following up on the outstanding passport request.,Burmese,neutral,2026-10-15T13:00:00,2026-10-15T17:00:00,ST-004,,false
+CT-00326,VC-00156,Phone,Customer resent a clearer copy of their passport.,Burmese,neutral,2026-10-09T07:00:00,2026-10-09T14:00:00,ST-007,,false
+CT-00327,VC-00157,Email,Requested clarification about the photo requirement.,French,positive,2026-10-16T11:00:00,2026-10-17T09:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00328,VC-00157,Phone,Requested clarification about the acceptance_letter requirement.,French,negative,2026-10-16T13:00:00,2026-10-18T09:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00329,VC-00158,Office visit,Requested clarification about the bank_statement requirement.,German,neutral,2026-09-29T23:00:00,2026-09-30T10:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00330,VC-00158,LINE,Customer resent a clearer copy of their photo.,German,negative,2026-10-04T05:00:00,2026-10-04T10:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00331,VC-00158,Phone,Confirmed the itinerary has been uploaded to the portal.,German,neutral,2026-09-29T09:00:00,2026-09-29T13:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00332,VC-00158,Email,Confirmed the bank_statement has been uploaded to the portal.,German,positive,2026-09-27T19:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00333,VC-00159,Email,Customer resent a clearer copy of their passport.,French,neutral,2026-10-14T00:00:00,2026-10-16T04:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00334,VC-00159,Web chat,Asked for an update on the photo review.,French,neutral,2026-09-16T12:00:00,2026-09-17T10:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00335,VC-00159,LINE,Requested clarification about the invitation_letter requirement.,French,neutral,2026-09-25T18:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00336,VC-00159,Office visit,Customer asked whether their invitation_letter was received.,French,positive,2026-09-16T04:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00337,VC-00160,LINE,Following up on the outstanding passport request.,French,negative,2026-10-12T19:00:00,2026-10-15T08:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00338,VC-00160,LINE,Confirmed the acceptance_letter has been uploaded to the portal.,French,negative,2026-10-16T02:00:00,2026-10-18T17:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00339,VC-00160,Email,Customer asked whether their photo was received.,French,negative,2026-10-13T09:00:00,2026-10-15T17:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00340,VC-00161,Email,Customer asked whether their photo was received.,English,negative,2026-09-10T06:00:00,2026-09-10T14:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00341,VC-00162,Phone,Customer resent a clearer copy of their sponsor_letter.,German,neutral,2026-09-27T10:00:00,2026-09-28T00:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00342,VC-00163,Phone,Requested clarification about the photo requirement.,French,neutral,2026-10-13T17:00:00,2026-10-13T19:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00343,VC-00163,LINE,Requested clarification about the passport requirement.,French,neutral,2026-10-13T05:00:00,2026-10-13T14:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00344,VC-00163,Phone,Requested clarification about the bank_statement requirement.,French,neutral,2026-10-04T16:00:00,2026-10-06T05:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00345,VC-00163,Email,Confirmed the passport has been uploaded to the portal.,French,positive,2026-10-14T18:00:00,2026-10-15T15:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00346,VC-00164,Office visit,Following up on the outstanding passport request.,English,negative,2026-10-04T05:00:00,2026-10-04T17:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00347,VC-00165,Email,Following up on the outstanding passport request.,French,negative,2026-10-17T23:00:00,2026-10-20T14:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00348,VC-00165,Web chat,Requested clarification about the financial_proof requirement.,French,neutral,2026-09-26T13:00:00,2026-09-27T16:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00349,VC-00165,Email,Customer resent a clearer copy of their acceptance_letter.,French,neutral,2026-09-30T02:00:00,2026-10-01T12:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00350,VC-00166,Office visit,Asked for an update on the passport review.,German,neutral,2026-10-17T15:00:00,2026-10-19T16:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00351,VC-00166,Office visit,Confirmed the relationship_proof has been uploaded to the portal.,German,neutral,2026-10-17T03:00:00,2026-10-20T03:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00352,VC-00166,Phone,Asked for an update on the relationship_proof review.,German,negative,2026-10-17T13:00:00,2026-10-19T00:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00353,VC-00166,Office visit,Requested clarification about the sponsor_letter requirement.,German,positive,2026-10-11T23:00:00,2026-10-14T10:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00354,VC-00167,Office visit,Requested clarification about the bank_statement requirement.,Thai,positive,2026-10-13T09:00:00,2026-10-15T10:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00355,VC-00167,Email,Customer asked whether their photo was received.,Thai,negative,2026-10-17T01:00:00,2026-10-17T19:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00356,VC-00167,Email,Confirmed the photo has been uploaded to the portal.,Thai,positive,2026-10-06T10:00:00,2026-10-07T05:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00357,VC-00167,LINE,Following up on the outstanding invitation_letter request.,Thai,positive,2026-10-02T15:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00358,VC-00168,Phone,Following up on the outstanding sponsor_letter request.,English,neutral,2026-10-08T17:00:00,2026-10-11T00:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00359,VC-00168,Email,Asked for an update on the photo review.,English,neutral,2026-09-20T11:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00360,VC-00168,Office visit,Asked for an update on the relationship_proof review.,English,neutral,2026-09-20T02:00:00,2026-09-22T08:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00361,VC-00170,Web chat,Customer asked whether their employment_contract was received.,German,negative,2026-09-27T11:00:00,2026-09-28T03:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00362,VC-00170,Office visit,Confirmed the work_permit has been uploaded to the portal.,German,positive,2026-10-06T21:00:00,2026-10-09T03:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00363,VC-00170,Office visit,Confirmed the employment_contract has been uploaded to the portal.,German,neutral,2026-10-09T21:00:00,2026-10-10T11:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00364,VC-00170,LINE,Asked for an update on the employment_contract review.,German,neutral,2026-10-11T08:00:00,2026-10-13T04:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00365,VC-00171,LINE,Confirmed the passport has been uploaded to the portal.,Thai,neutral,2026-10-13T00:00:00,2026-10-14T18:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00366,VC-00172,Phone,Asked for an update on the passport review.,Burmese,negative,2026-10-15T07:00:00,2026-10-16T13:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00367,VC-00172,Email,Following up on the outstanding passport request.,Burmese,negative,2026-10-11T05:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00368,VC-00172,Web chat,Requested clarification about the passport requirement.,Burmese,neutral,2026-10-16T00:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00369,VC-00173,Email,Asked for an update on the employment_contract review.,Burmese,positive,2026-09-12T15:00:00,2026-09-14T14:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00370,VC-00173,Email,Customer resent a clearer copy of their employment_contract.,Burmese,neutral,2026-10-08T06:00:00,2026-10-09T08:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00371,VC-00173,Phone,Asked for an update on the passport review.,Burmese,negative,2026-10-05T14:00:00,2026-10-08T08:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00372,VC-00173,Web chat,Asked for an update on the passport review.,Burmese,positive,2026-09-07T03:00:00,2026-09-09T01:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00373,VC-00174,Office visit,Customer resent a clearer copy of their passport.,Thai,neutral,2026-10-14T06:00:00,2026-10-15T23:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00374,VC-00174,Office visit,Asked for an update on the photo review.,Thai,negative,2026-10-14T18:00:00,2026-10-17T08:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00375,VC-00174,Phone,Customer resent a clearer copy of their photo.,Thai,neutral,2026-10-10T06:00:00,2026-10-10T09:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00376,VC-00176,Office visit,Confirmed the invitation_letter has been uploaded to the portal.,English,negative,2026-10-07T19:00:00,2026-10-08T09:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00377,VC-00177,LINE,Customer resent a clearer copy of their itinerary.,Thai,neutral,2026-09-30T19:00:00,2026-10-02T01:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00378,VC-00178,Email,Following up on the outstanding bank_statement request.,English,positive,2026-10-07T09:00:00,2026-10-09T22:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00379,VC-00180,Web chat,Asked for an update on the passport review.,French,neutral,2026-10-12T16:00:00,2026-10-15T10:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00380,VC-00180,Web chat,Customer asked whether their work_permit was received.,French,positive,2026-10-17T12:00:00,2026-10-18T05:00:00,ST-010,RELATED_CASE_FLAGGED,true
+CT-00381,VC-00181,Email,Customer asked whether their relationship_proof was received.,Thai,negative,2026-10-03T16:00:00,2026-10-06T06:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00382,VC-00181,Web chat,Customer asked whether their relationship_proof was received.,Thai,negative,2026-10-15T21:00:00,2026-10-16T03:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00383,VC-00181,Phone,Customer asked whether their sponsor_letter was received.,Thai,negative,2026-10-14T12:00:00,2026-10-15T18:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00384,VC-00182,Email,Customer asked whether their bank_statement was received.,English,negative,2026-09-27T05:00:00,2026-09-27T08:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00385,VC-00182,Web chat,Confirmed the bank_statement has been uploaded to the portal.,English,negative,2026-10-08T00:00:00,2026-10-09T08:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00386,VC-00182,Office visit,Customer asked whether their passport was received.,English,positive,2026-09-25T00:00:00,2026-09-26T14:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00387,VC-00183,Web chat,Following up on the outstanding passport request.,German,negative,2026-10-03T10:00:00,2026-10-06T03:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00388,VC-00183,Office visit,Following up on the outstanding passport request.,German,negative,2026-09-28T05:00:00,2026-09-29T11:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00389,VC-00183,Phone,Customer asked whether their financial_proof was received.,German,neutral,2026-09-26T04:00:00,2026-09-27T04:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00390,VC-00184,Email,Customer asked whether their photo was received.,Thai,positive,2026-10-10T16:00:00,2026-10-11T23:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00391,VC-00184,LINE,Customer resent a clearer copy of their employment_contract.,Thai,neutral,2026-09-18T16:00:00,2026-09-21T05:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00392,VC-00184,Phone,Confirmed the employment_contract has been uploaded to the portal.,Thai,negative,2026-10-12T03:00:00,2026-10-14T06:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00393,VC-00184,LINE,Requested clarification about the passport requirement.,Thai,neutral,2026-09-07T01:00:00,2026-09-08T02:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00394,VC-00185,Web chat,Confirmed the passport has been uploaded to the portal.,Burmese,neutral,2026-10-11T23:00:00,2026-10-13T18:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00395,VC-00185,Web chat,Customer resent a clearer copy of their photo.,Burmese,neutral,2026-10-12T13:00:00,2026-10-12T23:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00396,VC-00185,Office visit,Following up on the outstanding passport request.,Burmese,negative,2026-09-30T23:00:00,2026-10-01T00:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00397,VC-00185,Phone,Following up on the outstanding passport request.,Burmese,neutral,2026-10-09T09:00:00,2026-10-10T03:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00398,VC-00186,Phone,Customer asked whether their photo was received.,French,negative,2026-10-09T23:00:00,2026-10-11T22:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00399,VC-00186,Phone,Customer asked whether their photo was received.,French,positive,2026-10-17T03:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00400,VC-00186,Office visit,Customer asked whether their acceptance_letter was received.,French,negative,2026-10-11T16:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00401,VC-00186,Phone,Following up on the outstanding financial_proof request.,French,neutral,2026-10-16T04:00:00,2026-10-17T09:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00402,VC-00187,Web chat,Customer resent a clearer copy of their passport.,English,positive,2026-10-11T22:00:00,2026-10-13T03:00:00,ST-003,,false
+CT-00403,VC-00187,Phone,Customer resent a clearer copy of their photo.,English,neutral,2026-10-11T00:00:00,2026-10-11T12:00:00,ST-002,,false
+CT-00404,VC-00187,Email,Following up on the outstanding work_permit request.,English,neutral,2026-10-15T22:00:00,2026-10-17T01:00:00,ST-005,,false
+CT-00405,VC-00187,Office visit,Customer resent a clearer copy of their passport.,English,positive,2026-10-17T07:00:00,2026-10-19T02:00:00,ST-010,,false
+CT-00406,VC-00188,Office visit,Customer resent a clearer copy of their passport.,English,neutral,2026-09-28T02:00:00,2026-09-29T21:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00407,VC-00188,Phone,Customer asked whether their financial_proof was received.,English,neutral,2026-10-11T11:00:00,2026-10-12T00:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00408,VC-00188,Phone,Requested clarification about the photo requirement.,English,negative,2026-10-06T02:00:00,2026-10-06T15:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00409,VC-00188,LINE,Asked for an update on the passport review.,English,positive,2026-10-06T15:00:00,2026-10-09T15:00:00,ST-006,RELATED_CASE_FLAGGED,true
+CT-00410,VC-00189,Phone,Requested clarification about the passport requirement.,English,positive,2026-10-07T23:00:00,2026-10-08T08:00:00,ST-004,RELATED_CASE_FLAGGED,true
+CT-00411,VC-00190,Office visit,Customer resent a clearer copy of their passport.,French,negative,2026-10-16T23:00:00,2026-10-17T16:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00412,VC-00190,Web chat,Confirmed the itinerary has been uploaded to the portal.,French,negative,2026-10-15T08:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00413,VC-00190,Office visit,Customer asked whether their passport was received.,French,positive,2026-10-05T17:00:00,2026-10-06T05:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00414,VC-00191,Email,Confirmed the invitation_letter has been uploaded to the portal.,French,neutral,2026-10-16T20:00:00,2026-10-17T15:00:00,ST-009,RELATED_CASE_FLAGGED,true
+CT-00415,VC-00191,Office visit,Following up on the outstanding bank_statement request.,French,neutral,2026-10-15T11:00:00,2026-10-17T15:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00416,VC-00191,LINE,Customer asked whether their invitation_letter was received.,French,negative,2026-10-05T03:00:00,2026-10-06T20:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00417,VC-00192,LINE,Asked for an update on the photo review.,English,neutral,2026-10-15T14:00:00,2026-10-16T21:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00418,VC-00192,Office visit,Customer resent a clearer copy of their photo.,English,negative,2026-10-13T09:00:00,2026-10-16T02:00:00,ST-012,RELATED_CASE_FLAGGED,true
+CT-00419,VC-00193,Web chat,Confirmed the photo has been uploaded to the portal.,Thai,negative,2026-10-15T21:00:00,2026-10-16T13:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00420,VC-00193,Email,Following up on the outstanding photo request.,Thai,neutral,2026-09-28T17:00:00,2026-09-29T14:00:00,ST-011,RELATED_CASE_FLAGGED,true
+CT-00421,VC-00193,Office visit,Confirmed the relationship_proof has been uploaded to the portal.,Thai,positive,2026-09-08T00:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00422,VC-00194,Phone,Following up on the outstanding acceptance_letter request.,Thai,neutral,2026-10-16T15:00:00,2026-10-16T20:00:00,ST-002,RELATED_CASE_FLAGGED,true
+CT-00423,VC-00194,Phone,Requested clarification about the passport requirement.,Thai,positive,2026-10-16T02:00:00,2026-10-16T15:00:00,ST-008,RELATED_CASE_FLAGGED,true
+CT-00424,VC-00195,Office visit,Confirmed the work_permit has been uploaded to the portal.,French,positive,2026-10-14T00:00:00,2026-10-16T13:00:00,ST-007,RELATED_CASE_FLAGGED,true
+CT-00425,VC-00195,Email,Confirmed the photo has been uploaded to the portal.,French,negative,2026-09-22T18:00:00,2026-09-24T16:00:00,ST-005,RELATED_CASE_FLAGGED,true
+CT-00426,VC-00195,LINE,Customer asked whether their work_permit was received.,French,neutral,2026-09-19T04:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00427,VC-00196,Email,Asked for an update on the employment_contract review.,Thai,negative,2026-10-05T17:00:00,2026-10-07T18:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00428,VC-00197,LINE,Following up on the outstanding passport request.,French,negative,2026-10-15T08:00:00,,,RELATED_CASE_FLAGGED,true
+CT-00429,VC-00198,Phone,Requested clarification about the photo requirement.,Thai,neutral,2026-10-14T10:00:00,2026-10-16T12:00:00,ST-003,RELATED_CASE_FLAGGED,true
+CT-00430,VC-00198,Phone,Requested clarification about the bank_statement requirement.,Thai,negative,2026-10-15T11:00:00,2026-10-15T12:00:00,ST-001,RELATED_CASE_FLAGGED,true
+CT-00431,VC-00199,Email,Confirmed the invitation_letter has been uploaded to the portal.,Burmese,neutral,2026-10-11T06:00:00,2026-10-11T20:00:00,ST-006,RELATED_CASE_FLAGGED,true

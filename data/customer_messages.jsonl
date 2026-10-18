@@ -1,0 +1,2 @@
+{"ts": "2026-10-18T12:53:45", "case_id": "VC-00001", "staff_id": "ST-001", "channel": "Office visit", "text": "hello", "direction": "outbound", "sent": false}
+{"ts": "2026-10-18T13:00:00", "case_id": "VC-00001", "staff_id": "ST-001", "channel": "Email", "text": "test", "direction": "outbound", "sent": false}

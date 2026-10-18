@@ -1,0 +1,6 @@
+journey_type,sla_target_hours,required_documents,description
+Tourist,48,passport;photo;bank_statement;itinerary,Standard tourist visa service level target.
+Business,72,passport;photo;invitation_letter;bank_statement,Standard business visa service level target.
+Student,120,passport;photo;acceptance_letter;financial_proof,Standard student visa service level target.
+Work,168,passport;photo;work_permit;employment_contract,Standard work visa service level target.
+Family,96,passport;photo;relationship_proof;sponsor_letter,Standard family visa service level target.

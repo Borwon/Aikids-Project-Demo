@@ -1,0 +1,454 @@
+issue_id,case_id,issue_type,field,evidence,confidence,detected_at
+IS-00001,VC-00001,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00001: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00002,VC-00001,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00002: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00003,VC-00001,SLA_BREACH,sla_target_hours,346.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00004,VC-00002,MISSING_REQUIRED_FIELD,current_status,current_status is blank,insufficient,2026-10-18T12:00:00
+IS-00005,VC-00002,AMBIGUOUS_CASE,current_status,No status and no contact history,insufficient,2026-10-18T12:00:00
+IS-00006,VC-00003,MISSING_DOCUMENT,documents_received,Missing: bank_statement,confirmed,2026-10-18T12:00:00
+IS-00007,VC-00003,UNRESPONDED_CONTACT,response_sent_at,contact CT-00005 has no response,confirmed,2026-10-18T12:00:00
+IS-00008,VC-00003,UNRESPONDED_CONTACT,response_sent_at,contact CT-00006 has no response,confirmed,2026-10-18T12:00:00
+IS-00009,VC-00004,MISSING_DOCUMENT,documents_received,"Missing: passport, invitation_letter",confirmed,2026-10-18T12:00:00
+IS-00010,VC-00004,TRANSPORT_CONFLICT,transport_bookings,itinerary='MUC - Munich' internal_note='MEL - Melbourne' airport_code='HND',conflicting,2026-10-18T12:00:00
+IS-00011,VC-00004,UNRESPONDED_CONTACT,response_sent_at,contact CT-00009 has no response,confirmed,2026-10-18T12:00:00
+IS-00012,VC-00004,SLA_BREACH,sla_target_hours,222.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00013,VC-00005,MISSING_DOCUMENT,documents_received,"Missing: passport, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00014,VC-00005,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00012: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00015,VC-00005,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00013: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00016,VC-00005,SLA_BREACH,sla_target_hours,424.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00017,VC-00006,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00018,VC-00006,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00015: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00019,VC-00006,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00016: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00020,VC-00007,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00021: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00021,VC-00007,UNRESPONDED_CONTACT,response_sent_at,contact CT-00021 has no response,confirmed,2026-10-18T12:00:00
+IS-00022,VC-00008,UNASSIGNED_OWNER,case_owner_staff_id,case_owner_staff_id is blank,confirmed,2026-10-18T12:00:00
+IS-00023,VC-00008,SLA_BREACH,sla_target_hours,194.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00024,VC-00009,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00025,VC-00009,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00024: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00026,VC-00010,MISSING_DOCUMENT,documents_received,Missing: work_permit,confirmed,2026-10-18T12:00:00
+IS-00027,VC-00010,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00025: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00028,VC-00011,MISSING_DOCUMENT,documents_received,Missing: bank_statement,confirmed,2026-10-18T12:00:00
+IS-00029,VC-00011,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00027: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00030,VC-00011,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00028: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00031,VC-00011,UNRESPONDED_CONTACT,response_sent_at,contact CT-00029 has no response,confirmed,2026-10-18T12:00:00
+IS-00032,VC-00012,MISSING_DOCUMENT,documents_received,"Missing: photo, work_permit",confirmed,2026-10-18T12:00:00
+IS-00033,VC-00012,SLA_BREACH,sla_target_hours,815.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00034,VC-00013,MISSING_DOCUMENT,documents_received,"Missing: passport, itinerary",confirmed,2026-10-18T12:00:00
+IS-00035,VC-00013,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00030: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00036,VC-00013,SLA_BREACH,sla_target_hours,192.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00037,VC-00014,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00038,VC-00014,UNRESPONDED_CONTACT,response_sent_at,contact CT-00031 has no response,confirmed,2026-10-18T12:00:00
+IS-00039,VC-00014,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00032: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00040,VC-00014,UNRESPONDED_CONTACT,response_sent_at,contact CT-00033 has no response,confirmed,2026-10-18T12:00:00
+IS-00041,VC-00014,SLA_BREACH,sla_target_hours,112.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00042,VC-00015,MISSING_DOCUMENT,documents_received,"Missing: passport, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00043,VC-00015,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00035: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00044,VC-00016,SLA_BREACH,sla_target_hours,1068.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00045,VC-00017,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00038: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00046,VC-00017,SLA_BREACH,sla_target_hours,118.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00047,VC-00018,MISSING_DOCUMENT,documents_received,"Missing: invitation_letter, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00048,VC-00018,TRANSPORT_CONFLICT,transport_bookings,itinerary='NRT - Narita International' internal_note='LHR - Heathrow' airport_code='FRA',conflicting,2026-10-18T12:00:00
+IS-00049,VC-00018,UNRESPONDED_CONTACT,response_sent_at,contact CT-00041 has no response,confirmed,2026-10-18T12:00:00
+IS-00050,VC-00018,SLA_BREACH,sla_target_hours,81.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00051,VC-00019,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00052,VC-00019,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00045: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00053,VC-00019,SLA_BREACH,sla_target_hours,156.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00054,VC-00020,MISSING_DOCUMENT,documents_received,Missing: financial_proof,confirmed,2026-10-18T12:00:00
+IS-00055,VC-00020,SLA_BREACH,sla_target_hours,245.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00056,VC-00021,MISSING_DOCUMENT,documents_received,"Missing: passport, employment_contract",confirmed,2026-10-18T12:00:00
+IS-00057,VC-00021,SLA_BREACH,sla_target_hours,579.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00058,VC-00022,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00059,VC-00022,SLA_BREACH,sla_target_hours,76.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00060,VC-00023,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00048: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00061,VC-00023,SLA_BREACH,sla_target_hours,75.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00062,VC-00024,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00052: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00063,VC-00025,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00064,VC-00025,SLA_BREACH,sla_target_hours,205.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00065,VC-00026,MISSING_DOCUMENT,documents_received,"Missing: passport, photo",confirmed,2026-10-18T12:00:00
+IS-00066,VC-00026,UNASSIGNED_OWNER,case_owner_staff_id,case_owner_staff_id is blank,confirmed,2026-10-18T12:00:00
+IS-00067,VC-00027,MISSING_DOCUMENT,documents_received,Missing: work_permit,confirmed,2026-10-18T12:00:00
+IS-00068,VC-00028,MISSING_DOCUMENT,documents_received,"Missing: photo, invitation_letter",confirmed,2026-10-18T12:00:00
+IS-00069,VC-00028,UNRESPONDED_CONTACT,response_sent_at,contact CT-00057 has no response,confirmed,2026-10-18T12:00:00
+IS-00070,VC-00028,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00059: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00071,VC-00028,UNRESPONDED_CONTACT,response_sent_at,contact CT-00059 has no response,confirmed,2026-10-18T12:00:00
+IS-00072,VC-00029,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00073,VC-00029,SLA_BREACH,sla_target_hours,114.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00074,VC-00030,MISSING_DOCUMENT,documents_received,"Missing: photo, sponsor_letter",confirmed,2026-10-18T12:00:00
+IS-00075,VC-00030,SLA_BREACH,sla_target_hours,183.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00076,VC-00031,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00063: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00077,VC-00031,SLA_BREACH,sla_target_hours,664.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00078,VC-00032,UNRESPONDED_CONTACT,response_sent_at,contact CT-00064 has no response,confirmed,2026-10-18T12:00:00
+IS-00079,VC-00032,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00066: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00080,VC-00032,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00067: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00081,VC-00033,MISSING_DOCUMENT,documents_received,"Missing: photo, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00082,VC-00033,SLA_BREACH,sla_target_hours,599.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00083,VC-00034,UNRESPONDED_CONTACT,response_sent_at,contact CT-00071 has no response,confirmed,2026-10-18T12:00:00
+IS-00084,VC-00034,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00072: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00085,VC-00034,STATUS_TIMESTAMP_CONFLICT,response_sent_at,a response_sent_at precedes case_created_at,conflicting,2026-10-18T12:00:00
+IS-00086,VC-00035,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00087,VC-00035,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00073: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00088,VC-00035,SLA_BREACH,sla_target_hours,269.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00089,VC-00036,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00090,VC-00036,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00074: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00091,VC-00036,SLA_BREACH,sla_target_hours,241.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00092,VC-00037,MISSING_DOCUMENT,documents_received,"Missing: acceptance_letter, financial_proof",confirmed,2026-10-18T12:00:00
+IS-00093,VC-00038,MISSING_DOCUMENT,documents_received,"Missing: photo, sponsor_letter",confirmed,2026-10-18T12:00:00
+IS-00094,VC-00038,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00081: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00095,VC-00038,SLA_BREACH,sla_target_hours,203.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00096,VC-00039,MISSING_DOCUMENT,documents_received,"Missing: passport, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00097,VC-00039,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00082: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00098,VC-00040,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00099,VC-00040,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00084: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00100,VC-00040,SLA_BREACH,sla_target_hours,129.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00101,VC-00041,MISSING_DOCUMENT,documents_received,"Missing: passport, acceptance_letter",confirmed,2026-10-18T12:00:00
+IS-00102,VC-00041,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00086: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00103,VC-00041,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00087: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00104,VC-00042,MISSING_DOCUMENT,documents_received,"Missing: passport, acceptance_letter",confirmed,2026-10-18T12:00:00
+IS-00105,VC-00043,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00093: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00106,VC-00044,MISSING_DOCUMENT,documents_received,"Missing: photo, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00107,VC-00044,UNRESPONDED_CONTACT,response_sent_at,contact CT-00097 has no response,confirmed,2026-10-18T12:00:00
+IS-00108,VC-00044,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00098: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00109,VC-00044,UNRESPONDED_CONTACT,response_sent_at,contact CT-00098 has no response,confirmed,2026-10-18T12:00:00
+IS-00110,VC-00045,MISSING_DOCUMENT,documents_received,"Missing: bank_statement, itinerary",confirmed,2026-10-18T12:00:00
+IS-00111,VC-00045,TRANSPORT_CONFLICT,transport_bookings,itinerary='MUC - Munich' internal_note='LHR - Heathrow' airport_code='MEL',conflicting,2026-10-18T12:00:00
+IS-00112,VC-00046,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00113,VC-00047,SLA_BREACH,sla_target_hours,904.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00114,VC-00048,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00104: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00115,VC-00048,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00105: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00116,VC-00049,MISSING_DOCUMENT,documents_received,"Missing: photo, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00117,VC-00049,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00107: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00118,VC-00049,UNRESPONDED_CONTACT,response_sent_at,contact CT-00107 has no response,confirmed,2026-10-18T12:00:00
+IS-00119,VC-00049,SLA_BREACH,sla_target_hours,639.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00120,VC-00050,MISSING_DOCUMENT,documents_received,"Missing: passport, photo",confirmed,2026-10-18T12:00:00
+IS-00121,VC-00050,SLA_BREACH,sla_target_hours,322.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00122,VC-00051,MISSING_REQUIRED_FIELD,current_status,current_status is blank,insufficient,2026-10-18T12:00:00
+IS-00123,VC-00051,AMBIGUOUS_CASE,current_status,No status and no contact history,insufficient,2026-10-18T12:00:00
+IS-00124,VC-00052,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00109: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00125,VC-00052,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00110: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00126,VC-00052,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00111: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00127,VC-00053,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00128,VC-00053,UNRESPONDED_CONTACT,response_sent_at,contact CT-00112 has no response,confirmed,2026-10-18T12:00:00
+IS-00129,VC-00054,MISSING_DOCUMENT,documents_received,Missing: itinerary,confirmed,2026-10-18T12:00:00
+IS-00130,VC-00054,SLA_BREACH,sla_target_hours,958.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00131,VC-00055,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00132,VC-00055,SLA_BREACH,sla_target_hours,727.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00133,VC-00056,SLA_BREACH,sla_target_hours,540.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00134,VC-00057,MISSING_DOCUMENT,documents_received,Missing: relationship_proof,confirmed,2026-10-18T12:00:00
+IS-00135,VC-00057,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00116: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00136,VC-00058,UNASSIGNED_OWNER,case_owner_staff_id,case_owner_staff_id is blank,confirmed,2026-10-18T12:00:00
+IS-00137,VC-00058,UNRESPONDED_CONTACT,response_sent_at,contact CT-00120 has no response,confirmed,2026-10-18T12:00:00
+IS-00138,VC-00058,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00121: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00139,VC-00058,UNRESPONDED_CONTACT,response_sent_at,contact CT-00121 has no response,confirmed,2026-10-18T12:00:00
+IS-00140,VC-00058,SLA_BREACH,sla_target_hours,206.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00141,VC-00059,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00122: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00142,VC-00059,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00123: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00143,VC-00059,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00124: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00144,VC-00059,UNRESPONDED_CONTACT,response_sent_at,contact CT-00124 has no response,confirmed,2026-10-18T12:00:00
+IS-00145,VC-00060,SLA_BREACH,sla_target_hours,251.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00146,VC-00061,UNASSIGNED_OWNER,case_owner_staff_id,case_owner_staff_id is blank,confirmed,2026-10-18T12:00:00
+IS-00147,VC-00061,UNRESPONDED_CONTACT,response_sent_at,contact CT-00127 has no response,confirmed,2026-10-18T12:00:00
+IS-00148,VC-00061,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00129: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00149,VC-00061,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00130: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00150,VC-00062,MISSING_DOCUMENT,documents_received,"Missing: passport, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00151,VC-00062,UNRESPONDED_CONTACT,response_sent_at,contact CT-00131 has no response,confirmed,2026-10-18T12:00:00
+IS-00152,VC-00062,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00132: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00153,VC-00062,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00133: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00154,VC-00062,SLA_BREACH,sla_target_hours,310.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00155,VC-00063,MISSING_DOCUMENT,documents_received,"Missing: passport, photo",confirmed,2026-10-18T12:00:00
+IS-00156,VC-00063,UNASSIGNED_OWNER,case_owner_staff_id,case_owner_staff_id is blank,confirmed,2026-10-18T12:00:00
+IS-00157,VC-00063,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00134: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00158,VC-00064,MISSING_DOCUMENT,documents_received,"Missing: photo, work_permit",confirmed,2026-10-18T12:00:00
+IS-00159,VC-00065,MISSING_DOCUMENT,documents_received,"Missing: passport, acceptance_letter",confirmed,2026-10-18T12:00:00
+IS-00160,VC-00066,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00138: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00161,VC-00066,SLA_BREACH,sla_target_hours,588.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00162,VC-00067,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00163,VC-00069,MISSING_DOCUMENT,documents_received,"Missing: relationship_proof, sponsor_letter",confirmed,2026-10-18T12:00:00
+IS-00164,VC-00069,SLA_BREACH,sla_target_hours,176.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00165,VC-00070,MISSING_DOCUMENT,documents_received,"Missing: passport, photo",confirmed,2026-10-18T12:00:00
+IS-00166,VC-00070,SLA_BREACH,sla_target_hours,228.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00167,VC-00071,MISSING_DOCUMENT,documents_received,"Missing: photo, relationship_proof",confirmed,2026-10-18T12:00:00
+IS-00168,VC-00071,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00140: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00169,VC-00071,UNRESPONDED_CONTACT,response_sent_at,contact CT-00140 has no response,confirmed,2026-10-18T12:00:00
+IS-00170,VC-00071,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00141: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00171,VC-00071,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00143: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00172,VC-00072,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00173,VC-00072,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00144: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00174,VC-00072,UNRESPONDED_CONTACT,response_sent_at,contact CT-00145 has no response,confirmed,2026-10-18T12:00:00
+IS-00175,VC-00072,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00146: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00176,VC-00072,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00147: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00177,VC-00072,SLA_BREACH,sla_target_hours,116.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00178,VC-00073,MISSING_DOCUMENT,documents_received,Missing: financial_proof,confirmed,2026-10-18T12:00:00
+IS-00179,VC-00073,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00148: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00180,VC-00074,SLA_BREACH,sla_target_hours,508.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00181,VC-00076,MISSING_DOCUMENT,documents_received,Missing: itinerary,confirmed,2026-10-18T12:00:00
+IS-00182,VC-00076,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00152: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00183,VC-00076,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00153: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00184,VC-00076,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00154: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00185,VC-00076,SLA_BREACH,sla_target_hours,268.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00186,VC-00078,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00155: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00187,VC-00078,UNRESPONDED_CONTACT,response_sent_at,contact CT-00155 has no response,confirmed,2026-10-18T12:00:00
+IS-00188,VC-00078,SLA_BREACH,sla_target_hours,503.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00189,VC-00079,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00190,VC-00079,SLA_BREACH,sla_target_hours,592.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00191,VC-00080,MISSING_DOCUMENT,documents_received,Missing: financial_proof,confirmed,2026-10-18T12:00:00
+IS-00192,VC-00080,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00156: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00193,VC-00080,UNRESPONDED_CONTACT,response_sent_at,contact CT-00156 has no response,confirmed,2026-10-18T12:00:00
+IS-00194,VC-00081,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00157: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00195,VC-00081,UNRESPONDED_CONTACT,response_sent_at,contact CT-00157 has no response,confirmed,2026-10-18T12:00:00
+IS-00196,VC-00082,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00197,VC-00082,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00159: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00198,VC-00082,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00160: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00199,VC-00082,SLA_BREACH,sla_target_hours,149.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00200,VC-00083,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00201,VC-00083,SLA_BREACH,sla_target_hours,159.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00202,VC-00084,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00203,VC-00084,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00164: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00204,VC-00084,SLA_BREACH,sla_target_hours,389.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00205,VC-00085,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00206,VC-00085,SLA_BREACH,sla_target_hours,497.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00207,VC-00086,SLA_BREACH,sla_target_hours,183.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00208,VC-00087,MISSING_DOCUMENT,documents_received,Missing: work_permit,confirmed,2026-10-18T12:00:00
+IS-00209,VC-00087,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00170: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00210,VC-00088,MISSING_DOCUMENT,documents_received,"Missing: photo, relationship_proof",confirmed,2026-10-18T12:00:00
+IS-00211,VC-00088,SLA_BREACH,sla_target_hours,875.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00212,VC-00089,MISSING_DOCUMENT,documents_received,"Missing: acceptance_letter, financial_proof",confirmed,2026-10-18T12:00:00
+IS-00213,VC-00089,TRANSPORT_CONFLICT,transport_bookings,itinerary='MUC - Munich' internal_note='NRT - Narita International' airport_code='MEL',conflicting,2026-10-18T12:00:00
+IS-00214,VC-00089,SLA_BREACH,sla_target_hours,534.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00215,VC-00090,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00216,VC-00090,UNRESPONDED_CONTACT,response_sent_at,contact CT-00173 has no response,confirmed,2026-10-18T12:00:00
+IS-00217,VC-00091,SLA_BREACH,sla_target_hours,107.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00218,VC-00092,MISSING_DOCUMENT,documents_received,"Missing: photo, relationship_proof, sponsor_letter",confirmed,2026-10-18T12:00:00
+IS-00219,VC-00093,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00220,VC-00093,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00181: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00221,VC-00094,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00184: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00222,VC-00095,MISSING_DOCUMENT,documents_received,"Missing: passport, photo, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00223,VC-00095,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00187: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00224,VC-00095,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00189: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00225,VC-00095,SLA_BREACH,sla_target_hours,104.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00226,VC-00096,MISSING_DOCUMENT,documents_received,"Missing: photo, work_permit, employment_contract",confirmed,2026-10-18T12:00:00
+IS-00227,VC-00097,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00228,VC-00097,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00190: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00229,VC-00097,SLA_BREACH,sla_target_hours,347.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00230,VC-00098,MISSING_DOCUMENT,documents_received,"Missing: photo, invitation_letter, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00231,VC-00098,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00193: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00232,VC-00098,SLA_BREACH,sla_target_hours,123.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00233,VC-00099,MISSING_DOCUMENT,documents_received,"Missing: relationship_proof, sponsor_letter",confirmed,2026-10-18T12:00:00
+IS-00234,VC-00099,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00196: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00235,VC-00099,UNRESPONDED_CONTACT,response_sent_at,contact CT-00196 has no response,confirmed,2026-10-18T12:00:00
+IS-00236,VC-00100,MISSING_REQUIRED_FIELD,current_status,current_status is blank,insufficient,2026-10-18T12:00:00
+IS-00237,VC-00100,AMBIGUOUS_CASE,current_status,No status and no contact history,insufficient,2026-10-18T12:00:00
+IS-00238,VC-00101,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00239,VC-00101,UNRESPONDED_CONTACT,response_sent_at,contact CT-00198 has no response,confirmed,2026-10-18T12:00:00
+IS-00240,VC-00101,UNRESPONDED_CONTACT,response_sent_at,contact CT-00199 has no response,confirmed,2026-10-18T12:00:00
+IS-00241,VC-00102,MISSING_DOCUMENT,documents_received,Missing: bank_statement,confirmed,2026-10-18T12:00:00
+IS-00242,VC-00103,MISSING_DOCUMENT,documents_received,"Missing: photo, sponsor_letter",confirmed,2026-10-18T12:00:00
+IS-00243,VC-00104,UNRESPONDED_CONTACT,response_sent_at,contact CT-00206 has no response,confirmed,2026-10-18T12:00:00
+IS-00244,VC-00104,SLA_BREACH,sla_target_hours,141.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00245,VC-00105,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00246,VC-00105,SLA_BREACH,sla_target_hours,129.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00247,VC-00106,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00248,VC-00106,SLA_BREACH,sla_target_hours,459.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00249,VC-00107,MISSING_DOCUMENT,documents_received,"Missing: work_permit, employment_contract",confirmed,2026-10-18T12:00:00
+IS-00250,VC-00107,SLA_BREACH,sla_target_hours,749.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00251,VC-00108,MISSING_DOCUMENT,documents_received,"Missing: passport, photo",confirmed,2026-10-18T12:00:00
+IS-00252,VC-00108,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00210: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00253,VC-00108,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00211: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00254,VC-00108,SLA_BREACH,sla_target_hours,240.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00255,VC-00109,MISSING_DOCUMENT,documents_received,Missing: work_permit,confirmed,2026-10-18T12:00:00
+IS-00256,VC-00110,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00257,VC-00110,SLA_BREACH,sla_target_hours,299.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00258,VC-00111,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00259,VC-00111,SLA_BREACH,sla_target_hours,959.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00260,VC-00112,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00261,VC-00112,UNASSIGNED_OWNER,case_owner_staff_id,case_owner_staff_id is blank,confirmed,2026-10-18T12:00:00
+IS-00262,VC-00112,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00213: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00263,VC-00112,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00214: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00264,VC-00112,UNRESPONDED_CONTACT,response_sent_at,contact CT-00216 has no response,confirmed,2026-10-18T12:00:00
+IS-00265,VC-00113,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00266,VC-00114,MISSING_DOCUMENT,documents_received,"Missing: passport, sponsor_letter",confirmed,2026-10-18T12:00:00
+IS-00267,VC-00115,MISSING_DOCUMENT,documents_received,"Missing: passport, photo",confirmed,2026-10-18T12:00:00
+IS-00268,VC-00115,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00218: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00269,VC-00116,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00270,VC-00116,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00219: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00271,VC-00116,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00220: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00272,VC-00117,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00273,VC-00117,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00224: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00274,VC-00117,SLA_BREACH,sla_target_hours,302.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00275,VC-00118,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00276,VC-00118,SLA_BREACH,sla_target_hours,164.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00277,VC-00119,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00228: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00278,VC-00119,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00229: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00279,VC-00121,MISSING_DOCUMENT,documents_received,Missing: employment_contract,confirmed,2026-10-18T12:00:00
+IS-00280,VC-00121,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00236: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00281,VC-00121,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00237: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00282,VC-00121,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00238: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00283,VC-00121,SLA_BREACH,sla_target_hours,211.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00284,VC-00122,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00285,VC-00122,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00239: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00286,VC-00122,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00240: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00287,VC-00122,UNRESPONDED_CONTACT,response_sent_at,contact CT-00240 has no response,confirmed,2026-10-18T12:00:00
+IS-00288,VC-00122,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00241: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00289,VC-00123,SLA_BREACH,sla_target_hours,131.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00290,VC-00124,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00291,VC-00125,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00292,VC-00125,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00247: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00293,VC-00125,UNRESPONDED_CONTACT,response_sent_at,contact CT-00248 has no response,confirmed,2026-10-18T12:00:00
+IS-00294,VC-00126,MISSING_DOCUMENT,documents_received,Missing: bank_statement,confirmed,2026-10-18T12:00:00
+IS-00295,VC-00127,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00253: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00296,VC-00128,MISSING_DOCUMENT,documents_received,"Missing: acceptance_letter, financial_proof",confirmed,2026-10-18T12:00:00
+IS-00297,VC-00128,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00255: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00298,VC-00128,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00256: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00299,VC-00128,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00257: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00300,VC-00128,UNRESPONDED_CONTACT,response_sent_at,contact CT-00257 has no response,confirmed,2026-10-18T12:00:00
+IS-00301,VC-00129,MISSING_DOCUMENT,documents_received,"Missing: passport, photo, acceptance_letter",confirmed,2026-10-18T12:00:00
+IS-00302,VC-00129,SLA_BREACH,sla_target_hours,476.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00303,VC-00130,MISSING_DOCUMENT,documents_received,Missing: relationship_proof,confirmed,2026-10-18T12:00:00
+IS-00304,VC-00131,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00262: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00305,VC-00131,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00263: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00306,VC-00131,UNRESPONDED_CONTACT,response_sent_at,contact CT-00264 has no response,confirmed,2026-10-18T12:00:00
+IS-00307,VC-00131,SLA_BREACH,sla_target_hours,230.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00308,VC-00132,MISSING_DOCUMENT,documents_received,"Missing: passport, photo, employment_contract",confirmed,2026-10-18T12:00:00
+IS-00309,VC-00132,UNRESPONDED_CONTACT,response_sent_at,contact CT-00267 has no response,confirmed,2026-10-18T12:00:00
+IS-00310,VC-00132,SLA_BREACH,sla_target_hours,387.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00311,VC-00133,MISSING_DOCUMENT,documents_received,"Missing: passport, employment_contract",confirmed,2026-10-18T12:00:00
+IS-00312,VC-00133,TRANSPORT_CONFLICT,transport_bookings,itinerary='NRT - Narita International' internal_note='MUC - Munich' airport_code='LHR',conflicting,2026-10-18T12:00:00
+IS-00313,VC-00135,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00314,VC-00135,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00273: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00315,VC-00136,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00316,VC-00136,UNRESPONDED_CONTACT,response_sent_at,contact CT-00278 has no response,confirmed,2026-10-18T12:00:00
+IS-00317,VC-00137,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00318,VC-00137,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00279: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00319,VC-00137,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00280: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00320,VC-00138,SLA_BREACH,sla_target_hours,239.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00321,VC-00140,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00322,VC-00140,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00289: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00323,VC-00140,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00290: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00324,VC-00140,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00292: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00325,VC-00141,MISSING_DOCUMENT,documents_received,Missing: employment_contract,confirmed,2026-10-18T12:00:00
+IS-00326,VC-00141,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00293: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00327,VC-00142,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00328,VC-00142,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00294: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00329,VC-00142,SLA_BREACH,sla_target_hours,834.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00330,VC-00143,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00331,VC-00143,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00296: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00332,VC-00143,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00297: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00333,VC-00144,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00334,VC-00144,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00300: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00335,VC-00144,SLA_BREACH,sla_target_hours,674.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00336,VC-00145,MISSING_DOCUMENT,documents_received,"Missing: photo, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00337,VC-00145,UNRESPONDED_CONTACT,response_sent_at,contact CT-00302 has no response,confirmed,2026-10-18T12:00:00
+IS-00338,VC-00145,UNRESPONDED_CONTACT,response_sent_at,contact CT-00303 has no response,confirmed,2026-10-18T12:00:00
+IS-00339,VC-00145,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00304: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00340,VC-00147,MISSING_DOCUMENT,documents_received,"Missing: passport, photo, financial_proof",confirmed,2026-10-18T12:00:00
+IS-00341,VC-00148,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00308: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00342,VC-00148,SLA_BREACH,sla_target_hours,119.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00343,VC-00149,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00344,VC-00149,SLA_BREACH,sla_target_hours,529.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00345,VC-00150,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00346,VC-00150,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00313: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00347,VC-00150,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00314: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00348,VC-00151,MISSING_DOCUMENT,documents_received,"Missing: photo, relationship_proof",confirmed,2026-10-18T12:00:00
+IS-00349,VC-00151,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00316: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00350,VC-00151,UNRESPONDED_CONTACT,response_sent_at,contact CT-00316 has no response,confirmed,2026-10-18T12:00:00
+IS-00351,VC-00152,MISSING_DOCUMENT,documents_received,"Missing: passport, work_permit",confirmed,2026-10-18T12:00:00
+IS-00352,VC-00153,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00353,VC-00154,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00322: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00354,VC-00154,SLA_BREACH,sla_target_hours,253.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00355,VC-00155,SLA_BREACH,sla_target_hours,186.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00356,VC-00157,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00357,VC-00157,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00328: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00358,VC-00158,MISSING_DOCUMENT,documents_received,"Missing: photo, itinerary",confirmed,2026-10-18T12:00:00
+IS-00359,VC-00158,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00330: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00360,VC-00158,UNRESPONDED_CONTACT,response_sent_at,contact CT-00332 has no response,confirmed,2026-10-18T12:00:00
+IS-00361,VC-00158,SLA_BREACH,sla_target_hours,343.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00362,VC-00159,MISSING_DOCUMENT,documents_received,Missing: invitation_letter,confirmed,2026-10-18T12:00:00
+IS-00363,VC-00159,UNRESPONDED_CONTACT,response_sent_at,contact CT-00335 has no response,confirmed,2026-10-18T12:00:00
+IS-00364,VC-00159,UNRESPONDED_CONTACT,response_sent_at,contact CT-00336 has no response,confirmed,2026-10-18T12:00:00
+IS-00365,VC-00159,SLA_BREACH,sla_target_hours,108.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00366,VC-00160,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00367,VC-00160,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00337: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00368,VC-00160,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00338: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00369,VC-00160,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00339: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00370,VC-00161,MISSING_DOCUMENT,documents_received,"Missing: passport, acceptance_letter",confirmed,2026-10-18T12:00:00
+IS-00371,VC-00161,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00340: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00372,VC-00161,SLA_BREACH,sla_target_hours,918.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00373,VC-00162,MISSING_DOCUMENT,documents_received,Missing: sponsor_letter,confirmed,2026-10-18T12:00:00
+IS-00374,VC-00162,SLA_BREACH,sla_target_hours,506.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00375,VC-00163,MISSING_DOCUMENT,documents_received,"Missing: photo, itinerary",confirmed,2026-10-18T12:00:00
+IS-00376,VC-00163,SLA_BREACH,sla_target_hours,90.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00377,VC-00164,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00346: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00378,VC-00165,MISSING_DOCUMENT,documents_received,Missing: financial_proof,confirmed,2026-10-18T12:00:00
+IS-00379,VC-00165,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00347: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00380,VC-00166,MISSING_DOCUMENT,documents_received,"Missing: photo, relationship_proof",confirmed,2026-10-18T12:00:00
+IS-00381,VC-00166,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00352: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00382,VC-00167,MISSING_DOCUMENT,documents_received,"Missing: photo, invitation_letter",confirmed,2026-10-18T12:00:00
+IS-00383,VC-00167,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00355: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00384,VC-00167,UNRESPONDED_CONTACT,response_sent_at,contact CT-00357 has no response,confirmed,2026-10-18T12:00:00
+IS-00385,VC-00168,UNRESPONDED_CONTACT,response_sent_at,contact CT-00359 has no response,confirmed,2026-10-18T12:00:00
+IS-00386,VC-00169,MISSING_DOCUMENT,documents_received,Missing: bank_statement,confirmed,2026-10-18T12:00:00
+IS-00387,VC-00169,SLA_BREACH,sla_target_hours,830.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00388,VC-00170,MISSING_DOCUMENT,documents_received,"Missing: work_permit, employment_contract",confirmed,2026-10-18T12:00:00
+IS-00389,VC-00170,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00361: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00390,VC-00171,UNASSIGNED_OWNER,case_owner_staff_id,case_owner_staff_id is blank,confirmed,2026-10-18T12:00:00
+IS-00391,VC-00171,SLA_BREACH,sla_target_hours,132.0h elapsed vs target 120h,confirmed,2026-10-18T12:00:00
+IS-00392,VC-00172,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00393,VC-00172,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00366: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00394,VC-00172,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00367: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00395,VC-00172,UNRESPONDED_CONTACT,response_sent_at,contact CT-00367 has no response,confirmed,2026-10-18T12:00:00
+IS-00396,VC-00172,UNRESPONDED_CONTACT,response_sent_at,contact CT-00368 has no response,confirmed,2026-10-18T12:00:00
+IS-00397,VC-00173,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00398,VC-00173,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00371: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00399,VC-00173,SLA_BREACH,sla_target_hours,246.0h elapsed vs target 168h,confirmed,2026-10-18T12:00:00
+IS-00400,VC-00174,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00401,VC-00174,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00374: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00402,VC-00175,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00403,VC-00175,SLA_BREACH,sla_target_hours,577.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00404,VC-00176,MISSING_DOCUMENT,documents_received,"Missing: invitation_letter, bank_statement",confirmed,2026-10-18T12:00:00
+IS-00405,VC-00176,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00376: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00406,VC-00176,SLA_BREACH,sla_target_hours,257.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00407,VC-00177,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00408,VC-00177,SLA_BREACH,sla_target_hours,425.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00409,VC-00178,SLA_BREACH,sla_target_hours,267.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00410,VC-00179,SLA_BREACH,sla_target_hours,332.0h elapsed vs target 48h,confirmed,2026-10-18T12:00:00
+IS-00411,VC-00180,MISSING_DOCUMENT,documents_received,"Missing: work_permit, employment_contract",confirmed,2026-10-18T12:00:00
+IS-00412,VC-00181,MISSING_DOCUMENT,documents_received,Missing: passport,confirmed,2026-10-18T12:00:00
+IS-00413,VC-00181,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00381: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00414,VC-00181,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00382: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00415,VC-00181,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00383: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00416,VC-00182,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00384: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00417,VC-00182,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00385: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00418,VC-00183,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00387: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00419,VC-00183,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00388: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00420,VC-00184,UNASSIGNED_OWNER,case_owner_staff_id,case_owner_staff_id is blank,confirmed,2026-10-18T12:00:00
+IS-00421,VC-00184,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00392: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00422,VC-00185,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00396: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00423,VC-00186,MISSING_DOCUMENT,documents_received,Missing: acceptance_letter,confirmed,2026-10-18T12:00:00
+IS-00424,VC-00186,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00398: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00425,VC-00186,UNRESPONDED_CONTACT,response_sent_at,contact CT-00399 has no response,confirmed,2026-10-18T12:00:00
+IS-00426,VC-00186,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00400: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00427,VC-00186,UNRESPONDED_CONTACT,response_sent_at,contact CT-00400 has no response,confirmed,2026-10-18T12:00:00
+IS-00428,VC-00188,MISSING_DOCUMENT,documents_received,"Missing: photo, financial_proof",confirmed,2026-10-18T12:00:00
+IS-00429,VC-00188,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00408: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00430,VC-00189,MISSING_DOCUMENT,documents_received,"Missing: passport, photo",confirmed,2026-10-18T12:00:00
+IS-00431,VC-00189,SLA_BREACH,sla_target_hours,253.0h elapsed vs target 96h,confirmed,2026-10-18T12:00:00
+IS-00432,VC-00190,MISSING_DOCUMENT,documents_received,"Missing: passport, photo",confirmed,2026-10-18T12:00:00
+IS-00433,VC-00190,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00411: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00434,VC-00190,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00412: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00435,VC-00190,UNRESPONDED_CONTACT,response_sent_at,contact CT-00412 has no response,confirmed,2026-10-18T12:00:00
+IS-00436,VC-00191,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00416: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00437,VC-00192,MISSING_DOCUMENT,documents_received,"Missing: photo, sponsor_letter",confirmed,2026-10-18T12:00:00
+IS-00438,VC-00192,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00418: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00439,VC-00193,MISSING_DOCUMENT,documents_received,"Missing: photo, relationship_proof",confirmed,2026-10-18T12:00:00
+IS-00440,VC-00193,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00419: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00441,VC-00193,UNRESPONDED_CONTACT,response_sent_at,contact CT-00421 has no response,confirmed,2026-10-18T12:00:00
+IS-00442,VC-00194,MISSING_DOCUMENT,documents_received,Missing: acceptance_letter,confirmed,2026-10-18T12:00:00
+IS-00443,VC-00195,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00425: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00444,VC-00195,UNRESPONDED_CONTACT,response_sent_at,contact CT-00426 has no response,confirmed,2026-10-18T12:00:00
+IS-00445,VC-00196,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00427: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00446,VC-00197,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00447,VC-00197,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00428: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00448,VC-00197,UNRESPONDED_CONTACT,response_sent_at,contact CT-00428 has no response,confirmed,2026-10-18T12:00:00
+IS-00449,VC-00197,SLA_BREACH,sla_target_hours,76.0h elapsed vs target 72h,confirmed,2026-10-18T12:00:00
+IS-00450,VC-00198,NEGATIVE_SENTIMENT,sentiment_label,contact CT-00430: negative sentiment,confirmed,2026-10-18T12:00:00
+IS-00451,VC-00199,MISSING_DOCUMENT,documents_received,Missing: photo,confirmed,2026-10-18T12:00:00
+IS-00452,VC-00200,MISSING_REQUIRED_FIELD,current_status,current_status is blank,insufficient,2026-10-18T12:00:00
+IS-00453,VC-00200,AMBIGUOUS_CASE,current_status,No status and no contact history,insufficient,2026-10-18T12:00:00

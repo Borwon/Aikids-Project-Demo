@@ -1,0 +1,10 @@
+# Core pipeline only needs the standard library + pandas for convenience.
+# (The pipeline works with stdlib csv too, but pandas makes the joins crisp.)
+pandas>=2.0
+
+# Tests
+pytest>=7.4
+
+# Optional: only needed if you run the live backend (server.py)
+fastapi>=0.110
+uvicorn>=0.29

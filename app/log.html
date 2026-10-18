@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approval Log · VisaConnect Case Copilot</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="container">
+  <div class="page-head">
+    <div>
+      <h1>Approval Log</h1>
+      <p>Append-only audit trail. Every approve / edit / reject a staff member clicks is recorded here — nothing is transmitted anywhere.</p>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn" id="refresh">Refresh</button>
+  </div>
+
+  <div class="fairness" id="fairness" hidden>
+    <div><div class="big" id="fairBig">—</div><div class="lbl">fairness audit pass rate</div></div>
+    <div style="flex:1; color:#047857" id="fairText"></div>
+  </div>
+
+  <div class="card">
+    <div style="max-height:72vh; overflow:auto">
+      <table>
+        <thead><tr>
+          <th>Timestamp</th><th>Case</th><th>Staff</th><th>Action</th>
+          <th>Item</th><th>AI proposed</th><th>Human final</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div id="empty" class="empty-state" hidden>No decisions logged yet. Approve, edit or reject something on a case first.</div>
+  </div>
+</main>
+
+<script src="app.js"></script>
+<script>
+renderTopbar("log");
+
+function actionBadge(a) {
+  return a === "approve" ? badge("approve", "good", true)
+       : a === "edit" ? badge("edit", "info", true)
+       : badge("reject", "bad", true);
+}
+function clip(s, n = 220) {
+  if (s == null) return '<span class="faint">— none —</span>';
+  const str = String(s);
+  return esc(str.length > n ? str.slice(0, n) + "…" : str);
+}
+
+async function loadBias() {
+  const b = await getBias().catch(() => null);
+  if (!b || !b.comparisons) return;
+  $("#fairness").hidden = false;
+  $("#fairBig").textContent = `${b.cases_all_pass}/${b.cases_audited} cases · ${b.pass_rate}%`;
+  $("#fairText").textContent =
+    `${b.comparisons} nationality/language comparisons across ${b.cases_audited} cases · ` +
+    `${b.differences} bias differences. Proves the excluded fields never reach the model.`;
+}
+
+async function load() {
+  let rows = [];
+  try { rows = await getApprovals(); } catch (e) { $("#empty").hidden = false; return; }
+  const body = $("#rows");
+  clear(body);
+  $("#empty").hidden = rows.length > 0;
+  rows.slice().reverse().forEach((r) => {
+    const tr = document.createElement("tr");
+    tr.style.cursor = "default";
+    const ai = r.ai_output?.text;
+    const fin = r.final_output?.text;
+    const changed = r.action !== "approve" && String(ai) !== String(fin);
+    tr.innerHTML = `
+      <td class="mono">${esc(r.ts)}</td>
+      <td><a href="case.html?case_id=${encodeURIComponent(r.case_id)}" class="mono" style="color:var(--accent)">${esc(r.case_id)}</a></td>
+      <td class="mono">${esc(r.staff_id)}</td>
+      <td>${actionBadge(r.action)}</td>
+      <td class="muted">${esc(r.ai_output?.item || "")}</td>
+      <td style="max-width:320px">${clip(ai)}</td>
+      <td style="max-width:320px; ${changed ? "background:var(--warn-bg)" : ""}">${clip(fin)}</td>`;
+    body.appendChild(tr);
+  });
+}
+
+$("#refresh").addEventListener("click", () => { load(); loadBias(); });
+loadBias();
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+dataset,column_name,data_type,contains_pii,description
+visa_cases,case_id,string,no,Primary key for a visa case.
+visa_cases,customer_id,string,yes,Pseudonymous customer identifier.
+visa_cases,customer_nationality,string,yes,Customer nationality. Excluded from LLM payload.
+visa_cases,case_owner_staff_id,string,no,Assigned staff owner; blank means unassigned.
+visa_cases,current_status,string,no,Current workflow status of the case.
+visa_cases,journey_type,string,no,Visa service category; maps to an SLA target.
+visa_cases,destination_country,string,no,Intended destination country.
+visa_cases,case_created_at,datetime,no,When the case was opened.
+visa_cases,last_customer_update_at,datetime,no,Most recent customer-originated update.
+visa_cases,required_documents,list,no,Semicolon-separated required document keys.
+visa_cases,documents_received,list,no,Semicolon-separated received document keys.
+visa_cases,payment_status,string,no,unpaid | partial | paid | blank.
+visa_cases,message_language,string,yes,Preferred message language. Excluded from LLM payload.
+customer_contacts,channel,string,no,Phone | Email | Web chat | LINE | Office visit.
+customer_contacts,sentiment_label,string,no,positive | neutral | negative.
+customer_contacts,contact_at,datetime,no,When the customer made contact.
+customer_contacts,response_sent_at,datetime,no,When staff responded; blank if none.
+transport_bookings,itinerary_value,string,no,Airport as printed on the itinerary.
+transport_bookings,internal_note_value,string,no,Airport as recorded in the internal note.
+transport_bookings,airport_code,string,no,Airport code from the booking system.
+customer_reviews,rating,int,no,1-5 star review score.
