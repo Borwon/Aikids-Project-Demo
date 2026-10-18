@@ -4,86 +4,126 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Case Copilot · VisaConnect</title>
+<meta name="description" content="Review one visa case: raw record, AI flags and draft, and the customer conversation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230a1c33'/%3E%3Cpath d='M6 12l12-6-6 12-1.6-6z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<main class="container">
+<a class="skip-link" href="#main">Skip to content</a>
+<main class="container" id="main">
   <div class="page-head">
     <div>
       <h1 id="title">Case Copilot</h1>
       <p id="subtitle">Loading…</p>
     </div>
     <div class="spacer"></div>
-    <a class="btn" href="index.html">← Back to list</a>
+    <a class="btn btn-ghost" href="index.html" id="backLink"></a>
   </div>
 
-  <div id="banner"></div>
+  <div class="console">
+    <!-- ---------- column 1: queue ---------- -->
+    <aside class="card" aria-label="Case queue">
+      <div class="card-head">
+        <h2>Queue</h2>
+        <div class="spacer"></div>
+        <span class="hint" id="queueCount"></span>
+      </div>
+      <div style="padding:10px 10px 6px">
+        <div class="search">
+          <label class="sr-only" for="queueSearch">Filter the queue</label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="6.8"/><path d="M16.2 16.2L20.5 20.5"/></svg>
+          <input type="search" id="queueSearch" placeholder="Filter queue…" autocomplete="off">
+        </div>
+      </div>
+      <div class="queue-scroll">
+        <div class="queue-list" id="queueList"></div>
+      </div>
+    </aside>
 
-  <div class="card">
-    <div class="card-head"><h2>Case record (raw fields — nothing hidden)</h2>
-      <div class="spacer"></div><span id="recordBadges"></span></div>
-    <div class="card-body"><div id="fields" class="field-grid"></div></div>
-  </div>
+    <!-- ---------- column 2: case + AI ---------- -->
+    <section class="stack">
+      <div id="banner"></div>
 
-  <div class="detail-grid" style="margin-top:18px">
-    <div>
       <div class="card">
-        <div class="card-head"><h2>AI copilot output</h2>
+        <div class="card-head">
+          <h2>Case record</h2>
           <div class="spacer"></div>
-          <span id="validator" class="muted" style="font-size:12px"></span>
+          <span id="recordBadges"></span>
+        </div>
+        <div class="card-body"><div id="fields" class="field-grid"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <svg class="head-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.6l1.9 5.4 5.4 1.9-5.4 1.9L12 18.2l-1.9-5.4L4.7 10.9l5.4-1.9z"/></svg>
+          <h2>AI copilot output</h2>
+          <div class="spacer"></div>
+          <span id="validator" class="hint"></span>
         </div>
         <div class="card-body" id="aiBody"></div>
       </div>
 
+      <div class="card">
+        <div class="card-head"><h2>Transport</h2></div>
+        <div class="card-body" id="transport"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Customer reviews</h2></div>
+        <div class="card-body" id="reviews"></div>
+      </div>
+    </section>
+
+    <!-- ---------- column 3: conversation ---------- -->
+    <aside class="rail stack" aria-label="Conversation">
       <div class="card" id="chatCard">
-        <div class="card-head"><h2>Ask about this case</h2>
+        <div class="card-head">
+          <h2>Ask about this case</h2>
           <div class="spacer"></div>
-          <span class="muted" style="font-size:11.5px">read-only · scoped to this case</span>
+          <span class="hint">read-only</span>
         </div>
         <div class="card-body">
           <div id="chatLog" class="chat-log"></div>
           <div id="chatSuggest" class="chat-suggest"></div>
           <form id="chatForm" class="chat-form">
+            <label class="sr-only" for="chatInput">Ask the assistant about this case</label>
             <textarea id="chatInput" rows="2" placeholder="Ask about status, flags, SLA, last contact…" autocomplete="off"></textarea>
             <button class="btn btn-primary" id="chatSend" type="submit">Send</button>
           </form>
+          <div id="chatStatus" class="sr-only" role="status"></div>
         </div>
       </div>
-    </div>
-    <div>
+
       <div class="card">
-        <div class="card-head"><h2>Conversation with customer</h2>
+        <div class="card-head">
+          <h2>Conversation with customer</h2>
           <div class="spacer"></div>
-          <span class="muted" style="font-size:11.5px">demo · replies queued locally, never transmitted</span>
+          <span class="hint">queued locally</span>
         </div>
         <div class="card-body">
           <div id="custLog" class="chat-log"></div>
           <form id="custForm" class="chat-form">
+            <label class="sr-only" for="custChannel">Reply channel</label>
             <select id="custChannel" title="Channel"></select>
-            <textarea id="custInput" rows="1" placeholder="Write a reply to the customer…"></textarea>
+            <label class="sr-only" for="custInput">Write a reply to the customer</label>
+            <textarea id="custInput" rows="1" placeholder="Write a reply…"></textarea>
             <button class="btn btn-primary" type="submit">Add reply</button>
           </form>
         </div>
       </div>
-      <div class="card">
-        <div class="card-head"><h2>Transport</h2></div>
-        <div class="card-body" id="transport"></div>
-      </div>
-      <div class="card">
-        <div class="card-head"><h2>Reviews</h2></div>
-        <div class="card-body" id="reviews"></div>
-      </div>
-    </div>
+    </aside>
   </div>
 </main>
 
 <script src="app.js"></script>
 <script>
 renderTopbar("case");
+$("#backLink").innerHTML = icon("arrowLeft") + "All cases";
 
 const caseId = new URLSearchParams(location.search).get("case_id");
 let CASE = null;
 let DRAFT = null;
+let QUEUE = [];
 const decisions = {};   // item key -> action
 
 function field(k, v, isList) {
@@ -93,9 +133,48 @@ function field(k, v, isList) {
     <div class="v ${empty ? "empty" : ""}">${empty ? "blank" : esc(val)}</div></div>`;
 }
 
+/* ---------- queue column ---------- */
+function queueItem(c) {
+  const selected = c.case_id === caseId;
+  const flagKind0 = c.flag_types && c.flag_types.length ? flagKind(c.flag_types[0]) : "neutral";
+  return `<button type="button" class="queue-item ${selected ? "selected" : ""}" data-id="${esc(c.case_id)}"
+      ${selected ? 'aria-current="true"' : ""}>
+    <div class="q-top">
+      <span class="q-id">${esc(c.case_id)}</span>
+      <span class="spacer"></span>
+      ${c.has_conflict ? badge("conflict", "bad") : ""}
+    </div>
+    <div class="q-meta">
+      ${statusBadge(c.current_status)}
+      <span class="sep">·</span>
+      <span>${esc(c.journey_type || "—")}</span>
+      <span class="sep">·</span>
+      <span>${c.days_open}d</span>
+      ${c.flag_count ? `<span class="sep">·</span>${badge(c.flag_count + " flags", flagKind0)}` : ""}
+    </div>
+  </button>`;
+}
+
+function renderQueue() {
+  const q = $("#queueSearch").value.trim().toLowerCase();
+  const rows = QUEUE.filter((c) =>
+    !q || `${c.case_id} ${c.current_status} ${c.case_owner_staff_id}`.toLowerCase().includes(q));
+  $("#queueCount").textContent = `${rows.length} of ${QUEUE.length}`;
+  const list = $("#queueList");
+  list.innerHTML = rows.length
+    ? rows.map(queueItem).join("")
+    : '<div class="chat-empty">No cases match.</div>';
+  $$("#queueList .queue-item").forEach((b) =>
+    b.addEventListener("click", () => { location.href = `case.html?case_id=${encodeURIComponent(b.dataset.id)}`; }));
+  const sel = $("#queueList .queue-item.selected");
+  if (sel) sel.scrollIntoView({ block: "nearest" });
+}
+
+/* ---------- case record ---------- */
 function renderRecord(c) {
   $("#title").textContent = c.case_id;
-  $("#subtitle").innerHTML = `${esc(c.journey_type)} · opened ${fmtShort(c.case_created_at)} · ${c.days_open} days open`;
+  $("#subtitle").innerHTML =
+    `${esc(c.journey_type)} · opened ${fmtShort(c.case_created_at)} · ${c.days_open} days open`;
   $("#recordBadges").innerHTML =
     (c.sla_breached ? badge("SLA breached", "bad", true) : badge("SLA on-time", "good", true)) + " " +
     (c.has_conflict ? badge("transport conflict", "bad") : "");
@@ -114,9 +193,6 @@ function renderRecord(c) {
     field("Documents received", c.documents_received, true),
   ].join("");
 
-  // contacts are rendered as the customer conversation panel (loadConversation)
-
-  // transport
   const t = c.transport;
   $("#transport").innerHTML = !t
     ? '<span class="muted">No transport booking on file.</span>'
@@ -125,16 +201,18 @@ function renderRecord(c) {
         ${field("Internal note", t.internal_note_value)}
         ${field("Airport code", t.airport_code)}
         ${field("Departure", t.departure_date)}
-      </div>${t.conflict ? '<div class="banner banner-warn" style="margin-top:12px">Itinerary, internal note and airport code disagree — resolve before advising the customer.</div>' : ""}`;
+      </div>${t.conflict ? `<div class="banner banner-warn" style="margin:14px 0 0">${icon("alert")}<div><strong>The itinerary, internal note and airport code disagree.</strong> Confirm the correct airport with the customer before rebooking.</div></div>` : ""}`;
 
-  // reviews
   $("#reviews").innerHTML = !c.reviews.length
     ? '<span class="muted">No reviews on file.</span>'
     : c.reviews.map((r) =>
-        `<div><strong>${r.rating}★</strong> <span class="muted">${fmtShort(r.review_at)}</span>
-         <div>${esc(r.review_text)}</div></div>`).join("<hr style='border:none;border-top:1px dashed var(--border);margin:10px 0'>");
+        `<div><span style="color:var(--caution-ink)">${icon("star")}</span>
+           <strong>${r.rating}★</strong> <span class="muted">${fmtShort(r.review_at)}</span>
+           <div style="margin-top:2px">${esc(r.review_text)}</div></div>`)
+        .join('<hr class="soft">');
 }
 
+/* ---------- AI output ---------- */
 function flagsHtml(flags) {
   if (!flags.length) return '<span class="muted">No flags detected.</span>';
   return flags.map((f) => `<div class="flag">
@@ -148,16 +226,17 @@ function flagsHtml(flags) {
 
 function decisionRow(key, label, aiText, aiRender, editable) {
   const decided = decisions[key];
-  return `<div class="ai-block" data-item="${key}" style="margin-bottom:12px">
-    <h3>${esc(label)}</h3>
+  const decidedIcon = decided === "approve" ? "check" : decided === "edit" ? "pencil" : "x";
+  return `<div class="ai-block" data-item="${key}">
+    <h3>${icon("spark")}${esc(label)}</h3>
     <div class="body">${aiRender || `<div class="summary">${esc(aiText)}</div>`}</div>
     <div class="actions">
       ${decided
-        ? `<span class="decided ${decided}">${decided === "approve" ? "✓ Approved" : decided === "edit" ? "✎ Edited & saved" : "✕ Rejected"} by ${esc(getStaff())}</span>`
-        : `<button class="btn btn-approve btn-sm" data-act="approve">Approve</button>
-           ${editable ? '<button class="btn btn-edit btn-sm" data-act="edit">Edit</button>' : ""}
-           <button class="btn btn-reject btn-sm" data-act="reject">Reject</button>
-           <div class="spacer"></div><span class="muted" style="font-size:11.5px">AI suggestion — nothing counts until you decide</span>`}
+        ? `<span class="decided ${decided}">${icon(decidedIcon)}${decided === "approve" ? "Approved" : decided === "edit" ? "Edited &amp; saved" : "Rejected"} by ${esc(getStaff())}</span>`
+        : `<button class="btn btn-approve btn-sm" data-act="approve" type="button">${icon("check")}Approve</button>
+           ${editable ? `<button class="btn btn-edit btn-sm" data-act="edit" type="button">${icon("pencil")}Edit</button>` : ""}
+           <button class="btn btn-reject btn-sm" data-act="reject" type="button">${icon("x")}Reject</button>
+           <div class="spacer"></div><span class="decisionRow-note">AI suggestion — nothing counts until you decide</span>`}
     </div>
   </div>`;
 }
@@ -203,8 +282,10 @@ async function onDecision(ev) {
   const body = block.querySelector(".body");
   const original = body.innerHTML;
   body.innerHTML = `<textarea id="editBox">${esc(aiText)}</textarea>
-    <div class="actions"><button class="btn btn-primary btn-sm" id="saveEdit">Save edit</button>
-    <button class="btn btn-sm" id="cancelEdit">Cancel</button></div>`;
+    <div class="actions" style="border-top-color:var(--ai-border)">
+      <button class="btn btn-primary btn-sm" id="saveEdit" type="button">${icon("check")}Save edit</button>
+      <button class="btn btn-sm" id="cancelEdit" type="button">Cancel</button>
+    </div>`;
   $("#cancelEdit").addEventListener("click", () => { body.innerHTML = original; });
   $("#saveEdit").addEventListener("click", async () => {
     await logDecision(key, "edit", aiText, $("#editBox").value);
@@ -248,7 +329,7 @@ function renderSuggestions() {
 function renderChat() {
   const log = $("#chatLog");
   if (!CHAT.length) {
-    log.innerHTML = '<div class="chat-empty muted">Ask anything about this case — the assistant answers only from this case\'s data.</div>';
+    log.innerHTML = '<div class="chat-empty">Ask anything about this case. The assistant answers only from this case\'s data.</div>';
     return;
   }
   log.innerHTML = CHAT.map((m) =>
@@ -274,6 +355,7 @@ async function sendChat(text) {
     if (!res.ok) throw new Error("assistant unavailable (" + res.status + ")");
     const data = await res.json();
     CHAT[CHAT.length - 1] = { role: "assistant", content: data.reply };
+    $("#chatStatus").textContent = data.reply;
   } catch (e) {
     CHAT[CHAT.length - 1] = { role: "assistant", content: "Could not reach the assistant: " + e.message };
   } finally {
@@ -297,7 +379,7 @@ const CHANNELS = ["Phone", "Email", "Web chat", "LINE", "Office visit"];
 function renderConversation(thread) {
   const log = $("#custLog");
   if (!thread || !thread.length) {
-    log.innerHTML = '<div class="chat-empty muted">No conversation recorded for this case.</div>';
+    log.innerHTML = '<div class="chat-empty">No conversation recorded for this case.</div>';
     return;
   }
   log.innerHTML = thread.map((m) => {
@@ -322,7 +404,6 @@ async function loadConversation() {
   if (!res.ok) throw new Error("conversation unavailable (" + res.status + ")");
   const data = await res.json();
   renderConversation(data.thread);
-  // default the reply channel to the most recent customer channel
   const last = (CASE.contacts || []).slice(-1)[0];
   if (last && last.channel && CHANNELS.includes(last.channel)) $("#custChannel").value = last.channel;
 }
@@ -351,15 +432,26 @@ function initCustomerChat() {
     }
   });
   loadConversation().catch((err) => {
-    $("#custLog").innerHTML = `<div class="chat-empty muted">${esc(err.message)}</div>`;
+    $("#custLog").innerHTML = `<div class="chat-empty">${esc(err.message)}</div>`;
   });
 }
 
 async function init() {
   if (!caseId) { $("#subtitle").textContent = "No case_id provided."; return; }
-  const cases = await getCases();
+
+  let cases = [];
+  try {
+    cases = await getCases();
+  } catch (e) {
+    $("#subtitle").innerHTML = `<span style="color:var(--bad)">Could not load cases — start the app with <code>python server.py</code>.</span>`;
+    return;
+  }
+  QUEUE = cases;
+  renderQueue();
+  $("#queueSearch").addEventListener("input", renderQueue);
+
   CASE = cases.find((c) => c.case_id === caseId);
-  if (!CASE) { $("#subtitle").innerHTML = `<span style="color:#b91c1c">Unknown case ${esc(caseId)}.</span>`; return; }
+  if (!CASE) { $("#subtitle").innerHTML = `<span style="color:var(--bad)">Unknown case ${esc(caseId)}.</span>`; return; }
 
   DRAFT = CASE.draft;
   renderRecord(CASE);
@@ -370,13 +462,13 @@ async function init() {
     DRAFT = live.draft;
     const v = live.validator || {};
     $("#validator").innerHTML = v.ok
-      ? badge("hard-rule validator: passed", "good", true)
-      : badge("validator: rejected → regenerated", "warn", true);
+      ? badge("hard-rule validator passed", "good", true)
+      : badge("validator rejected → regenerated", "warn", true);
   }
   if (DRAFT.insufficient_information) {
-    $("#banner").innerHTML = '<div class="banner banner-info"><strong>Insufficient information.</strong> Required fields are missing (no status / no contact history), so the copilot is not recommending an action. It says so rather than guessing.</div>';
+    $("#banner").innerHTML = `<div class="banner banner-info">${icon("info")}<div><strong>Insufficient information.</strong> Required fields are missing (no status, no contact history), so the copilot is not recommending an action. It says so rather than guessing.</div></div>`;
   } else if (CASE.has_conflict) {
-    $("#banner").innerHTML = '<div class="banner banner-warn"><strong>Transport conflict detected.</strong> The copilot will ask the customer to confirm the airport and will not state either value as correct.</div>';
+    $("#banner").innerHTML = `<div class="banner banner-warn">${icon("alert")}<div><strong>Transport conflict detected.</strong> The copilot will ask the customer to confirm the airport and will not state either value as correct.</div></div>`;
   }
   renderAI();
   initChat();

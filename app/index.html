@@ -3,36 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Case List · VisaConnect Case Copilot</title>
+<title>Cases · VisaConnect Case Copilot</title>
+<meta name="description" content="Visa case queue with AI-detected flags, SLA status and transport conflicts.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230a1c33'/%3E%3Cpath d='M6 12l12-6-6 12-1.6-6z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<main class="container">
+<a class="skip-link" href="#main">Skip to content</a>
+<main class="container" id="main">
   <div class="page-head">
     <div>
-      <h1>Case List</h1>
-      <p id="subtitle">Loading cases…</p>
+      <h1>Cases</h1>
+      <p id="subtitle">Loading the case queue…</p>
+    </div>
+    <div class="spacer"></div>
+    <div class="search" style="min-width:280px">
+      <label class="sr-only" for="q">Search cases</label>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="6.8"/><path d="M16.2 16.2L20.5 20.5"/></svg>
+      <input type="search" id="q" placeholder="Search case id, status or owner…" autocomplete="off">
     </div>
   </div>
 
-  <div class="toolbar">
-    <input type="search" id="q" placeholder="Search case id or status…" style="min-width:260px">
-    <select id="statusFilter"><option value="">All statuses</option></select>
-    <label class="inline"><input type="checkbox" id="flagOnly"> Flagged only</label>
-    <label class="inline"><input type="checkbox" id="conflictOnly"> Transport conflict only</label>
-    <div class="spacer"></div>
-    <label class="inline"><input type="checkbox" id="showAll"> Show nationality / language columns</label>
-  </div>
+  <section class="kpis" id="kpis" aria-label="Queue summary"></section>
 
-  <div class="card">
-    <div style="max-height:70vh; overflow:auto">
+  <section class="card" aria-label="Case queue">
+    <div class="toolbar">
+      <label class="inline"><input type="checkbox" id="flagOnly"> Flagged only</label>
+      <label class="inline"><input type="checkbox" id="conflictOnly"> Transport conflict only</label>
+      <span style="width:1px;height:20px;background:var(--border)"></span>
+      <label class="inline"><input type="checkbox" id="showAll"> Show nationality / language</label>
+      <div class="spacer"></div>
+      <label class="inline">
+        <span class="sr-only">Filter by status</span>
+        <select id="statusFilter"><option value="">All statuses</option></select>
+      </label>
+    </div>
+    <div class="table-wrap">
       <table id="casesTable">
         <thead><tr id="headRow"></tr></thead>
         <tbody id="body"></tbody>
       </table>
     </div>
-    <div id="empty" class="empty-state" hidden>No cases match the current filters.</div>
-  </div>
+    <div id="empty" class="empty-state" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13.4h3.8l1.4 2.8h5.6l1.4-2.8H20"/><path d="M4 13.4L6.4 5.4h11.2L20 13.4v5.6H4z"/></svg>
+      <span class="es-title">No cases match these filters</span>
+      <span>Clear a filter or widen the search to see the queue again.</span>
+    </div>
+  </section>
 </main>
 
 <script src="app.js"></script>
@@ -44,8 +61,9 @@ let sortKey = "case_id";
 let sortDir = 1;
 
 const COLUMNS = [
-  { key: "case_id", label: "Case", sortable: true },
-  { key: "current_status", label: "Status", sortable: true, cell: (c) => c.current_status ? esc(c.current_status) : '<span class="faint">— none —</span>' },
+  { key: "case_id", label: "Case", sortable: true, cell: (c) => `<span class="mono" style="font-weight:600;color:var(--navy-900)">${esc(c.case_id)}</span>` },
+  { key: "current_status", label: "Status", sortable: true,
+    cell: (c) => c.current_status ? statusBadge(c.current_status) : '<span class="faint">— none —</span>' },
   { key: "journey_type", label: "Journey", sortable: true },
   { key: "days_open", label: "Days open", sortable: true, cls: "num", cell: (c) => c.days_open },
   { key: "sla", label: "SLA", sortable: true, cell: (c) =>
@@ -53,7 +71,7 @@ const COLUMNS = [
   { key: "hours", label: "Elapsed / target", sortable: true, cls: "num", cell: (c) => `${c.hours_elapsed}h / ${c.sla_target_hours}h` },
   { key: "flag_count", label: "Flags", sortable: true, cls: "num", cell: (c) =>
       c.flag_count ? badge(String(c.flag_count), flagKind(c.flag_types[0]), true) : '<span class="faint">0</span>' },
-  { key: "has_conflict", label: "Conflict", sortable: true, cell: (c) =>
+  { key: "has_conflict", label: "Transport", sortable: true, cell: (c) =>
       c.has_conflict ? badge("itinerary ≠ note", "bad") : '<span class="faint">—</span>' },
   { key: "owner", label: "Owner", sortable: true, cell: (c) =>
       c.case_owner_staff_id ? `<span class="mono">${esc(c.case_owner_staff_id)}</span>` : badge("unassigned", "warn") },
@@ -75,6 +93,24 @@ function visibleColumns() {
   return $("#showAll").checked ? COLUMNS.concat(HIDDEN_COLUMNS) : COLUMNS;
 }
 
+function renderKpis() {
+  const flagged = CASES.filter((c) => c.flag_count).length;
+  const breached = CASES.filter((c) => c.sla_breached).length;
+  const conflicts = CASES.filter((c) => c.has_conflict).length;
+  const tiles = [
+    { label: "Cases in queue", value: CASES.length, sub: "across all statuses", cls: "" },
+    { label: "Cases with flags", value: flagged, sub: "need a human look", cls: "" },
+    { label: "SLA breached", value: breached, sub: "past the response target", cls: "is-bad" },
+    { label: "Transport conflicts", value: conflicts, sub: "itinerary ≠ internal note", cls: "is-bad" },
+  ];
+  $("#kpis").innerHTML = tiles.map((t) =>
+    `<div class="kpi ${t.cls}">
+       <div class="k-label">${esc(t.label)}</div>
+       <div class="k-value">${t.value}</div>
+       <div class="k-sub">${esc(t.sub)}</div>
+     </div>`).join("");
+}
+
 function renderHead() {
   const row = $("#headRow");
   clear(row);
@@ -83,6 +119,7 @@ function renderHead() {
     th.textContent = col.label;
     if (col.sortable) {
       th.className = "sortable";
+      th.setAttribute("aria-sort", col.key === sortKey ? (sortDir > 0 ? "ascending" : "descending") : "none");
       if (col.key === sortKey) th.textContent += sortDir > 0 ? " ↑" : " ↓";
       th.addEventListener("click", () => {
         if (sortKey === col.key) sortDir *= -1; else { sortKey = col.key; sortDir = 1; }
@@ -127,7 +164,11 @@ function render() {
 
   for (const c of rows) {
     const tr = document.createElement("tr");
+    tr.tabIndex = 0;
     tr.addEventListener("click", () => { location.href = `case.html?case_id=${encodeURIComponent(c.case_id)}`; });
+    tr.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") location.href = `case.html?case_id=${encodeURIComponent(c.case_id)}`;
+    });
     for (const col of cols) {
       const td = document.createElement("td");
       if (col.cls) td.className = col.cls;
@@ -136,16 +177,20 @@ function render() {
     }
     body.appendChild(tr);
   }
-  $("#subtitle").textContent = `${rows.length} of ${CASES.length} cases shown · AI flags and drafts are suggestions until a staff member approves them.`;
+  $("#subtitle").textContent =
+    `${rows.length} of ${CASES.length} cases shown. AI flags and drafts are suggestions until a staff member approves them.`;
 }
 
 async function init() {
+  skeletonRows($("#body"), 9, 9);
   try {
     CASES = await getCases();
   } catch (e) {
-    $("#subtitle").innerHTML = `<span style="color:#b91c1c">Could not load cases — start the app with <code>python server.py</code>.</span>`;
+    $("#subtitle").innerHTML = `<span style="color:var(--bad)">Could not load cases — start the app with <code>python server.py</code>.</span>`;
+    skeletonRows($("#body"), 9, 0);
     return;
   }
+  renderKpis();
   const statuses = [...new Set(CASES.map((c) => c.current_status))].sort();
   const sel = $("#statusFilter");
   for (const s of statuses) {
