@@ -22,11 +22,13 @@ def build_thread(case: dict, queued: list[dict] | None = None) -> list[dict]:
             "sentiment": c.get("sentiment_label", ""),
         })
         if str(c.get("response_sent_at") or "").strip():
+            staff = str(c.get("responded_by_staff_id") or "").strip()
             items.append({
                 "kind": "system",
                 "ts": c.get("response_sent_at", ""),
-                "text": "Staff response logged (reply content not stored in the dataset)",
-                "staff_id": c.get("responded_by_staff_id", ""),
+                "text": f"Reply sent by {staff} — reply text not stored in this dataset"
+                        if staff else "Reply sent — reply text not stored in this dataset",
+                "staff_id": staff,
             })
 
     for q in queued or []:

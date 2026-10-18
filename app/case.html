@@ -13,6 +13,22 @@
 <main class="container wide" id="main">
   <div id="banner"></div>
 
+  <!-- sticky queue bar: work the list without losing your place -->
+  <div class="case-bar" id="caseBar" hidden>
+    <button class="bar-btn" id="prevCase" type="button" title="Previous case (k)"></button>
+    <button class="bar-btn" id="nextCase" type="button" title="Next case (j)"></button>
+    <span class="pos" id="casePos">—</span>
+    <span class="bar-sep" aria-hidden="true"></span>
+    <div class="search bar-jump">
+      <label class="sr-only" for="jump">Jump to a case</label>
+      <input type="search" id="jump" list="caseIds" placeholder="Jump to case id…" autocomplete="off">
+      <datalist id="caseIds"></datalist>
+    </div>
+    <label class="inline"><input type="checkbox" id="barFlagOnly"> Flagged only</label>
+    <div class="spacer"></div>
+    <span class="hint bar-hint">k / j for prev / next</span>
+  </div>
+
   <div class="case-layout">
     <!-- ---------- column 1: the case ---------- -->
     <aside class="case-side">
@@ -35,8 +51,8 @@
         </div>
         <div class="card-body">
           <p class="summary" id="sumText" style="margin:0;font-size:13.5px;color:var(--navy-800)"></p>
-          <ol class="points" id="sumPoints"></ol>
           <div class="hitl-row" id="sumActions"></div>
+          <button class="link-btn" id="watchJump" type="button" hidden></button>
           <button class="link-btn" id="detailsToggle" type="button" aria-expanded="false"></button>
           <div class="details-panel" id="detailsPanel" hidden></div>
         </div>
@@ -77,6 +93,12 @@
           <div class="suggest-actions" id="suggestActions"></div>
         </div>
 
+        <div class="reply-label">
+          <span class="rl-ico" aria-hidden="true" id="replyIcon"></span>
+          <strong id="replyWho">Reply to the customer</strong>
+          <span class="hint" id="replyHint"></span>
+        </div>
+
         <form class="composer" id="custForm">
           <label class="sr-only" for="custInput">Write a reply to the customer</label>
           <textarea id="custInput" rows="1" placeholder="Type a message…"></textarea>
@@ -97,7 +119,7 @@
     <aside class="rail" aria-label="AI insights">
       <h2 class="rail-title" id="railTitle"></h2>
 
-      <section class="card" aria-labelledby="watchTitle">
+      <section class="card" id="watchCard" aria-labelledby="watchTitle">
         <div class="card-head">
           <span class="head-tile bad" aria-hidden="true" id="watchIcon"></span>
           <h2 id="watchTitle">Key Points to Watch</h2>
@@ -119,14 +141,6 @@
         </div>
       </section>
 
-      <section class="card" aria-labelledby="tagTitle">
-        <div class="card-head">
-          <span class="head-tile good" aria-hidden="true" id="tagIcon"></span>
-          <h2 id="tagTitle">Evidence Tags</h2>
-        </div>
-        <div class="card-body"><div class="tags" id="tags"></div></div>
-      </section>
-
       <section class="card" aria-labelledby="slaTitle">
         <div class="card-head">
           <span class="head-tile" aria-hidden="true" id="slaIcon"></span>
@@ -134,7 +148,7 @@
         </div>
         <div class="card-body">
           <div class="sla-big" id="slaPct">—</div>
-          <div class="sla-cap">of customer contacts are responded late</div>
+          <div class="sla-cap">against the response target</div>
           <div class="bar"><i id="slaBar" style="width:0%"></i></div>
           <button class="link-btn" id="slaMore" type="button" aria-expanded="false">View details</button>
           <div class="muted" id="slaDetails" hidden style="font-size:12.5px;margin-top:6px"></div>
@@ -149,7 +163,7 @@
         <div class="card-body flush"><div class="rel-list" id="docList"></div></div>
       </section>
 
-      <section class="card" aria-labelledby="chatTitle">
+      <section class="card ask-card" aria-labelledby="chatTitle">
         <div class="card-head">
           <span class="head-tile" aria-hidden="true" id="askIcon"></span>
           <h2 id="chatTitle">Ask the copilot</h2>
@@ -162,7 +176,7 @@
           <form id="chatForm" class="chat-form">
             <label class="sr-only" for="chatInput">Ask the assistant about this case</label>
             <textarea id="chatInput" rows="2" placeholder="Ask about status, flags, SLA, last contact…" autocomplete="off"></textarea>
-            <button class="btn btn-primary" id="chatSend" type="submit">Send</button>
+            <button class="btn btn-ask" id="chatSend" type="submit">Ask</button>
           </form>
           <div id="chatStatus" class="sr-only" role="status"></div>
         </div>
@@ -187,13 +201,16 @@ $("#idTile").innerHTML = icon("plane");
 $("#sumIcon").innerHTML = icon("spark");
 $("#watchIcon").innerHTML = icon("alert");
 $("#recIcon").innerHTML = icon("spark");
-$("#tagIcon").innerHTML = icon("shield");
 $("#slaIcon").innerHTML = icon("clock");
 $("#docIcon").innerHTML = icon("file");
 $("#askIcon").innerHTML = icon("clipboard");
 $("#custAvatar").innerHTML = icon("user");
 $("#suggestIcon").innerHTML = icon("spark");
 $("#sendBtn").innerHTML = icon("send");
+$("#replyIcon").innerHTML = icon("user");
+$("#prevCase").innerHTML = icon("arrowLeft");
+$("#nextCase").innerHTML = icon("arrowRight");
+$(".bar-jump").insertAdjacentHTML("afterbegin", icon("search"));
 $("#railTitle").innerHTML = icon("spark") + "AI Insights";
 $$("[data-demo]").forEach((b) => {
   b.innerHTML = icon(b.dataset.demo === "Calling" ? "phone" : b.dataset.demo === "Video" ? "video"
@@ -221,23 +238,20 @@ function renderIdentity(c) {
   $("#idRows").innerHTML = rows.join("");
 }
 
-function pointsHtml(flags, limit) {
-  const shown = limit ? flags.slice(0, limit) : flags;
-  const rest = flags.length - shown.length;
-  return shown.map((f, i) => `<li>
+function pointsHtml(flags) {
+  return flags.map((f, i) => `<li>
       <span class="n ${flagKind(f.issue_type)}">${i + 1}</span>
       <span><span class="t">${esc(flagLabel(f.issue_type))}</span>
-      <span class="d">${esc(f.note || f.evidence || "")}</span></span>
-    </li>`).join("") +
-    (rest > 0 ? `<li><span class="n">+</span><span class="d">${rest} more in AI Insights</span></li>` : "");
+      <span class="d">${esc(humanizeEvidence(f.issue_type, f.note || f.evidence || ""))}</span></span>
+    </li>`).join("");
 }
 
 function renderSummary(c, d) {
   $("#sumText").textContent = d.summary || "No summary produced.";
   AI_TEXT.summary = String(d.summary || "");
-  $("#sumPoints").innerHTML = d.flags.length
-    ? pointsHtml(d.flags, 3)
-    : '<li><span class="n">–</span><span class="d">No flags detected on this case.</span></li>';
+  const n = d.flags.length;
+  $("#watchJump").hidden = n === 0;
+  $("#watchJump").innerHTML = `${n} thing${n === 1 ? "" : "s"} to watch ${icon("arrowRight")}`;
 }
 
 function renderRelated(c) {
@@ -389,26 +403,34 @@ function renderInsights(c, d) {
   $("#recText").textContent = d.recommended_action || "No action recommended.";
   AI_TEXT.recommended_action = String(d.recommended_action || "");
 
-  const seen = new Set();
-  const tags = [];
-  for (const f of d.flags) {
-    const [text, tone] = flagTag(f.issue_type);
-    if (seen.has(text)) continue;
-    seen.add(text);
-    tags.push(`<span class="tag tag-${tone}">${esc(text)}</span>`);
-  }
-  $("#tags").innerHTML = tags.length ? tags.join("") : '<span class="muted" style="font-size:12.5px">No evidence tags.</span>';
-
+  /* SLA leads with the decision — hours over target and when it was due —
+     rather than a percentage the reader has to interpret. A case can also run
+     past its target without being "breached" (the rule only counts open cases),
+     so that state is labelled instead of being rounded into "on time". */
   const contacts = c.contacts || [];
   const late = contacts.filter((x) => !String(x.response_sent_at || "").trim()).length;
-  const pct = contacts.length ? Math.round((100 * late) / contacts.length) : 0;
-  $("#slaPct").textContent = pct + "%";
-  $("#slaBar").style.width = pct + "%";
-  $("#slaBar").classList.toggle("is-bad", pct >= 50);
+  const target = Number(c.sla_target_hours) || 0;
+  const elapsed = Number(c.hours_elapsed) || 0;
+  const over = Math.round(elapsed - target);
+  const started = contacts.map((x) => x.contact_at).filter(Boolean).sort().pop() || c.case_created_at;
+  const due = started ? new Date(new Date(started).getTime() + target * 3600 * 1000) : null;
+
+  const state = c.sla_breached ? "breached" : over > 0 ? "over" : "within";
+  const tone = state === "breached" ? "bad" : state === "over" ? "warn" : "good";
+
+  $("#slaPct").textContent = over > 0 ? `+${over}h` : `${Math.abs(over)}h`;
+  $("#slaPct").className = "sla-big" + (state === "breached" ? " is-bad" : state === "over" ? " is-warn" : "");
+  $(".sla-cap").textContent =
+    state === "breached" ? `past the ${target}h response target`
+    : state === "over" ? `past the ${target}h target — case is not open, so not counted as breached`
+    : `left before the ${target}h response target`;
+  $("#slaBar").style.width = Math.min(100, target ? Math.round((100 * elapsed) / target) : 0) + "%";
+  $("#slaBar").className = state === "within" ? "" : "is-" + tone;
   $("#slaDetails").innerHTML =
-    `${c.hours_elapsed}h elapsed against a ${c.sla_target_hours}h response target ` +
-    (c.sla_breached ? badge("breached", "bad") : badge("on-time", "good")) +
-    `<br>${late} of ${contacts.length} customer contacts have no response logged.`;
+    (due && !isNaN(due) ? `Response was due <strong>${esc(fmtDay(due.toISOString()))}</strong>.<br>` : "") +
+    `${elapsed}h elapsed against a ${target}h response target ` +
+    badge(state === "breached" ? "breached" : state === "over" ? "over target, not breached" : "within target", tone) +
+    `<br>${late} of ${contacts.length} customer contact${contacts.length === 1 ? "" : "s"} have no reply logged.`;
 
   const received = new Set((c.documents_received || []).map(String));
   $("#docList").innerHTML = (c.required_documents || []).length
@@ -558,6 +580,68 @@ function initChat() {
   });
 }
 
+/* ---------- the queue bar: work the whole queue from here ---------- */
+let QUEUE_ALL = [];
+let barFlagOnly = new URLSearchParams(location.search).get("filter") === "flagged";
+
+function queueIds() {
+  const list = barFlagOnly ? QUEUE_ALL.filter((c) => c.flag_count) : QUEUE_ALL;
+  return list.map((c) => c.case_id).sort();
+}
+
+function goToCase(offset) {
+  const ids = queueIds();
+  const i = ids.indexOf(caseId);
+  const j = i < 0 ? 0 : i + offset;
+  if (j < 0 || j >= ids.length) return;
+  location.href = `case.html?case_id=${encodeURIComponent(ids[j])}${barFlagOnly ? "&filter=flagged" : ""}`;
+}
+
+function renderQueueBar() {
+  const ids = queueIds();
+  const i = ids.indexOf(caseId);
+  $("#casePos").textContent = i >= 0 ? `${i + 1} of ${ids.length}` : `${ids.length} cases`;
+  $("#prevCase").disabled = i <= 0;
+  $("#nextCase").disabled = i < 0 ? ids.length === 0 : i >= ids.length - 1;
+}
+
+function initQueueBar() {
+  $("#caseBar").hidden = false;
+  $("#caseIds").innerHTML = QUEUE_ALL.map((c) =>
+    `<option value="${esc(c.case_id)}">${esc(c.customer_id)}${c.current_status ? " · " + esc(c.current_status) : ""}</option>`).join("");
+  $("#barFlagOnly").checked = barFlagOnly;
+
+  $("#barFlagOnly").addEventListener("change", (e) => {
+    barFlagOnly = e.target.checked;
+    const url = new URL(location.href);
+    if (barFlagOnly) url.searchParams.set("filter", "flagged");
+    else url.searchParams.delete("filter");
+    history.replaceState(null, "", url);
+    renderQueueBar();
+  });
+  $("#prevCase").addEventListener("click", () => goToCase(-1));
+  $("#nextCase").addEventListener("click", () => goToCase(1));
+
+  $("#jump").addEventListener("change", () => {
+    const want = $("#jump").value.trim().toUpperCase();
+    if (!want) return;
+    const hit = QUEUE_ALL.find((c) =>
+      String(c.case_id).toUpperCase() === want || String(c.customer_id).toUpperCase() === want);
+    if (!hit) { toast("No case has the id " + $("#jump").value.trim()); return; }
+    location.href = `case.html?case_id=${encodeURIComponent(hit.case_id)}${barFlagOnly ? "&filter=flagged" : ""}`;
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const t = e.target;
+    if (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable)) return;
+    if (e.key === "j" || e.key === "]") { e.preventDefault(); goToCase(1); }
+    else if (e.key === "k" || e.key === "[") { e.preventDefault(); goToCase(-1); }
+  });
+
+  renderQueueBar();
+}
+
 /* ---------- boot ---------- */
 async function init() {
   if (!caseId) { $("#cid").textContent = "No case selected"; $("#banner").innerHTML = `<div class="banner banner-info">${icon("info")}<div>Open a case from the <a href="index.html" style="text-decoration:underline">Cases</a> list.</div></div>`; return; }
@@ -577,8 +661,16 @@ async function init() {
     return;
   }
 
+  QUEUE_ALL = cases;
+  initQueueBar();
+
   DRAFT = CASE.draft;
   $("#chatName").textContent = CASE.customer_id;
+  $("#replyWho").textContent = `Reply to ${CASE.customer_id}`;
+  $("#replyHint").textContent = "queued locally — nothing is transmitted";
+
+  $("#watchJump").addEventListener("click", () =>
+    $("#watchCard").scrollIntoView({ behavior: "smooth", block: "start" }));
 
   renderIdentity(CASE);
   renderSummary(CASE, DRAFT);

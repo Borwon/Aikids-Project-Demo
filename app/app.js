@@ -211,19 +211,46 @@ const FLAG_LABEL = {
 };
 function flagLabel(type) { return FLAG_LABEL[type] || String(type || "").replace(/_/g, " ").toLowerCase(); }
 
-/* evidence tag shown on the insight rail: [text, tone] */
-const FLAG_TAG = {
-  TRANSPORT_CONFLICT: ["Conflicting info", "bad"],
-  STATUS_TIMESTAMP_CONFLICT: ["Status conflict", "bad"],
-  SLA_BREACH: ["SLA breach", "bad"],
-  MISSING_REQUIRED_FIELD: ["Missing info", "warn"],
-  MISSING_DOCUMENT: ["Missing info", "warn"],
-  UNASSIGNED_OWNER: ["Unassigned owner", "warn"],
-  AMBIGUOUS_CASE: ["Need to verify", "info"],
-  UNRESPONDED_CONTACT: ["Need to verify", "info"],
-  NEGATIVE_SENTIMENT: ["Negative sentiment", "warn"],
+/* ---------- plain-language evidence ----------
+   The rule engine stores the raw comparison it made, e.g.
+   itinerary='MUC - Munich' internal_note='MEL - Melbourne' airport_code='HND'.
+   Staff should not have to read field names and quotes, so the UI relabels it.
+   The values themselves are never altered, only the words around them. */
+const EVIDENCE_KEY = {
+  itinerary: "Itinerary",
+  internal_note: "Internal note",
+  airport_code: "Booking system",
+  case_owner_staff_id: "Service owner",
+  current_status: "Status",
+  response_sent_at: "Reply timestamp",
+  sentiment_label: "Sentiment",
+  sla_target_hours: "SLA target",
 };
-function flagTag(type) { return FLAG_TAG[type] || [flagLabel(type), "neutral"]; }
+
+const EVIDENCE_RULES = [
+  [/^contact (\S+):\s*negative sentiment$/i, (m) => `Contact ${m[1]} reads as negative`],
+  [/^contact (\S+) has no response$/i, (m) => `Contact ${m[1]} has no reply logged`],
+  [/^(\d+(?:\.\d+)?)h elapsed vs target (\d+)h$/i,
+    (m) => `${Math.round(Number(m[1]))}h elapsed against a ${m[2]}h target — ${Math.round(Number(m[1]) - Number(m[2]))}h over`],
+  [/^a response_sent_at precedes case_created_at$/i, () => "A reply is timestamped before the case was created"],
+  [/^case_owner_staff_id is blank$/i, () => "No service owner is assigned"],
+  [/^current_status is blank$/i, () => "The case has no status"],
+];
+
+function humanizeEvidence(type, text) {
+  const raw = String(text || "").trim();
+  if (!raw) return "";
+  for (const [re, fn] of EVIDENCE_RULES) {
+    const m = raw.match(re);
+    if (m) return fn(m);
+  }
+  const pairs = Array.from(raw.matchAll(/([a-z_]+)=('([^']*)'|\S+)/g));
+  if (pairs.length) {
+    const parts = pairs.map((p) => `${EVIDENCE_KEY[p[1]] || p[1].replace(/_/g, " ")}: ${p[3] ?? p[2]}`);
+    return parts.join(" · ") + (type === "TRANSPORT_CONFLICT" ? " — the sources disagree" : "");
+  }
+  return raw.replace(/_/g, " ");
+}
 
 /* case status -> badge tone (kept off yellow; yellow means "AI wrote this") */
 function statusKind(status) {

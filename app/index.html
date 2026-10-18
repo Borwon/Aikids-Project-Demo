@@ -67,7 +67,9 @@ const COLUMNS = [
   { key: "journey_type", label: "Journey", sortable: true },
   { key: "days_open", label: "Days open", sortable: true, cls: "num", cell: (c) => c.days_open },
   { key: "sla", label: "SLA", sortable: true, cell: (c) =>
-      c.sla_breached ? badge("breached", "bad", true) : badge("on-time", "good", true) },
+      c.sla_breached ? badge("breached", "bad", true)
+        : c.hours_elapsed > c.sla_target_hours ? badge("over target", "warn", true)
+        : badge("within target", "good", true) },
   { key: "hours", label: "Elapsed / target", sortable: true, cls: "num", cell: (c) => `${c.hours_elapsed}h / ${c.sla_target_hours}h` },
   { key: "flag_count", label: "Flags", sortable: true, cls: "num", cell: (c) =>
       c.flag_count ? badge(String(c.flag_count), flagKind(c.flag_types[0]), true) : '<span class="faint">0</span>' },
@@ -83,7 +85,7 @@ const HIDDEN_COLUMNS = [
 ];
 
 function sortVal(c, key) {
-  if (key === "sla") return c.sla_breached ? 1 : 0;
+  if (key === "sla") return c.sla_breached ? 2 : c.hours_elapsed > c.sla_target_hours ? 1 : 0;
   if (key === "has_conflict") return c.has_conflict ? 1 : 0;
   if (key === "owner") return c.case_owner_staff_id || "";
   return c[key];

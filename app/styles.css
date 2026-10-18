@@ -228,6 +228,39 @@ svg.ico {
 /* the case console: case side · conversation · AI insights */
 .container.wide { max-width: 1720px; padding: var(--s5) var(--s6) var(--s8); }
 
+/* sticky queue bar — work the list without losing your place */
+.case-bar {
+  position: sticky; top: 72px; z-index: 15;
+  display: flex; align-items: center; gap: var(--s3);
+  padding: 8px var(--s4); margin-bottom: var(--s4);
+  background: rgba(255, 255, 255, .93);
+  backdrop-filter: saturate(150%) blur(10px);
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  box-shadow: var(--sh-1);
+}
+.case-bar .bar-btn {
+  width: 34px; height: 34px; flex: none; cursor: pointer; font: inherit;
+  display: grid; place-items: center; border-radius: var(--r-sm);
+  background: var(--surface); border: 1px solid var(--border-strong); color: var(--navy-800);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.case-bar .bar-btn svg { width: 16px; height: 16px; }
+.case-bar .bar-btn:hover:not(:disabled) { background: var(--primary-050); border-color: var(--primary); color: var(--primary-600); }
+.case-bar .bar-btn:disabled { opacity: .4; cursor: not-allowed; }
+.case-bar .pos {
+  font-family: var(--mono); font-size: 12px; color: var(--muted);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.case-bar .bar-sep { width: 1px; height: 22px; background: var(--border); flex: none; }
+.case-bar .bar-jump { min-width: 220px; }
+.case-bar .bar-jump input { height: 34px; padding-top: 2px; padding-bottom: 2px; }
+.case-bar .bar-hint { white-space: nowrap; }
+@media (max-width: 900px) {
+  .case-bar { flex-wrap: wrap; top: 68px; }
+  .case-bar .bar-hint { display: none; }
+  .case-bar .bar-jump { min-width: 0; flex: 1; }
+}
+
 .case-layout {
   display: grid;
   grid-template-columns: 320px minmax(420px, 1fr) 340px;
@@ -249,6 +282,7 @@ svg.ico {
 @media (max-width: 900px) {
   .case-layout { grid-template-columns: minmax(0, 1fr); }
   .rail { grid-template-columns: minmax(0, 1fr); }
+  .chat-pane { min-height: 0; max-height: none; }
   .container { padding: var(--s5) var(--s4) var(--s8); }
 }
 
@@ -565,8 +599,9 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--r-md); box-shadow: var(--sh-1);
-  min-height: calc(100dvh - 132px);
-  max-height: calc(100dvh - 108px);
+  /* leaves room for the 64px topbar and the 50px sticky queue bar above it */
+  min-height: calc(100dvh - 198px);
+  max-height: calc(100dvh - 174px);
 }
 .chat-head {
   flex: none; display: flex; align-items: center; gap: var(--s3);
@@ -634,6 +669,17 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
   padding: var(--s4) var(--s5); border-top: 1px solid var(--border);
   background: var(--surface);
 }
+
+/* makes it obvious which box reaches the customer and which one does not */
+.reply-label { display: flex; align-items: center; gap: 8px; }
+.reply-label .rl-ico {
+  width: 22px; height: 22px; border-radius: 50%; flex: none;
+  display: grid; place-items: center; color: #fff;
+  background: linear-gradient(150deg, #4f6ef2, #7b5cf0);
+}
+.reply-label .rl-ico svg { width: 13px; height: 13px; }
+.reply-label strong { font-size: 12.5px; font-weight: 620; color: var(--navy-800); }
+.reply-label .hint { font-size: 11px; color: var(--faint); }
 .ai-suggest {
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, var(--ai-bg), var(--ai-bg-2));
@@ -698,6 +744,8 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
   font-size: 28px; font-weight: 640; letter-spacing: -.03em;
   color: var(--navy-900); font-variant-numeric: tabular-nums; line-height: 1.1;
 }
+.sla-big.is-bad { color: var(--bad); }
+.sla-big.is-warn { color: var(--caution-ink); }
 .sla-cap { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .bar {
   height: 8px; border-radius: var(--r-pill); background: var(--surface-3);
@@ -709,6 +757,8 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
   transition: width 420ms var(--ease);
 }
 .bar > i.is-bad { background: linear-gradient(90deg, #ef8a1f, var(--bad)); }
+.bar > i.is-warn { background: linear-gradient(90deg, #f5c34a, #ef8a1f); }
+.bar > i.is-good { background: linear-gradient(90deg, #35c08c, var(--good)); }
 
 /* ============================== chat ==================================== */
 
@@ -743,10 +793,17 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
   display: flex; gap: var(--s2); align-items: flex-end;
   margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--border);
 }
-.chat-form textarea { flex: 1; min-height: 44px; max-height: 140px; margin: 0; }
+.chat-form textarea { flex: 1; min-height: 44px; max-height: 140px; margin: 0; background: var(--surface); }
 .chat-form .btn { flex: none; height: 38px; }
 .chat-form select { flex: none; height: 38px; font-size: 12.5px; }
 .chat-suggest { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--s3); }
+
+/* The case assistant is a utility panel, not a conversation: dashed, recessed,
+   with a secondary button. It must never look like the box that reaches the
+   customer, so nobody types a customer reply into the wrong one. */
+.ask-card { background: var(--surface-2); border-style: dashed; }
+.btn-ask { background: var(--surface); color: var(--primary-600); border-color: var(--primary-100); }
+.btn-ask:hover { background: var(--primary-050); border-color: var(--primary); }
 
 /* ============================== banners ================================= */
 

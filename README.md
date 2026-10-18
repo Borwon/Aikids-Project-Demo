@@ -16,7 +16,7 @@ VisaConnect is fictional. Approvals are logged, never transmitted.
 
 ```powershell
 python run_pipeline.py      # generate synthetic data -> clean/flag -> cases.json -> bias audit
-python -m pytest -q tests   # 5 safety tests + bias audit
+python -m pytest -q tests   # 24 tests: safety, bias audit, conversation, chat
 python server.py            # http://127.0.0.1:8000
 ```
 
@@ -47,7 +47,7 @@ app/                           three-screen frontend (no framework, no CDN)
   log.html                     Approval Log
 server.py                      stdlib HTTP server + approvals/draft/bias API
 run_pipeline.py                runs all four pipeline steps in order
-tests/                         5 safety tests + bias audit test
+tests/                         24 tests: safety, bias audit, conversation, chat
 data/                          raw/, clean/, cases.json, approval_log.jsonl, bias_audit.csv
 ```
 
@@ -99,16 +99,24 @@ same validator, same screens.
 
 ## Screens
 
-1. **Case List** — sortable/filterable table with SLA badge, flag count and a
-   conflict badge. Nationality/language columns are hidden by default behind a
+1. **Case List** — sortable/filterable table with a three-state SLA badge
+   (`breached` / `over target` / `within target`), flag count and a conflict
+   badge. Nationality/language columns are hidden by default behind a
    "show nationality / language columns" toggle.
-2. **Case Copilot** — one case, three columns. Left: case identity plus the AI
-   **Case Summary** (its numbered key points) and a "full case details" panel that
-   opens the raw field dump — nothing is hidden. Centre: the customer conversation
-   as a thread, the yellow **AI Suggest Answer** card above the composer
-   (`Use this answer` drops the draft into the box, `Edit` and `⋯` are the other two
-   decisions). Right: **AI Insights** — key points to watch, recommended next action,
-   evidence tags, SLA status and case documents.
+2. **Case Copilot** — one case, three columns, under a sticky **queue bar**:
+   previous/next case, jump-to-case, and a flagged-only filter, so a staff member
+   can work the whole queue without going back to the list (`k` / `j` or `[` / `]`
+   move between cases; typing in any field is left alone). Left: case identity
+   plus the AI **Case Summary** and a "full case details" panel that opens the raw
+   field dump — nothing is hidden. Centre: the customer conversation as a thread,
+   the yellow **AI Suggest Answer** card above the composer (`Use this answer`
+   drops the draft into the box, `Edit` and `⋯` are the other two decisions).
+   Right: **AI Insights** — key points to watch, recommended next action, SLA
+   status and case documents. Findings are listed once, in one place; raw rule
+   evidence (`itinerary='…' internal_note='…'`) is relabelled into plain language
+   for staff, with the values themselves untouched. The read-only case assistant
+   is drawn as a recessed utility panel so it can't be mistaken for the box that
+   reaches the customer.
    Every AI item has **Approve / Edit / Reject**; nothing leaves the screen until a
    control is clicked. A live `/api/draft` call shows the hard-rule validator status.
 3. **Approval Log** — read-only, timestamped audit trail of every decision, with
