@@ -108,16 +108,19 @@ same validator, same screens.
 2. **Case Copilot** — one case, under a sticky **queue bar**: previous/next case,
    jump-to-case, and a flagged-only filter, so a staff member can work the whole
    queue without going back to the list (`k` / `j` or `[` / `]` move between
-   cases; typing in any field is left alone). All of the case information sits in
-   a band **above** the conversation — left: case identity plus the AI **Case
-   Summary** and a "full case details" panel that opens the raw field dump, so
-   nothing is hidden; middle: **AI Insights** — key points to watch, recommended
-   next action, SLA status and case documents; right: the airport pickup panel and
-   the read-only case assistant. The customer conversation then runs **full width
-   beneath the band**, so the thread and the reply box are never squeezed into a
-   side column: the thread, with the yellow **AI Suggest Answer** card above the
-   composer (`Use this answer` drops the draft into the box, `Edit` and `⋯` are the
-   other two decisions).
+   cases; typing in any field is left alone). Everything about the case lives in a
+   single **dossier frame** at the top: identity and age, the AI **Case Summary**,
+   the recommended next action, the SLA reading and the flags — all visible at a
+   glance, each with its own **Approve / Edit / Reject**. Anything longer (the raw
+   field dump, the full watch list, response-time detail, documents, related
+   records) opens **downward from one "See all case details" toggle**, so the frame
+   stays short by default and nothing is hidden behind a second page.
+   Beneath it the **conversation** takes the main column with the yellow **AI
+   Suggest Answer** card and the composer (`Use this answer` drops the draft into
+   the box, `Edit` and `⋯` are the other two decisions), the read-only case
+   assistant sits as a dashed strip directly above the composer, and the **airport
+   pickup** plan holds the right-hand column so the agent can read the thread and
+   the map at the same time.
    Findings are listed once, in one place; raw rule evidence
    (`itinerary='…' internal_note='…'`) is relabelled into plain language for staff,
    with the values themselves untouched. The read-only case assistant is drawn as a

@@ -29,136 +29,89 @@
     <span class="hint bar-hint">k / j for prev / next</span>
   </div>
 
-  <!-- case information first, the conversation full width beneath it -->
-  <div class="case-top">
-    <!-- ---------- column 1: the case ---------- -->
-    <aside class="case-side">
+  <!-- one frame: everything about the case, compact until you open it -->
+  <section class="dossier" aria-label="Case information">
+    <div class="dos-head">
       <a class="back-link" href="index.html" id="backLink"></a>
+      <div class="spacer"></div>
+      <div class="dos-sla" id="dosSla"></div>
+    </div>
 
-      <div class="id-card" aria-label="Case identity">
-        <div class="id-top">
-          <span class="id-tile" aria-hidden="true" id="idTile"></span>
-          <span class="id-num" id="cid">—</span>
-          <span id="idBadges"></span>
+    <div class="dos-main">
+      <div class="dos-id" aria-label="Case identity">
+        <span class="id-tile" aria-hidden="true" id="idTile"></span>
+        <div class="dos-id-text">
+          <div class="id-top">
+            <span class="id-num" id="cid">—</span>
+            <span id="idBadges"></span>
+          </div>
+          <div class="dos-meta" id="idRows"></div>
         </div>
-        <div class="id-rows" id="idRows"></div>
       </div>
 
-      <!-- AI wrote the summary: blue panel, yellow rail -->
-      <section class="card ai-tint" aria-labelledby="sumTitle">
-        <div class="card-head">
+      <!-- AI wrote the summary: blue panel, yellow tag -->
+      <div class="dos-block">
+        <div class="dos-label">
           <span class="head-tile ai" aria-hidden="true" id="sumIcon"></span>
-          <h2 id="sumTitle">Case Summary<span class="ai-tag">AI</span></h2>
+          Case summary<span class="ai-tag">AI</span>
         </div>
-        <div class="card-body">
-          <p class="summary" id="sumText" style="margin:0;font-size:13.5px;color:var(--navy-800)"></p>
-          <div class="hitl-row" id="sumActions"></div>
-          <button class="link-btn" id="watchJump" type="button" hidden></button>
-          <button class="link-btn" id="detailsToggle" type="button" aria-expanded="false"></button>
-          <div class="details-panel" id="detailsPanel" hidden></div>
-        </div>
-      </section>
+        <p class="dos-text clamp2" id="sumText"></p>
+        <div class="hitl-row compact" id="sumActions"></div>
+      </div>
 
-      <section class="card" aria-labelledby="relTitle">
-        <div class="card-head"><h2 id="relTitle">Related Information</h2></div>
-        <div class="card-body flush"><div class="rel-list" id="relList"></div></div>
-      </section>
-    </aside>
-
-    <!-- ---------- column 2: AI insights ---------- -->
-    <aside class="rail" aria-label="AI insights">
-      <h2 class="rail-title" id="railTitle"></h2>
-
-      <section class="card" id="watchCard" aria-labelledby="watchTitle">
-        <div class="card-head">
-          <span class="head-tile bad" aria-hidden="true" id="watchIcon"></span>
-          <h2 id="watchTitle">Key Points to Watch</h2>
-        </div>
-        <div class="card-body">
-          <ol class="points" id="watchPoints" style="margin-top:0"></ol>
-          <div class="hitl-row" id="watchActions"></div>
-        </div>
-      </section>
-
-      <section class="card" aria-labelledby="recTitle">
-        <div class="card-head">
+      <div class="dos-block">
+        <div class="dos-label">
           <span class="head-tile ai" aria-hidden="true" id="recIcon"></span>
-          <h2 id="recTitle">Recommended Next Action<span class="ai-tag">AI</span></h2>
+          Next action<span class="ai-tag">AI</span>
         </div>
-        <div class="card-body">
-          <div id="recText" style="font-size:13.5px;color:var(--navy-800)"></div>
-          <div class="hitl-row" id="recActions"></div>
-        </div>
-      </section>
+        <p class="dos-text clamp2" id="recText"></p>
+        <div class="hitl-row compact" id="recActions"></div>
+      </div>
+    </div>
 
-      <section class="card" aria-labelledby="slaTitle">
-        <div class="card-head">
-          <span class="head-tile" aria-hidden="true" id="slaIcon"></span>
-          <h2 id="slaTitle">SLA Status</h2>
-        </div>
-        <div class="card-body">
-          <div class="sla-big" id="slaPct">—</div>
-          <div class="sla-cap">against the response target</div>
-          <div class="bar"><i id="slaBar" style="width:0%"></i></div>
-          <button class="link-btn" id="slaMore" type="button" aria-expanded="false">View details</button>
-          <div class="muted" id="slaDetails" hidden style="font-size:12.5px;margin-top:6px"></div>
-        </div>
-      </section>
+    <div class="dos-foot">
+      <div class="dos-flags" id="dosFlags"></div>
+      <div class="spacer"></div>
+      <span class="dos-caveat">suggestions — nothing counts until you decide</span>
+      <button class="dos-toggle" id="detailsToggle" type="button" aria-expanded="false" aria-controls="detailsWrap"></button>
+    </div>
 
-      <section class="card" aria-labelledby="docTitle">
-        <div class="card-head">
-          <span class="head-tile" aria-hidden="true" id="docIcon"></span>
-          <h2 id="docTitle">Case Documents</h2>
+    <!-- everything that does not fit in the band, in one place, opens downward -->
+    <div class="dos-more" id="detailsWrap">
+      <div class="dos-more-in">
+        <div class="dos-grid">
+          <section class="dos-sec">
+            <h3>Case fields</h3>
+            <div id="detailsPanel"></div>
+          </section>
+          <section class="dos-sec">
+            <h3>Key points to watch</h3>
+            <ol class="points" id="watchPoints"></ol>
+            <div class="hitl-row" id="watchActions"></div>
+          </section>
+          <section class="dos-sec">
+            <h3>Response time</h3>
+            <div class="sla-big" id="slaPct">—</div>
+            <div class="sla-cap">against the response target</div>
+            <div class="bar"><i id="slaBar" style="width:0%"></i></div>
+            <button class="link-btn" id="slaMore" type="button" aria-expanded="false">View details</button>
+            <div class="muted" id="slaDetails" hidden style="font-size:12.5px;margin-top:6px"></div>
+          </section>
+          <section class="dos-sec">
+            <h3>Documents</h3>
+            <div class="rel-list" id="docList"></div>
+          </section>
+          <section class="dos-sec">
+            <h3>Related records</h3>
+            <div class="rel-list" id="relList"></div>
+          </section>
         </div>
-        <div class="card-body flush"><div class="rel-list" id="docList"></div></div>
-      </section>
-    </aside>
+      </div>
+    </div>
+  </section>
 
-    <!-- ---------- column 3: pickup + read-only case assistant ---------- -->
-    <aside class="case-side case-side--end" aria-label="Pickup and case assistant">
-      <!-- airport pickup assist: illustrative plan, real device location or a labelled simulation -->
-      <section class="card pickup-card" id="pickupCard" hidden aria-labelledby="pickupTitle">
-        <div class="card-head">
-          <span class="head-tile" aria-hidden="true" id="pickupIcon"></span>
-          <h2 id="pickupTitle">Airport pickup</h2>
-          <div class="spacer"></div>
-          <span class="loc-chip" id="locChip">location off</span>
-        </div>
-        <div class="pickup-tools">
-          <button class="btn btn-sm" id="locBtn" type="button">Use my location</button>
-          <button class="btn btn-sm" id="simBtn" type="button">Simulate walk</button>
-        </div>
-        <div class="card-body pickup-body">
-          <div class="pickup-map" id="pickupMap"></div>
-          <div class="pickup-side">
-            <div id="pickupSteps"></div>
-            <p class="pk-note" id="pickupNote"></p>
-          </div>
-        </div>
-      </section>
-
-      <section class="card ask-card" aria-labelledby="chatTitle">
-        <div class="card-head">
-          <span class="head-tile" aria-hidden="true" id="askIcon"></span>
-          <h2 id="chatTitle">Ask the copilot</h2>
-          <div class="spacer"></div>
-          <span class="hint">read-only</span>
-        </div>
-        <div class="card-body">
-          <div id="chatLog" class="chat-log"></div>
-          <div id="chatSuggest" class="chat-suggest"></div>
-          <form id="chatForm" class="chat-form">
-            <label class="sr-only" for="chatInput">Ask the assistant about this case</label>
-            <textarea id="chatInput" rows="2" placeholder="Ask about status, flags, SLA, last contact…" autocomplete="off"></textarea>
-            <button class="btn btn-ask" id="chatSend" type="submit">Ask</button>
-          </form>
-          <div id="chatStatus" class="sr-only" role="status"></div>
-        </div>
-      </section>
-    </aside>
-  </div>
-
-  <!-- ---------- the conversation: full width, beneath all the case information ---------- -->
+  <!-- ---------- conversation on the left, the pickup plan on the right ---------- -->
+  <div class="case-body" id="caseBody">
   <section class="chat-pane" aria-label="Conversation with the customer">
     <header class="chat-head">
       <span class="avatar" aria-hidden="true" id="custAvatar"></span>
@@ -175,6 +128,23 @@
     <div class="thread" id="custLog" role="log" aria-live="polite"></div>
 
     <div class="composer-wrap">
+      <!-- read-only assistant: answers about this case, never reaches the customer -->
+      <section class="ask-strip" aria-labelledby="chatTitle">
+        <div class="ask-head">
+          <span class="head-tile" aria-hidden="true" id="askIcon"></span>
+          <h2 id="chatTitle">Ask the copilot</h2>
+          <span class="ask-hint">read-only · answered from this case only</span>
+        </div>
+        <div id="chatLog" class="chat-log" hidden></div>
+        <div id="chatSuggest" class="chat-suggest"></div>
+        <form id="chatForm" class="ask-form">
+          <label class="sr-only" for="chatInput">Ask the assistant about this case</label>
+          <input id="chatInput" type="search" placeholder="Ask about status, flags, SLA, last contact…" autocomplete="off">
+          <button class="btn btn-ask" id="chatSend" type="submit">Ask</button>
+        </form>
+        <div id="chatStatus" class="sr-only" role="status"></div>
+      </section>
+
       <!-- the AI reply: yellow means a human has not approved it yet -->
       <div class="ai-suggest" id="suggestCard">
         <div class="suggest-head">
@@ -208,6 +178,30 @@
       </form>
     </div>
   </section>
+
+  <!-- airport pickup: illustrative plan, real device location or a labelled simulation -->
+  <aside class="case-tools" aria-label="Airport pickup">
+    <section class="card pickup-card" id="pickupCard" hidden aria-labelledby="pickupTitle">
+      <div class="card-head">
+        <span class="head-tile" aria-hidden="true" id="pickupIcon"></span>
+        <h2 id="pickupTitle">Airport pickup</h2>
+        <div class="spacer"></div>
+        <span class="loc-chip" id="locChip">location off</span>
+      </div>
+      <div class="pickup-tools">
+        <button class="btn btn-sm" id="locBtn" type="button">Use my location</button>
+        <button class="btn btn-sm" id="simBtn" type="button">Simulate walk</button>
+      </div>
+      <div class="card-body pickup-body">
+        <div class="pickup-map" id="pickupMap"></div>
+        <div class="pickup-side">
+          <div id="pickupSteps"></div>
+          <p class="pk-note" id="pickupNote"></p>
+        </div>
+      </div>
+    </section>
+  </aside>
+  </div>
 </main>
 
 <script src="app.js"></script>
@@ -225,10 +219,7 @@ const AI_TEXT = {};              // item key -> the AI's original text
 $("#backLink").innerHTML = icon("arrowLeft") + "Back to cases";
 $("#idTile").innerHTML = icon("plane");
 $("#sumIcon").innerHTML = icon("spark");
-$("#watchIcon").innerHTML = icon("alert");
 $("#recIcon").innerHTML = icon("spark");
-$("#slaIcon").innerHTML = icon("clock");
-$("#docIcon").innerHTML = icon("file");
 $("#askIcon").innerHTML = icon("clipboard");
 $("#custAvatar").innerHTML = icon("user");
 $("#suggestIcon").innerHTML = icon("spark");
@@ -238,7 +229,6 @@ $("#pickupIcon").innerHTML = icon("plane");
 $("#prevCase").innerHTML = icon("arrowLeft");
 $("#nextCase").innerHTML = icon("arrowRight");
 $(".bar-jump").insertAdjacentHTML("afterbegin", icon("search"));
-$("#railTitle").innerHTML = icon("spark") + "AI Insights";
 $$("[data-demo]").forEach((b) => {
   b.innerHTML = icon(b.dataset.demo === "Calling" ? "phone" : b.dataset.demo === "Video" ? "video"
     : b.dataset.demo === "More" ? "dots" : b.dataset.demo === "Attachments" ? "paperclip"
@@ -248,21 +238,21 @@ $$("[data-demo]").forEach((b) => {
 
 const DOC_LABEL = (d) => String(d || "").replace(/_/g, " ");
 
-/* ---------- column 1: identity + case summary ---------- */
+/* ---------- the band: identity + case summary ---------- */
 function renderIdentity(c) {
   $("#cid").textContent = "#" + c.case_id;
   $("#idBadges").innerHTML =
     (c.flag_count ? badge("Needs attention", "warn") : "") +
     (c.has_conflict ? badge("conflict", "bad") : "");
   const rows = [
-    `<div class="id-row">${icon("user")}<span>${esc(c.customer_id)} <span class="dim">· ${esc(c.customer_nationality)}</span></span></div>`,
-    `<div class="id-row">${icon("plane")}<span>${esc(c.journey_type)} → ${esc(c.destination_country)}</span></div>`,
+    `${icon("user")}<span>${esc(c.customer_id)} · ${esc(c.customer_nationality)}</span>`,
+    `${icon("plane")}<span>${esc(c.journey_type)} → ${esc(c.destination_country)}</span>`,
   ];
   if (c.transport) {
-    rows.push(`<div class="id-row">${icon("bag")}<span>${esc(c.transport.itinerary_value)}${c.transport.conflict ? " " + badge("itinerary ≠ note", "bad") : ""}</span></div>`);
+    rows.push(`${icon("bag")}<span>${esc(c.transport.airport_code)}${c.transport.conflict ? " " + badge("≠ note", "bad") : ""}</span>`);
   }
-  rows.push(`<div class="id-row">${icon("calendar")}<span>Opened ${esc(fmtShort(c.case_created_at))} · ${c.days_open} days open</span></div>`);
-  $("#idRows").innerHTML = rows.join("");
+  rows.push(`${icon("calendar")}<span>${c.days_open} days open · opened ${esc(fmtShort(c.case_created_at))}</span>`);
+  $("#idRows").innerHTML = rows.map((h) => `<span class="id-row">${h}</span>`).join("");
 }
 
 function pointsHtml(flags) {
@@ -276,9 +266,18 @@ function pointsHtml(flags) {
 function renderSummary(c, d) {
   $("#sumText").textContent = d.summary || "No summary produced.";
   AI_TEXT.summary = String(d.summary || "");
-  const n = d.flags.length;
-  $("#watchJump").hidden = n === 0;
-  $("#watchJump").innerHTML = `${n} thing${n === 1 ? "" : "s"} to watch ${icon("arrowRight")}`;
+}
+
+/* the flags at a glance; the full list and its decision live in the expander */
+function renderFlagChips(d) {
+  const flags = d.flags || [];
+  $("#dosFlags").innerHTML = flags.length
+    ? flags.map((f) => `<button class="flag-chip" type="button" data-flag="1">${icon("alert")}<span>${esc(flagLabel(f.issue_type))}</span></button>`).join("")
+    : `<span class="flag-chip is-clean">${icon("check")}<span>Nothing flagged</span></span>`;
+  $$("#dosFlags .flag-chip[data-flag]").forEach((b) => b.addEventListener("click", () => {
+    showDetails(true);
+    setTimeout(() => $("#watchPoints").scrollIntoView({ behavior: "smooth", block: "center" }), 260);
+  }));
 }
 
 function renderRelated(c) {
@@ -300,14 +299,36 @@ function renderRelated(c) {
   $$("#relList .rel-row").forEach((b) => b.addEventListener("click", () => {
     if (b.dataset.target === "thread") $("#custLog").scrollIntoView({ behavior: "smooth", block: "center" });
     else if (b.dataset.target === "pickup") $("#pickupCard").scrollIntoView({ behavior: "smooth", block: "start" });
-    else { showDetails(true); $("#detailsPanel").scrollIntoView({ behavior: "smooth", block: "center" }); }
+    else { showDetails(true); setTimeout(() => $("#detailsPanel").scrollIntoView({ behavior: "smooth", block: "center" }), 260); }
   }));
 }
 
 function showDetails(open) {
-  $("#detailsPanel").hidden = !open;
-  $("#detailsToggle").setAttribute("aria-expanded", String(open));
-  $("#detailsToggle").innerHTML = open ? "Hide full case details" : "View full case details " + icon("arrowRight");
+  const wrap = $("#detailsWrap");
+  const btn = $("#detailsToggle");
+  wrap.classList.toggle("is-open", open);
+  btn.setAttribute("aria-expanded", String(open));
+  if (open) {
+    btn.innerHTML = `${icon("chevronDown")}Hide case details`;
+    wrap.style.maxHeight = wrap.scrollHeight + "px";
+    const done = (e) => {
+      if (e.propertyName !== "max-height") return;
+      wrap.removeEventListener("transitionend", done);
+      if (wrap.classList.contains("is-open")) wrap.style.maxHeight = "none";
+    };
+    wrap.addEventListener("transitionend", done);
+  } else {
+    const nFields = $("#detailsPanel").querySelectorAll(".field").length;
+    const nDocs = (CASE && (CASE.required_documents || []).length) || 0;
+    btn.innerHTML =
+      `${icon("chevronDown")}See all case details <span class="dos-count">${nFields} fields · ${nDocs} docs</span>`;
+    wrap.style.maxHeight = wrap.scrollHeight + "px";  // pin before collapsing
+    void wrap.offsetHeight;
+    wrap.style.maxHeight = "0px";
+  }
+  // keep the collapsed panel out of the tab order as well as out of sight
+  wrap.inert = !open;
+  wrap.setAttribute("aria-hidden", String(!open));
 }
 
 function renderDetails(c) {
@@ -396,13 +417,21 @@ async function onDecision(ev) {
   // edit: swap the body for a textarea
   const body = $("#" + ({ summary: "sumText", recommended_action: "recText", draft_message: "suggestText" }[key]));
   const original = body.innerHTML;
-  body.innerHTML = `<textarea id="editBox" rows="4" style="min-height:0">${esc(aiText)}</textarea>
+  body.classList.add("is-editing");
+  body.innerHTML = `<textarea id="editBox" rows="3" style="min-height:0">${esc(aiText)}</textarea>
     <div class="hitl-row">
       <button class="btn btn-primary btn-sm" id="saveEdit" type="button">${icon("check")}Save edit</button>
       <button class="btn btn-sm" id="cancelEdit" type="button">Cancel</button>
     </div>`;
-  $("#cancelEdit").addEventListener("click", () => { body.innerHTML = original; });
-  $("#saveEdit").addEventListener("click", () => logDecision(key, "edit", aiText, $("#editBox").value));
+  $("#editBox").focus();
+  $("#cancelEdit").addEventListener("click", () => { body.innerHTML = original; body.classList.remove("is-editing"); });
+  $("#saveEdit").addEventListener("click", () => {
+    const next = $("#editBox").value;
+    body.classList.remove("is-editing");
+    body.textContent = next;
+    AI_TEXT[key] = next;
+    logDecision(key, "edit", aiText, next);
+  });
 }
 
 async function logDecision(key, action, aiText, finalText) {
@@ -454,6 +483,16 @@ function renderInsights(c, d) {
     : `left before the ${target}h response target`;
   $("#slaBar").style.width = Math.min(100, target ? Math.round((100 * elapsed) / target) : 0) + "%";
   $("#slaBar").className = state === "within" ? "" : "is-" + tone;
+
+  /* the same reading, condensed into the band so it is visible without opening
+     anything: the decision first, then how far through the target we are */
+  const pct = Math.min(100, target ? Math.round((100 * elapsed) / target) : 0);
+  $("#dosSla").innerHTML =
+    `<span class="dos-sla-val is-${state}">${
+      state === "breached" ? "SLA breached" : state === "over" ? `+${over}h over` : `${Math.abs(over)}h left`
+    }</span><span class="dos-sla-bar"><i class="${state === "within" ? "" : "is-" + tone}" style="width:${pct}%"></i></span>`;
+  $("#dosSla").title = `${elapsed}h elapsed against the ${target}h response target`;
+
   $("#slaDetails").innerHTML =
     (due && !isNaN(due) ? `Response was due <strong>${esc(fmtDay(due.toISOString()))}</strong>.<br>` : "") +
     `${elapsed}h elapsed against a ${target}h response target ` +
@@ -563,10 +602,8 @@ function renderSuggestions() {
 
 function renderChat() {
   const log = $("#chatLog");
-  if (!CHAT.length) {
-    log.innerHTML = '<div class="chat-empty">Ask anything about this case. The assistant answers only from this case\'s data.</div>';
-    return;
-  }
+  log.hidden = CHAT.length === 0;
+  if (!CHAT.length) { log.innerHTML = ""; return; }
   log.innerHTML = CHAT.map((m) =>
     `<div class="msg ${m.role}"><div class="bubble">${esc(m.content)}</div></div>`).join("");
   log.scrollTop = log.scrollHeight;
@@ -697,18 +734,16 @@ async function init() {
   $("#replyWho").textContent = `Reply to ${CASE.customer_id}`;
   $("#replyHint").textContent = "queued locally — nothing is transmitted";
 
-  $("#watchJump").addEventListener("click", () =>
-    $("#watchCard").scrollIntoView({ behavior: "smooth", block: "start" }));
-
   renderIdentity(CASE);
   renderSummary(CASE, DRAFT);
   renderDetails(CASE);
   renderRelated(CASE);
   renderInsights(CASE, DRAFT);
+  renderFlagChips(DRAFT);
   renderDecisions();
 
   $("#detailsToggle").addEventListener("click", () =>
-    showDetails($("#detailsPanel").hidden));
+    showDetails(!$("#detailsWrap").classList.contains("is-open")));
   showDetails(false);
 
   $("#slaMore").addEventListener("click", () => {
@@ -721,6 +756,7 @@ async function init() {
   initComposer();
   initChat();
 
+  $("#caseBody").classList.toggle("has-tools", Boolean(CASE.transport));
   if (CASE.transport) {
     $("#pickupCard").hidden = false;
     mountPickup(CASE, {

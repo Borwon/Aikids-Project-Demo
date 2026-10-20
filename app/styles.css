@@ -261,36 +261,162 @@ svg.ico {
   .case-bar .bar-jump { min-width: 0; flex: 1; }
 }
 
-/* The case information sits in a band above the conversation: case + summary,
-   AI insights, then pickup and the read-only assistant. The conversation itself
-   runs full width underneath, so nothing is squeezed into a side column. */
-.case-top {
-  display: grid;
-  grid-template-columns: 320px minmax(0, 1fr) 420px;
-  gap: var(--s5);
-  align-items: stretch;
+/* ========================= the case dossier ============================= */
+/* Everything about the case lives in one frame above the conversation:
+   identity, the two AI suggestions, SLA and the flags. It stays compact on
+   purpose; anything longer opens downward from the footer toggle. */
+.dossier {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-1);
+  overflow: hidden;
 }
-.case-top > * { min-width: 0; }
-.case-side { display: flex; flex-direction: column; gap: var(--s4); }
-/* cases with no booking have no pickup card, so pin the assistant to the band's
-   bottom edge instead of leaving a half-empty column.
-   (three classes so it beats the later `.card + .card` reset) */
-.case-side--end > .card.ask-card { margin-top: auto; }
+.dos-head {
+  display: flex; align-items: center; gap: var(--s3);
+  padding: 6px var(--s4) 6px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.dos-head .back-link { padding-left: 4px; }
+
+.dos-sla { display: flex; align-items: center; gap: 9px; }
+.dos-sla-val {
+  font-size: 12px; font-weight: 640; font-variant-numeric: tabular-nums;
+  color: var(--good); background: var(--good-bg); border: 1px solid var(--good-border);
+  padding: 2px 9px; border-radius: var(--r-pill); white-space: nowrap;
+}
+.dos-sla-val.is-over { color: var(--caution-ink); background: var(--caution-bg); border-color: var(--caution-border); }
+.dos-sla-val.is-breached { color: var(--bad); background: var(--bad-bg); border-color: var(--bad-border); }
+.dos-sla-bar { width: 76px; height: 4px; border-radius: 2px; background: var(--surface-3); overflow: hidden; }
+.dos-sla-bar > i { display: block; height: 100%; border-radius: 2px; background: var(--primary); }
+.dos-sla-bar > i.is-warn { background: linear-gradient(90deg, #f5c34a, #ef8a1f); }
+.dos-sla-bar > i.is-bad { background: linear-gradient(90deg, #ef8a1f, var(--bad)); }
+
+.dos-main {
+  display: grid;
+  grid-template-columns: minmax(0, 258px) minmax(0, 1fr) minmax(0, 310px);
+  gap: var(--s5);
+  padding: var(--s4);
+  align-items: start;
+}
+.dos-id { display: flex; gap: var(--s3); align-items: flex-start; min-width: 0; }
+.dos-id .id-tile { width: 38px; height: 38px; border-radius: 11px; }
+.dos-id .id-tile svg { width: 20px; height: 20px; }
+.dos-id-text { min-width: 0; }
+.dos-id .id-top { gap: 8px; row-gap: 4px; }
+.dos-id .id-num { font-size: 17px; }
+.dos-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 12px; margin-top: 5px; }
+.dos-meta .id-row { font-size: 12px; gap: 5px; color: var(--muted); }
+.dos-meta .id-row svg { width: 13px; height: 13px; }
+
+.dos-block { min-width: 0; }
+.dos-label {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 660; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--muted);
+}
+.dos-label .head-tile {
+  width: 19px; height: 19px; border-radius: 6px; flex: none;
+  display: grid; place-items: center;
+  background: var(--ai-bg); color: var(--ai-ink); border: 1px solid var(--ai-border);
+}
+.dos-label .head-tile svg { width: 12px; height: 12px; }
+.dos-label .ai-tag { margin-left: 2px; }
+
+.dos-text { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--navy-800); }
+.clamp2 {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* editing swaps the clamped paragraph for a textarea — let it grow */
+.dos-text.is-editing { display: block; overflow: visible; }
+.dos-text textarea { margin: 0 0 8px; min-height: 0; }
+
+.hitl-row.compact { margin-top: 8px; gap: 6px; }
+.hitl-row.compact .note { display: none; }
+.hitl-row.compact .btn { padding: 4px 9px; font-size: 12px; }
+.hitl-row.compact .btn svg { width: 12.5px; height: 12.5px; }
+.hitl-row.compact .decided { font-size: 12px; }
+
+.dos-foot {
+  display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap;
+  padding: 7px var(--s4);
+  border-top: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.dos-flags { display: flex; flex-wrap: wrap; gap: 6px; }
+.flag-chip {
+  display: inline-flex; align-items: center; gap: 6px; font: inherit;
+  font-size: 11.5px; font-weight: 580; cursor: pointer;
+  padding: 3px 9px; border-radius: var(--r-pill);
+  color: var(--caution-ink); background: var(--caution-bg);
+  border: 1px solid var(--caution-border);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.flag-chip svg { width: 13px; height: 13px; flex: none; }
+.flag-chip:hover { border-color: var(--caution-ink); }
+.flag-chip.is-clean {
+  color: var(--muted); background: var(--surface); border-color: var(--border);
+  cursor: default;
+}
+.flag-chip.is-clean svg { color: var(--good); }
+.dos-caveat { font-size: 11px; color: var(--faint); }
+
+.dos-toggle {
+  display: inline-flex; align-items: center; gap: 6px; font: inherit;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  color: var(--primary-600); background: var(--surface);
+  border: 1px solid var(--primary-100); border-radius: var(--r-pill);
+  padding: 4px 11px;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.dos-toggle svg { width: 14px; height: 14px; transition: transform var(--dur) var(--ease); }
+.dos-toggle:hover { background: var(--primary-050); border-color: var(--primary); }
+.dos-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.dos-count { font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* the expander: 0 → the panel's own height, measured once when it opens */
+.dos-more { max-height: 0; overflow: hidden; transition: max-height 240ms var(--ease); }
+.dos-more-in { min-height: 0; }
+/* the sections flow into two columns so a tall one does not leave a hole
+   under its neighbour the way equal grid rows would */
+.dos-grid {
+  column-count: 2; column-gap: var(--s5);
+  padding: var(--s4);
+  border-top: 1px solid var(--border);
+}
+.dos-sec { min-width: 0; break-inside: avoid; margin: 0 0 var(--s5); }
+.dos-sec:last-child { margin-bottom: 0; }
+.dos-sec h3 {
+  margin: 0 0 9px; font-size: 10.5px; font-weight: 660;
+  letter-spacing: .07em; text-transform: uppercase; color: var(--faint);
+}
+.dos-sec .points { margin-top: 0; }
+.dos-sec .rel-list {
+  padding: var(--s1);
+  border: 1px solid var(--border); border-radius: var(--r-sm);
+}
+.dos-sec .field { padding: 8px 11px; }
+
+/* ------------------ conversation left, pickup plan right ----------------- */
+.case-body {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: var(--s5); margin-top: var(--s5); align-items: start;
+}
+.case-body.has-tools { grid-template-columns: minmax(0, 1fr) 400px; }
+.case-tools { display: flex; flex-direction: column; gap: var(--s4); min-width: 0; }
 
 @media (max-width: 1400px) {
-  .case-top { grid-template-columns: 290px minmax(0, 1fr) 380px; }
+  .case-body.has-tools { grid-template-columns: minmax(0, 1fr) 368px; }
 }
 @media (max-width: 1180px) {
-  .case-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .case-side--end {
-    grid-column: 1 / -1;
-    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    gap: var(--s4); align-items: start;
-  }
+  .case-body.has-tools { grid-template-columns: minmax(0, 1fr); }
+  .dos-main { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .dos-id { grid-column: 1 / -1; }
 }
 @media (max-width: 900px) {
-  .case-top { grid-template-columns: minmax(0, 1fr); }
-  .case-side--end { grid-template-columns: minmax(0, 1fr); }
+  .dos-main { grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
+  .dos-grid { column-count: 1; }
   .container { padding: var(--s5) var(--s4) var(--s8); }
 }
 
@@ -599,18 +725,16 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
 .id-row svg { width: 15px; height: 15px; color: var(--faint); flex: none; }
 .id-row .dim { color: var(--muted); }
 
-.details-panel { margin-top: var(--s4); padding-top: var(--s4); border-top: 1px dashed var(--border-strong); }
-
 /* ============================ conversation ============================== */
 
 .chat-pane {
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--r-md); box-shadow: var(--sh-1);
-  /* sits below the information band, so it takes a fixed comfortable height
-     rather than the whole viewport */
-  height: clamp(560px, 66vh, 780px);
-  margin-top: var(--s5);
+  /* sits beside the pickup plan, under the dossier: a comfortable fixed height
+     that still fits on a laptop screen */
+  height: clamp(440px, calc(100vh - 400px), 760px);
+  margin-top: 0;
 }
 .chat-head {
   flex: none; display: flex; align-items: center; gap: var(--s3);
@@ -885,19 +1009,43 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
 .msg.system { justify-content: center; }
 .sysline { font-size: 11px; color: var(--faint); font-style: italic; text-align: center; }
 
-.chat-form {
-  display: flex; gap: var(--s2); align-items: flex-end;
-  margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--border);
-}
-.chat-form textarea { flex: 1; min-height: 44px; max-height: 140px; margin: 0; background: var(--surface); }
-.chat-form .btn { flex: none; height: 38px; }
-.chat-form select { flex: none; height: 38px; font-size: 12.5px; }
-.chat-suggest { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--s3); }
+.chat-suggest { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* The case assistant is a utility panel, not a conversation: dashed, recessed,
    with a secondary button. It must never look like the box that reaches the
-   customer, so nobody types a customer reply into the wrong one. */
-.ask-card { background: var(--surface-2); border-style: dashed; }
+   customer, so nobody types a customer reply into the wrong one. It sits just
+   above the reply box, but reads as a strip so it costs almost no height. */
+.ask-strip {
+  display: flex; flex-direction: column;
+  padding: 8px var(--s3);
+  background: var(--surface-2);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-md);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.ask-strip:focus-within { border-color: var(--primary); background: var(--surface); }
+.ask-head { display: flex; align-items: center; gap: 8px; }
+.ask-head h2 { margin: 0; font-size: 12.5px; font-weight: 620; color: var(--navy-800); }
+.ask-head .head-tile {
+  width: 22px; height: 22px; border-radius: 7px; flex: none;
+  display: grid; place-items: center;
+  background: var(--primary-050); color: var(--primary-600);
+}
+.ask-head .head-tile svg { width: 13px; height: 13px; }
+.ask-hint { margin-left: auto; font-size: 11px; color: var(--faint); }
+
+.ask-form { display: flex; gap: var(--s2); align-items: center; margin-top: 8px; }
+.ask-form input { flex: 1; height: 36px; font-size: 13px; background: var(--surface); }
+.ask-form .btn { flex: none; height: 36px; }
+
+.ask-strip .chat-log {
+  margin-top: 8px; max-height: 168px; padding: 8px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm);
+}
+.ask-strip .chat-suggest { margin-top: 8px; }
+/* suggestion chips are discoverability, not content: show them on focus only */
+.ask-strip:not(:focus-within) .chat-suggest { display: none; }
+
 .btn-ask { background: var(--surface); color: var(--primary-600); border-color: var(--primary-100); }
 .btn-ask:hover { background: var(--primary-050); border-color: var(--primary); }
 
