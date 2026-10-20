@@ -105,20 +105,24 @@ same validator, same screens.
    (`breached` / `over target` / `within target`), flag count and a conflict
    badge. Nationality/language columns are hidden by default behind a
    "show nationality / language columns" toggle.
-2. **Case Copilot** — one case, three columns, under a sticky **queue bar**:
-   previous/next case, jump-to-case, and a flagged-only filter, so a staff member
-   can work the whole queue without going back to the list (`k` / `j` or `[` / `]`
-   move between cases; typing in any field is left alone). Left: case identity
-   plus the AI **Case Summary** and a "full case details" panel that opens the raw
-   field dump — nothing is hidden. Centre: the customer conversation as a thread,
-   the yellow **AI Suggest Answer** card above the composer (`Use this answer`
-   drops the draft into the box, `Edit` and `⋯` are the other two decisions).
-   Right: **AI Insights** — key points to watch, recommended next action, SLA
-   status and case documents. Findings are listed once, in one place; raw rule
-   evidence (`itinerary='…' internal_note='…'`) is relabelled into plain language
-   for staff, with the values themselves untouched. The read-only case assistant
-   is drawn as a recessed utility panel so it can't be mistaken for the box that
-   reaches the customer.
+2. **Case Copilot** — one case, under a sticky **queue bar**: previous/next case,
+   jump-to-case, and a flagged-only filter, so a staff member can work the whole
+   queue without going back to the list (`k` / `j` or `[` / `]` move between
+   cases; typing in any field is left alone). All of the case information sits in
+   a band **above** the conversation — left: case identity plus the AI **Case
+   Summary** and a "full case details" panel that opens the raw field dump, so
+   nothing is hidden; middle: **AI Insights** — key points to watch, recommended
+   next action, SLA status and case documents; right: the airport pickup panel and
+   the read-only case assistant. The customer conversation then runs **full width
+   beneath the band**, so the thread and the reply box are never squeezed into a
+   side column: the thread, with the yellow **AI Suggest Answer** card above the
+   composer (`Use this answer` drops the draft into the box, `Edit` and `⋯` are the
+   other two decisions).
+   Findings are listed once, in one place; raw rule evidence
+   (`itinerary='…' internal_note='…'`) is relabelled into plain language for staff,
+   with the values themselves untouched. The read-only case assistant is drawn as a
+   recessed utility panel so it can't be mistaken for the box that reaches the
+   customer.
    Every AI item has **Approve / Edit / Reject**; nothing leaves the screen until a
    control is clicked. A live `/api/draft` call shows the hard-rule validator status.
 3. **Approval Log** — read-only, timestamped audit trail of every decision, with

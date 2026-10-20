@@ -261,28 +261,36 @@ svg.ico {
   .case-bar .bar-jump { min-width: 0; flex: 1; }
 }
 
-.case-layout {
+/* The case information sits in a band above the conversation: case + summary,
+   AI insights, then pickup and the read-only assistant. The conversation itself
+   runs full width underneath, so nothing is squeezed into a side column. */
+.case-top {
   display: grid;
-  grid-template-columns: 320px minmax(420px, 1fr) 340px;
+  grid-template-columns: 320px minmax(0, 1fr) 420px;
   gap: var(--s5);
-  align-items: start;
+  align-items: stretch;
 }
-.case-layout > * { min-width: 0; }
+.case-top > * { min-width: 0; }
 .case-side { display: flex; flex-direction: column; gap: var(--s4); }
+/* cases with no booking have no pickup card, so pin the assistant to the band's
+   bottom edge instead of leaving a half-empty column.
+   (three classes so it beats the later `.card + .card` reset) */
+.case-side--end > .card.ask-card { margin-top: auto; }
 
+@media (max-width: 1400px) {
+  .case-top { grid-template-columns: 290px minmax(0, 1fr) 380px; }
+}
 @media (max-width: 1180px) {
-  .case-layout { grid-template-columns: 300px minmax(0, 1fr); }
-  .rail {
+  .case-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .case-side--end {
     grid-column: 1 / -1;
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: var(--s4); align-items: start;
   }
-  .rail .rail-title { grid-column: 1 / -1; }
 }
 @media (max-width: 900px) {
-  .case-layout { grid-template-columns: minmax(0, 1fr); }
-  .rail { grid-template-columns: minmax(0, 1fr); }
-  .chat-pane { min-height: 0; max-height: none; }
+  .case-top { grid-template-columns: minmax(0, 1fr); }
+  .case-side--end { grid-template-columns: minmax(0, 1fr); }
   .container { padding: var(--s5) var(--s4) var(--s8); }
 }
 
@@ -599,9 +607,10 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--r-md); box-shadow: var(--sh-1);
-  /* leaves room for the 64px topbar and the 50px sticky queue bar above it */
-  min-height: calc(100dvh - 198px);
-  max-height: calc(100dvh - 174px);
+  /* sits below the information band, so it takes a fixed comfortable height
+     rather than the whole viewport */
+  height: clamp(560px, 66vh, 780px);
+  margin-top: var(--s5);
 }
 .chat-head {
   flex: none; display: flex; align-items: center; gap: var(--s3);
@@ -628,7 +637,8 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
 .icon-btn:hover { background: var(--surface-3); color: var(--navy-900); }
 
 .thread {
-  flex: 1; overflow-y: auto; padding: var(--s5);
+  flex: 1; overflow-y: auto;
+  padding: var(--s5) max(var(--s5), calc((100% - 1080px) / 2));
   display: flex; flex-direction: column; gap: var(--s4);
   background: var(--surface-2);
 }
@@ -637,7 +647,8 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--r-pill); padding: 3px 12px;
 }
-.thread .msg { display: flex; gap: 10px; align-items: flex-end; max-width: 80%; }
+/* the pane is now full width, so keep bubbles at a readable measure */
+.thread .msg { display: flex; gap: 10px; align-items: flex-end; max-width: min(80%, 820px); }
 .thread .msg.customer { align-self: flex-start; }
 .thread .msg.staff { align-self: flex-end; flex-direction: row-reverse; }
 .thread .msg.system { align-self: stretch; max-width: none; }
@@ -666,7 +677,8 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
 
 .composer-wrap {
   flex: none; display: flex; flex-direction: column; gap: var(--s3);
-  padding: var(--s4) var(--s5); border-top: 1px solid var(--border);
+  padding: var(--s4) max(var(--s5), calc((100% - 1080px) / 2));
+  border-top: 1px solid var(--border);
   background: var(--surface);
 }
 
@@ -733,12 +745,17 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
 
 /* ========================= airport pickup assist ======================== */
 
-.pickup-card { margin-top: var(--s5); }
+.pickup-card { margin-top: 0; }
+/* the map sits in a side column now, so its steps stack underneath it */
 .pickup-body {
-  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, 1fr);
-  gap: var(--s5); align-items: start;
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: var(--s4); align-items: start;
 }
-@media (max-width: 900px) { .pickup-body { grid-template-columns: minmax(0, 1fr); } }
+.pickup-tools {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s2); padding: 0 var(--s4) var(--s3);
+}
+.pickup-tools .btn { width: 100%; justify-content: center; padding-inline: var(--s3); white-space: nowrap; }
 
 .loc-chip {
   font-size: 11px; font-weight: 600; color: var(--muted);
@@ -746,8 +763,6 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
   padding: 3px 10px; border-radius: var(--r-pill); white-space: nowrap;
 }
 .loc-chip.is-live { color: var(--good); background: var(--good-bg); border-color: var(--good-border); }
-/* the pickup header carries a chip and two buttons, so let it wrap on phones */
-@media (max-width: 620px) { .pickup-card .card-head { flex-wrap: wrap; row-gap: var(--s2); } }
 
 .pk-plan {
   display: block; width: 100%; height: auto;
@@ -760,8 +775,8 @@ tbody tr.selected { background: var(--primary-050); box-shadow: inset 3px 0 0 va
 .pk-area.hall rect { fill: #f5f8fc; }
 .pk-area.kerb rect { fill: #f8fafd; stroke-dasharray: 1.6 1.4; }
 .pk-room {
-  font-size: 2.5px; font-weight: 600; fill: var(--faint); letter-spacing: .02em;
-  paint-order: stroke; stroke: var(--surface); stroke-width: 1.4px; stroke-linejoin: round;
+  font-size: 2.85px; font-weight: 600; fill: var(--faint); letter-spacing: .02em;
+  paint-order: stroke; stroke: var(--surface); stroke-width: 1.5px; stroke-linejoin: round;
 }
 .pk-walk { stroke: #dbe5f1; stroke-width: 2.6; stroke-linecap: round; }
 .pk-route { fill: none; stroke-linecap: round; stroke-linejoin: round; }
@@ -953,3 +968,4 @@ hr.soft { border: none; border-top: 1px dashed var(--border); margin: 10px 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
 }
+
